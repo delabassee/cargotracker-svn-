@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/admin.xhtml">
+        <ui:define name="title">Cargo Administration</ui:define>
+        <ui:define name="header">
+            <style type="text/css">
+                td {
+                    align: left;
+                }
+            </style>
+        </ui:define>
+        <ui:define name="content">
+            <div id="container">
+                <h:form>
+                    <table>
+                        <caption>Book new cargo</caption>
+                        <tbody>
+                            <tr>
+                                <td>Origin</td>
+                                <td><h:selectOneMenu value="#{registration.originUnlocode}">
+                                        <f:selectItems value="#{registration.locations}" var="location"
+                                                       itemLabel="#{location.name}" itemValue="#{location.unLocode}" />
+                                    </h:selectOneMenu></td>
+                            </tr>
+                            <tr>
+                                <td>Destination</td>
+                                <td><h:selectOneMenu
+                                        value="#{registration.destinationUnlocode}">
+                                        <f:selectItems value="#{registration.locations}" var="location"
+                                                       itemLabel="#{location.name}" itemValue="#{location.unLocode}" />
+                                    </h:selectOneMenu></td>
+                            </tr>
+                            <tr>
+                                <td>Arrival deadline:</td>
+                                <td><h:inputText value="#{registration.arrivalDeadline}"
+                                                 size="10" maxlength="10" /></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td><h:commandButton value="Book"
+                                                     action="#{registration.register}" /></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

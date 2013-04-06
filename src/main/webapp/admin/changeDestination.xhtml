@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/admin.xhtml">
+        <ui:define name="title">Cargo Administration</ui:define>
+        <ui:define name="header">
+            <style type="text/css">
+                td {
+                    align: left;
+                }
+            </style>
+        </ui:define>
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="trackingId"
+                             value="#{changeDestination.trackingId}" />
+                <f:viewAction action="#{changeDestination.load}" />
+            </f:metadata>
+            <div id="container">
+                <h:form>
+                    <table>
+                        <caption>Change destination for cargo
+                            #{changeDestination.cargo.trackingId}</caption>
+                        <tbody>
+                            <tr>
+                                <td>Current destination</td>
+                                <td>#{changeDestination.cargo.finalDestination}</td>
+                            </tr>
+                            <tr>
+                                <td>New destination</td>
+                                <td><h:selectOneMenu
+                                        value="#{changeDestination.destinationUnlocode}">
+                                        <f:selectItems value="#{changeDestination.locations}"
+                                                       var="location" itemLabel="#{location.name}"
+                                                       itemValue="#{location.unLocode}" />
+                                    </h:selectOneMenu></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td><h:commandButton value="Change destination"
+                                                     action="#{changeDestination.changeDestination()}" /></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

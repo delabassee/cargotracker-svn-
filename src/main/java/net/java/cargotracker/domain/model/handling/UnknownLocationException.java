@@ -1,0 +1,18 @@
+package net.java.cargotracker.domain.model.handling;
+
+import net.java.cargotracker.domain.model.location.UnLocode;
+
+public class UnknownLocationException extends CannotCreateHandlingEventException {
+
+    private UnLocode unlocode;
+
+    public UnknownLocationException(UnLocode unlocode) {
+        this.unlocode = unlocode;
+    }
+
+    @Override
+    public String getMessage() {
+        return "No location with UN locode " + unlocode.getIdString()
+                + " exists in the system";
+    }
+}

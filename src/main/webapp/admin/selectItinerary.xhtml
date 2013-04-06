@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/admin.xhtml">
+        <ui:define name="title">Cargo Administration</ui:define>
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="trackingId"
+                             value="#{itinerarySelection.trackingId}" />
+                <f:viewAction action="#{itinerarySelection.load}" />
+            </f:metadata>
+            <div id="container">
+                <table>
+                    <caption>Select route</caption>
+                    <tr>
+                        <td>Cargo #{itinerarySelection.cargo.trackingId} is going from
+                            ${itinerarySelection.cargo.origin} to
+                            ${itinerarySelection.cargo.finalDestination}</td>
+                    </tr>
+                </table>
+                <h:panelGroup rendered="#{empty itinerarySelection.routeCandidates}">
+                    <p>No routes found that satisfy the route specification. Try
+                        setting an arrival deadline futher into the future (a few weeks at
+                        least).</p>
+                </h:panelGroup>
+                <ui:repeat value="#{itinerarySelection.routeCandidates}"
+                           var="itinerary" varStatus="itineraryStatus">
+                    <h:form>
+                        <table>
+                            <caption>Route candidate #{itineraryStatus.index + 1}</caption>
+                            <thead>
+                                <tr>
+                                    <td>Voyage</td>
+                                    <td>From</td>
+                                    <td></td>
+                                    <td>To</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ui:repeat value="#{itinerary.legs}" var="leg"
+                                           varStatus="legStatus">
+                                    <tr>
+                                        <td>#{leg.voyageNumber}</td>
+                                        <td>#{leg.from}</td>
+                                        <td>#{leg.loadTime}</td>
+                                        <td>#{leg.to}</td>
+                                        <td>#{leg.unloadTime}</td>
+                                    </tr>
+                                </ui:repeat>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <p>
+                                            <h:commandButton value="Assign cargo to this route"
+                                                             action="#{itinerarySelection.assignItinerary(itineraryStatus.index)}" />
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </h:form>
+                </ui:repeat>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/admin.xhtml">
+        <ui:define name="title">Cargo Administration</ui:define>
+        <ui:define name="content">
+            <f:metadata>
+                <f:viewParam name="trackingId" value="#{cargoDetails.trackingId}" />
+                <f:viewAction action="#{cargoDetails.load}" />
+            </f:metadata>
+            <div id="container">
+                <table>
+                    <caption>Details for cargo
+                        #{cargoDetails.cargo.trackingId}</caption>
+                    <tbody>
+                        <tr>
+                            <td>Origin</td>
+                            <td>#{cargoDetails.cargo.origin}</td>
+                        </tr>
+                        <tr>
+                            <td>Destination</td>
+                            <td>#{cargoDetails.cargo.finalDestination}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><h:link value="Change destination"
+                                        outcome="changeDestination.xhtml?faces-redirect=true">
+                                    <f:param name="trackingId"
+                                             value="#{cargoDetails.cargo.trackingId}" />
+                                </h:link></td>
+                        </tr>
+                        <tr>
+                            <td>Arrival deadline</td>
+                            <td>#{cargoDetails.cargo.arrivalDeadline}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p></p>
+                <h:panelGroup rendered="#{cargoDetails.cargo.routed}">
+                    <h:panelGroup rendered="#{cargoDetails.cargo.misrouted}">
+                        <p>
+                            <em>Cargo is misrouted - <h:link value="reroute this cargo"
+                                                             outcome="selectItinerary.xhtml?faces-redirect=true">
+                                    <f:param name="trackingId"
+                                             value="#{cargoDetails.cargo.trackingId}" />
+                                </h:link></em>
+                        </p>
+                    </h:panelGroup>
+                    <table border="1">
+                        <caption>Itinerary</caption>
+                        <thead>
+                            <tr>
+                                <td>Voyage number</td>
+                                <td colspan="2">Load</td>
+                                <td colspan="2">Unload</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ui:repeat value="#{cargoDetails.cargo.legs}" var="leg">
+                                <tr>
+                                    <td>#{leg.voyageNumber}</td>
+                                    <td>#{leg.from}</td>
+                                    <td>(#{leg.loadTime})</td>
+                                    <td>#{leg.to}</td>
+                                    <td>(#{leg.unloadTime})</td>
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{not cargoDetails.cargo.routed}">
+                    <p>
+                        <strong>Not routed</strong> -
+                        <h:link value="route this cargo"
+                                outcome="selectItinerary.xhtml?faces-redirect=true">
+                            <f:param name="trackingId"
+                                     value="#{cargoDetails.cargo.trackingId}" />
+                        </h:link>
+                    </p>
+                </h:panelGroup>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

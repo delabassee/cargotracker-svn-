@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title><ui:insert name="title">Title</ui:insert></title>
+        <style type="text/css" title="style" media="screen">
+            @import "/cargo-tracker/stylesheets/public.css";
+        </style>
+    </h:head>
+    <h:body>
+        <div id="outer">
+            <div id="apptitle">
+                <img src="/cargo-tracker/images/cargo-tracker-banner.png" />
+            </div>
+            <div id="body">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+            <div id="footer">
+                This application is written by <a href="https://blogs.oracle.com/reza/" target="_blank">Reza Rahman</a>
+            </div>
+        </div>
+    </h:body>
+</html>
