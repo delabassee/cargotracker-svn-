@@ -12,6 +12,7 @@
     <properties>
       <property name="javax.persistence.schema-generation-action" value="drop-and-create"/>
       <property name="javax.persistence.schema-generation-target" value="database"/>
+      <property name="eclipselink.weaving" value="false"/>
     </properties>
   </persistence-unit>
 </persistence>
