@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
@@ -26,7 +27,7 @@ import net.java.cargotracker.domain.model.voyage.SampleVoyages;
  * Loads sample data for demo.
  */
 @Singleton
-// @Startup
+@Startup
 public class SampleDataGenerator {
 
     @PersistenceContext

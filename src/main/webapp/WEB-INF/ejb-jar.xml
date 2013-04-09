@@ -3,6 +3,7 @@
          xmlns = "http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation = "http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd">
+    <!--
     <enterprise-beans>
         <message-driven>
             <ejb-name>MisdirectedCargoConsumer</ejb-name>
@@ -53,4 +54,5 @@
             </activation-config>
         </message-driven>        
     </enterprise-beans>
+    -->
 </ejb-jar>
