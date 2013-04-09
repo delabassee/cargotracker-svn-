@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ejb-jar xmlns = "http://java.sun.com/xml/ns/javaee"
-         version = "3.1"
+<ejb-jar version = "3.2"
+         xmlns = "http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation = "http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_1.xsd">
-    <!--
+         xsi:schemaLocation = "http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/ejb-jar_3_2.xsd">
     <enterprise-beans>
         <message-driven>
             <ejb-name>MisdirectedCargoConsumer</ejb-name>
@@ -32,12 +31,26 @@
                         destinationLookup
                     </activation-config-property-name>
                     <activation-config-property-value>
-                        java:global/jms/MisDeliveredCargoQueue
+                        java:global/jms/DeliveredCargoQueue
                     </activation-config-property-value>
                 </activation-config-property>
             </activation-config>
         </message-driven>
-        RejectedRegistrationAttemptsQueue
+        <message-driven>
+            <ejb-name>RejectedRegistrationAttemptsConsumer</ejb-name>
+            <ejb-class>net.java.cargotracker.infrastructure.messaging.jms.SimpleLoggingConsumer</ejb-class>
+            <messaging-type>javax.jms.MessageListener</messaging-type>
+            <message-destination-type>javax.jms.Queue</message-destination-type>
+            <activation-config>
+                <activation-config-property>
+                    <activation-config-property-name>
+                        destinationLookup
+                    </activation-config-property-name>
+                    <activation-config-property-value>
+                        java:global/jms/RejectedRegistrationAttemptsQueue
+                    </activation-config-property-value>
+                </activation-config-property>
+            </activation-config>
+        </message-driven>        
     </enterprise-beans>
-    -->
 </ejb-jar>

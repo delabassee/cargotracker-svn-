@@ -4,12 +4,9 @@ import java.util.Arrays;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
-import javax.jms.JMSDestinationDefinition;
-import javax.jms.JMSDestinationDefinitions;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import net.java.cargotracker.domain.model.cargo.Cargo;
@@ -29,33 +26,7 @@ import net.java.cargotracker.domain.model.voyage.SampleVoyages;
  * Loads sample data for demo.
  */
 @Singleton
-@Startup
-// TODO Move this back to XML.
-@JMSDestinationDefinitions({
-    @JMSDestinationDefinition(
-        name = "java:global/jms/CargoHandledQueue",
-    resourceAdapter = "jmsra",
-    interfaceName = "javax.jms.Queue",
-    destinationName = "CargoHandledQueue",
-    description = "Cargo Handled Queue"),
-    @JMSDestinationDefinition(
-        name = "java:global/jms/MisdirectedCargoQueue",
-    resourceAdapter = "jmsra",
-    interfaceName = "javax.jms.Queue",
-    destinationName = "MisdirectedCargoQueue",
-    description = "Misdirected Cargo Queue"),
-    @JMSDestinationDefinition(
-        name = "java:global/jms/DeliveredCargoQueue",
-    resourceAdapter = "jmsra",
-    interfaceName = "javax.jms.Queue",
-    destinationName = "DeliveredCargoQueue",
-    description = "Delivered Cargo Queue"),
-    @JMSDestinationDefinition(
-        name = "java:global/jms/HandlingEventRegistrationAttemptQueue",
-    resourceAdapter = "jmsra",
-    interfaceName = "javax.jms.Queue",
-    destinationName = "HandlingEventRegistrationAttemptQueue",
-    description = "Handling Event Registration Attempt Queue")})
+// @Startup
 public class SampleDataGenerator {
 
     @PersistenceContext
