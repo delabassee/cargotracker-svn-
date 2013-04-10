@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -28,7 +30,8 @@ import net.java.cargotracker.interfaces.handling.HandlingReport;
  * asynchronous message with the information to the handling event registration
  * system for proper registration.
  */
-@Stateless // TODO Make this a stateless bean for better scalability.
+@Singleton // TODO Make this a stateless bean for better scalability.
+@Startup
 @Path("/handling")
 public class HandlingReportService {
 

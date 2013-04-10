@@ -22,7 +22,7 @@ public class CargoTrackingViewAdapter {
             List<HandlingEvent> handlingEvents) {
         this.cargo = cargo;
 
-        this.events = new ArrayList<HandlingEventViewAdapter>(
+        this.events = new ArrayList<>(
                 handlingEvents.size());
         for (HandlingEvent handlingEvent : handlingEvents) {
             events.add(new HandlingEventViewAdapter(handlingEvent));

@@ -3,8 +3,7 @@ package net.java.cargotracker.interfaces.tracking.web;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import net.java.cargotracker.domain.model.cargo.Cargo;
@@ -24,8 +23,7 @@ import net.java.cargotracker.domain.model.handling.HandlingEventRepository;
  * domain model, and the adapter helps us shield the domain model classes.
  */
 @Named
-@SessionScoped
-@Stateful
+@ViewScoped
 public class CargoTracker implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,7 +65,7 @@ public class CargoTracker implements Serializable {
         }
     }
 
-    @Remove
+//    @Remove
     public void destroy() {
         // Nothing to be done.
     }
