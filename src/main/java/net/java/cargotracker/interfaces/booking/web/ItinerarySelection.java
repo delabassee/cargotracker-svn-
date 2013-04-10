@@ -2,7 +2,7 @@ package net.java.cargotracker.interfaces.booking.web;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import net.java.cargotracker.interfaces.booking.facade.BookingServiceFacade;
@@ -23,7 +23,7 @@ import net.java.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
  * @see net.java.cargotracker.interfaces.tracking.CargoTrackingController
  */
 @Named
-@SessionScoped
+@ViewScoped
 // TODO Fix view param multiple call issue.
 public class ItinerarySelection implements Serializable {
 

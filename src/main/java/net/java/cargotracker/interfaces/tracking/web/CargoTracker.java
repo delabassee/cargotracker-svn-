@@ -2,7 +2,6 @@ package net.java.cargotracker.interfaces.tracking.web;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.ejb.Remove;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -63,10 +62,5 @@ public class CargoTracker implements Serializable {
             // TODO Generate a Faces error messsage.			
             System.err.println("Cargo with tracking ID:" + trackingId + " not found.");
         }
-    }
-
-//    @Remove
-    public void destroy() {
-        // Nothing to be done.
     }
 }

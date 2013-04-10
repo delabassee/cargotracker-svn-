@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import net.java.cargotracker.interfaces.booking.facade.BookingServiceFacade;
@@ -23,7 +23,7 @@ import net.java.cargotracker.interfaces.booking.facade.dto.Location;
  * interfaces.
  */
 @Named
-@SessionScoped
+@ViewScoped
 public class Registration implements Serializable {
 
     private static final long serialVersionUID = 1L;
