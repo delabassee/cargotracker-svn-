@@ -13,7 +13,7 @@ public class HandlingHistory {
     public HandlingHistory(Collection<HandlingEvent> handlingEvents) {
         Validate.notNull(handlingEvents, "Handling events are required");
 
-        this.handlingEvents = new ArrayList<HandlingEvent>(handlingEvents);
+        this.handlingEvents = new ArrayList<>(handlingEvents);
     }
 
     /**
@@ -21,8 +21,8 @@ public class HandlingHistory {
      * ordered by completion time.
      */
     public List<HandlingEvent> getDistinctEventsByCompletionTime() {
-        List<HandlingEvent> ordered = new ArrayList<HandlingEvent>(
-                new HashSet<HandlingEvent>(handlingEvents));
+        List<HandlingEvent> ordered = new ArrayList<>(
+                new HashSet<>(handlingEvents));
         sort(ordered, BY_COMPLETION_TIME_COMPARATOR);
 
         return Collections.unmodifiableList(ordered);

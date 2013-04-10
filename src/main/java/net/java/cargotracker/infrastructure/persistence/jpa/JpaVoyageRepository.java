@@ -8,6 +8,7 @@ import net.java.cargotracker.domain.model.voyage.Voyage;
 import net.java.cargotracker.domain.model.voyage.VoyageNumber;
 import net.java.cargotracker.domain.model.voyage.VoyageRepository;
 
+// TODO Change this to a singleton?
 public class JpaVoyageRepository implements VoyageRepository,
         Serializable {
 

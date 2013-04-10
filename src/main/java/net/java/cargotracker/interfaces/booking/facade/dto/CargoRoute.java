@@ -26,7 +26,7 @@ public class CargoRoute implements Serializable {
         this.finalDestination = finalDestination;
         this.arrivalDeadline = arrivalDeadline;
         this.misrouted = misrouted;
-        this.legs = new ArrayList<Leg>();
+        this.legs = new ArrayList<>();
     }
 
     public String getTrackingId() {

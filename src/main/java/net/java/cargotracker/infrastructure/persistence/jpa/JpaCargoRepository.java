@@ -11,6 +11,7 @@ import net.java.cargotracker.domain.model.cargo.CargoRepository;
 import net.java.cargotracker.domain.model.cargo.Leg;
 import net.java.cargotracker.domain.model.cargo.TrackingId;
 
+// TODO Change this to a singleton?
 public class JpaCargoRepository implements CargoRepository, Serializable {
 
     private static final long serialVersionUID = 1L;

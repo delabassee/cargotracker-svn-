@@ -1,8 +1,6 @@
 package net.java.pathfinder.api;
 
 import java.util.*;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -15,8 +13,7 @@ import javax.ws.rs.core.MediaType;
 import net.java.pathfinder.internal.GraphDao;
 
 // TODO Change this to stateless for better scalability.
-@Singleton
-@Startup
+@Stateless
 @Path("/graph-traversal")
 public class GraphTraversalService {
 

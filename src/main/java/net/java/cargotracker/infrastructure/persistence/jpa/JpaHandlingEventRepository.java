@@ -8,6 +8,7 @@ import net.java.cargotracker.domain.model.handling.HandlingEvent;
 import net.java.cargotracker.domain.model.handling.HandlingEventRepository;
 import net.java.cargotracker.domain.model.handling.HandlingHistory;
 
+// TODO Change this to a singleton?
 public class JpaHandlingEventRepository implements HandlingEventRepository,
         Serializable {
 

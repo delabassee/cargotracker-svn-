@@ -9,6 +9,7 @@ import net.java.cargotracker.domain.model.location.Location;
 import net.java.cargotracker.domain.model.location.LocationRepository;
 import net.java.cargotracker.domain.model.location.UnLocode;
 
+// TODO Change this to a singleton?
 public class JpaLocationRepository implements LocationRepository, Serializable {
 
     private static final long serialVersionUID = 1L;
