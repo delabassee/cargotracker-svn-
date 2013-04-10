@@ -54,5 +54,5 @@
             </activation-config>
         </message-driven>        
     </enterprise-beans>
-    -->
+    --> 
 </ejb-jar>

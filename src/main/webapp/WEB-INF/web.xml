@@ -53,5 +53,5 @@
         <interface-name>javax.jms.Queue</interface-name>
         <resource-adapter>jmsra</resource-adapter>
         <destination-name>RejectedRegistrationAttemptsQueue</destination-name>
-    </jms-destination>    
+    </jms-destination>       
 </web-app>
