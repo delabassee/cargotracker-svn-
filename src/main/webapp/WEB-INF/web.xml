@@ -43,15 +43,15 @@
         <destination-name>DeliveredCargoQueue</destination-name>
     </jms-destination>
     <jms-destination>
+        <name>java:global/jms/RejectedRegistrationAttemptsQueue</name>
+        <interface-name>javax.jms.Queue</interface-name>
+        <resource-adapter>jmsra</resource-adapter>
+        <destination-name>RejectedRegistrationAttemptsQueue</destination-name>
+    </jms-destination>
+    <jms-destination>
         <name>java:global/jms/HandlingEventRegistrationAttemptQueue</name>
         <interface-name>javax.jms.Queue</interface-name>
         <resource-adapter>jmsra</resource-adapter>
         <destination-name>HandlingEventRegistrationAttemptQueue</destination-name>
     </jms-destination>
-    <jms-destination>
-        <name>java:global/jms/RejectedRegistrationAttemptsQueue</name>
-        <interface-name>javax.jms.Queue</interface-name>
-        <resource-adapter>jmsra</resource-adapter>
-        <destination-name>RejectedRegistrationAttemptsQueue</destination-name>
-    </jms-destination>       
 </web-app>

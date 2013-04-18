@@ -1,6 +1,5 @@
 package net.java.cargotracker.domain.model.handling;
 
-import net.java.cargotracker.domain.model.handling.HandlingEvent;
 import java.util.Arrays;
 import java.util.Date;
 import net.java.cargotracker.domain.model.cargo.Cargo;

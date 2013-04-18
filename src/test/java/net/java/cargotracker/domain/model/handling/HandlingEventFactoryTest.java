@@ -1,10 +1,5 @@
 package net.java.cargotracker.domain.model.handling;
 
-import net.java.cargotracker.domain.model.handling.UnknownCargoException;
-import net.java.cargotracker.domain.model.handling.HandlingEventFactory;
-import net.java.cargotracker.domain.model.handling.HandlingEvent;
-import net.java.cargotracker.domain.model.handling.UnknownVoyageException;
-import net.java.cargotracker.domain.model.handling.UnknownLocationException;
 import java.util.Date;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.CargoRepository;

@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Schedule;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import net.java.cargotracker.application.ApplicationEvents;
 import net.java.cargotracker.domain.model.cargo.TrackingId;
@@ -31,7 +31,7 @@ import net.java.cargotracker.interfaces.handling.HandlingEventRegistrationAttemp
  * files are deleted.
  */
 // TODO Revisit exception handling
-@Singleton
+@Stateless
 public class UploadDirectoryScanner {
 
     public static final String ISO_8601_FORMAT = "yyyy-MM-dd HH:mm";

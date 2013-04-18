@@ -18,13 +18,13 @@ public class JmsApplicationEvents implements ApplicationEvents, Serializable {
 
     @Inject
     JMSContext jmsContext;
-    @Resource(name = "java:global/jms/CargoHandledQueue")
+    @Resource(lookup = "java:global/jms/CargoHandledQueue")
     private Destination cargoHandledQueue;
-    @Resource(name = "java:global/jms/MisdirectedCargoQueue")
+    @Resource(lookup = "java:global/jms/MisdirectedCargoQueue")
     private Destination misdirectedCargoQueue;
-    @Resource(name = "java:global/jms/DeliveredCargoQueue")
+    @Resource(lookup = "java:global/jms/DeliveredCargoQueue")
     private Destination deliveredCargoQueue;
-    @Resource(name = "java:global/jms/HandlingEventRegistrationAttemptQueue")
+    @Resource(lookup = "java:global/jms/HandlingEventRegistrationAttemptQueue")
     private Destination handlingEventQueue;
     private static final Logger logger = Logger.getLogger(
             JmsApplicationEvents.class.getName());
