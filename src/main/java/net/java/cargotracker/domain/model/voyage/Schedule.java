@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.eclipse.persistence.annotations.PrivateOwned;
 
 /**
  * A voyage schedule.
@@ -17,8 +18,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class Schedule implements Serializable {
 
     public static final Schedule EMPTY = new Schedule();
+    // TODO Look into why cascade delete doesn't work.
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "voyage_id") // TODO Index as cm_index
+    @PrivateOwned
     private List<CarrierMovement> carrierMovements = Collections.EMPTY_LIST;
 
     public Schedule() {

@@ -16,6 +16,10 @@ public class HandlingHistory {
         this.handlingEvents = new ArrayList<>(handlingEvents);
     }
 
+    public List<HandlingEvent> getAllHandlingEvents() {
+        return handlingEvents;
+    }
+
     /**
      * @return A distinct list (no duplicate registrations) of handling events,
      * ordered by completion time.

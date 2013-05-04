@@ -12,6 +12,7 @@ import javax.persistence.OrderBy;
 import net.java.cargotracker.domain.model.handling.HandlingEvent;
 import net.java.cargotracker.domain.model.location.Location;
 import org.apache.commons.lang3.Validate;
+import org.eclipse.persistence.annotations.PrivateOwned;
 
 @Embeddable
 public class Itinerary implements Serializable {
@@ -19,9 +20,11 @@ public class Itinerary implements Serializable {
     private static final long serialVersionUID = 1L;
     static final Itinerary EMPTY_ITINERARY = new Itinerary();
     private static final Date END_OF_DAYS = new Date(Long.MAX_VALUE);
+    // TODO Look into why cascade delete doesn't work.
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cargo_id") // TODO Index this is in leg_index
     @OrderBy("loadTime")
+    @PrivateOwned
     private List<Leg> legs = Collections.emptyList();
 
     public Itinerary() {

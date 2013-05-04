@@ -2,6 +2,7 @@ package net.java.cargotracker.application.util;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -40,12 +41,34 @@ public class SampleDataGenerator {
     @PostConstruct
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void loadSampleData() {
+        unLoadAll(); //  Fail-safe in case of application restart that does not trigger a JPA schema drop.
         loadSampleLocations();
         loadSampleVoyages();
         loadSampleCargos();
     }
 
-    public void loadSampleLocations() {
+    private void unLoadAll() {
+        // In order to remove handling events, must remove refrences in cargo.
+        // Dropping cargo first won't work since handling events have references
+        // to it.
+        // TODO See if there is a better way to do this.
+        List<Cargo> cargos = entityManager.createQuery("Select c from Cargo c",
+                Cargo.class).getResultList();
+        for (Cargo cargo : cargos) {
+            cargo.getDelivery().setLastEvent(null);
+            entityManager.merge(cargo);
+        }
+
+        // Delete all entities
+        entityManager.createQuery("Delete from HandlingEvent").executeUpdate();
+        entityManager.createQuery("Delete from Leg").executeUpdate();
+        entityManager.createQuery("Delete from Cargo").executeUpdate();
+        entityManager.createQuery("Delete from CarrierMovement").executeUpdate();
+        entityManager.createQuery("Delete from Voyage").executeUpdate();
+        entityManager.createQuery("Delete from Location").executeUpdate();
+    }
+
+    private void loadSampleLocations() {
         entityManager.persist(SampleLocations.HONGKONG);
         entityManager.persist(SampleLocations.MELBOURNE);
         entityManager.persist(SampleLocations.STOCKHOLM);
@@ -61,7 +84,7 @@ public class SampleDataGenerator {
         entityManager.persist(SampleLocations.DALLAS);
     }
 
-    public void loadSampleVoyages() {
+    private void loadSampleVoyages() {
         entityManager.persist(SampleVoyages.HONGKONG_TO_NEW_YORK);
         entityManager.persist(SampleVoyages.NEW_YORK_TO_DALLAS);
         entityManager.persist(SampleVoyages.DALLAS_TO_HELSINKI);
@@ -69,13 +92,13 @@ public class SampleDataGenerator {
         entityManager.persist(SampleVoyages.DALLAS_TO_HELSINKI_ALT);
     }
 
-    public void loadSampleCargos() {
+    private void loadSampleCargos() {
         // Cargo ABC123
+        TrackingId trackingId1 = new TrackingId("ABC123");
 
         RouteSpecification routeSpecification1 = new RouteSpecification(
                 SampleLocations.HONGKONG, SampleLocations.HELSINKI,
                 DateUtil.toDate("2009-03-15"));
-        TrackingId trackingId1 = new TrackingId("ABC123");
         Cargo abc123 = new Cargo(trackingId1, routeSpecification1);
 
         Itinerary itinerary1 = new Itinerary(Arrays.asList(
@@ -128,11 +151,11 @@ public class SampleDataGenerator {
         entityManager.persist(abc123);
 
         // Cargo JKL567
+        TrackingId trackingId2 = new TrackingId("JKL567");
 
         RouteSpecification routeSpecification2 = new RouteSpecification(
                 SampleLocations.HANGZOU, SampleLocations.STOCKHOLM,
                 DateUtil.toDate("2009-03-18"));
-        TrackingId trackingId2 = new TrackingId("JKL567");
         Cargo jkl567 = new Cargo(trackingId2, routeSpecification2);
 
         Itinerary itinerary2 = new Itinerary(Arrays.asList(

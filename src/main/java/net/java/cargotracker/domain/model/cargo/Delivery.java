@@ -133,6 +133,10 @@ public class Delivery implements Serializable {
         this.lastKnownLocation = lastKnownLocation;
     }
 
+    public void setLastEvent(HandlingEvent lastEvent) {
+        this.lastEvent = lastEvent;
+    }
+
     public Voyage getCurrentVoyage() {
         return DomainObjectUtils.nullSafe(currentVoyage, Voyage.NONE);
     }
