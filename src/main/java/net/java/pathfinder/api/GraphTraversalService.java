@@ -1,7 +1,7 @@
 package net.java.pathfinder.api;
 
 import java.util.*;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,7 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import net.java.pathfinder.internal.GraphDao;
 
-@RequestScoped// TODO Change this to stateless for better scalability.
+@Stateless// TODO Change this to stateless for better scalability.
 @Path("/graph-traversal")
 public class GraphTraversalService {
 
