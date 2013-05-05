@@ -37,16 +37,16 @@ public class HandlingReportService {
     private ApplicationEvents applicationEvents;
 
     @GET
-    @Path("/test")
+    @Path("/example")
     @Produces(MediaType.APPLICATION_JSON)
-    public HandlingReport test() {
+    public HandlingReport example() {
         HandlingReport report = new HandlingReport();
 
-        report.setType("test");
-        report.setUnLocode("test");
-        report.setVoyageNumber("test");
-        report.setCompletionTime("test");
-        report.setTrackingIds(Arrays.asList(new String[]{"test1", "test2"}));
+        report.setType("TYPE");
+        report.setUnLocode("ULOCD");
+        report.setVoyageNumber("VGNM");
+        report.setCompletionTime("yyyy-MM-dd HH:mm");
+        report.setTrackingIds(Arrays.asList(new String[]{"track1", "track2"}));
 
         return report;
     }
