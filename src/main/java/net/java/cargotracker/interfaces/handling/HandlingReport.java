@@ -25,7 +25,6 @@ public class HandlingReport {
     @NotNull
     @Size(min = 5, max = 5)
     private String unLocode;
-    @NotNull
     @Size(min = 4, max = 5)
     private String voyageNumber;
 

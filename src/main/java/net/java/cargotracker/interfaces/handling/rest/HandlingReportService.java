@@ -59,8 +59,13 @@ public class HandlingReportService {
         try {
             Date completionTime = new SimpleDateFormat(ISO_8601_FORMAT).parse(
                     handlingReport.getCompletionTime());
-            VoyageNumber voyageNumber = new VoyageNumber(
-                    handlingReport.getVoyageNumber());
+            VoyageNumber voyageNumber = null;
+
+            if (handlingReport.getVoyageNumber() != null) {
+                voyageNumber = new VoyageNumber(
+                        handlingReport.getVoyageNumber());
+            }
+
             HandlingEvent.Type type = HandlingEvent.Type.valueOf(
                     handlingReport.getType());
             UnLocode unLocode = new UnLocode(handlingReport.getUnLocode());
