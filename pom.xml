@@ -98,6 +98,7 @@
                 <version>2.1.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <!-- <warName>cargo-tracker</warName> -->
                 </configuration>
             </plugin>
             <plugin>
