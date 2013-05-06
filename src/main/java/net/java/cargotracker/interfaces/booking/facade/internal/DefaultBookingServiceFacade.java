@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import net.java.cargotracker.application.BookingService;
 import net.java.cargotracker.domain.model.cargo.Cargo;
@@ -21,6 +22,7 @@ import net.java.cargotracker.interfaces.booking.facade.internal.assembler.CargoR
 import net.java.cargotracker.interfaces.booking.facade.internal.assembler.ItineraryCandidateDtoAssembler;
 import net.java.cargotracker.interfaces.booking.facade.internal.assembler.LocationDtoAssembler;
 
+@ApplicationScoped
 public class DefaultBookingServiceFacade implements BookingServiceFacade,
         Serializable {
 

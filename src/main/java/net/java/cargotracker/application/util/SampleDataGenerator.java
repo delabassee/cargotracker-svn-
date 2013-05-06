@@ -60,6 +60,7 @@ public class SampleDataGenerator {
         }
 
         // Delete all entities
+        // TODO See why cascade delete is not working.
         entityManager.createQuery("Delete from HandlingEvent").executeUpdate();
         entityManager.createQuery("Delete from Leg").executeUpdate();
         entityManager.createQuery("Delete from Cargo").executeUpdate();

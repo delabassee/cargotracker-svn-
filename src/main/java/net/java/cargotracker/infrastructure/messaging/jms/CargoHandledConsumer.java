@@ -17,6 +17,7 @@ import net.java.cargotracker.domain.model.cargo.TrackingId;
  * This is a programmatic hook into the JMS infrastructure to make cargo
  * inspection message-driven.
  */
+// TODO Use standard JMS properties
 //@MessageDriven(activationConfig = {
 //    @ActivationConfigProperty(
 //      propertyName = "destinationLookup",

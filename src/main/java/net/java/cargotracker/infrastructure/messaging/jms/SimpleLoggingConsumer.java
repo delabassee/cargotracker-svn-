@@ -5,11 +5,7 @@ import java.util.logging.Logger;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
-//@MessageDriven(activationConfig = {
-//    @ActivationConfigProperty(
-//      propertyName = "destinationLookup",
-//    propertyValue = "java:global/jms/DeliveredCargoQueue")
-//})
+// MDB Wired up in XML.
 public class SimpleLoggingConsumer implements MessageListener {
 
     private static final Logger logger = Logger.getLogger(

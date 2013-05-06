@@ -6,7 +6,7 @@
     <application>
         <resource-bundle>
             <base-name>net.java.cargotracker.messages</base-name>
-            <var>msg</var>
+            <var>messages</var>
         </resource-bundle>
     </application>
 </faces-config>

@@ -19,8 +19,6 @@ public class CargoRouteDtoAssembler {
                     .getUnLocode().getIdString(), leg.getLoadTime(), leg.getUnloadTime());
         }
 
-        System.out.println("Cargo route: " + cargo.getItinerary());
-
         return dto;
     }
 }

@@ -1,6 +1,8 @@
 package net.java.cargotracker.domain.model.handling;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.CargoRepository;
@@ -12,17 +14,16 @@ import net.java.cargotracker.domain.model.voyage.Voyage;
 import net.java.cargotracker.domain.model.voyage.VoyageNumber;
 import net.java.cargotracker.domain.model.voyage.VoyageRepository;
 
-public class HandlingEventFactory {
+@ApplicationScoped
+public class HandlingEventFactory implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Inject
     private CargoRepository cargoRepository;
     @Inject
     private VoyageRepository voyageRepository;
     @Inject
     private LocationRepository locationRepository;
-
-    public HandlingEventFactory() {
-    }
 
     /**
      * @param registrationTime time when this event was received by the system

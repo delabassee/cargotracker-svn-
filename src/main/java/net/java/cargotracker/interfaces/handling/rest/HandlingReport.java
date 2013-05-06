@@ -1,4 +1,4 @@
-package net.java.cargotracker.interfaces.handling;
+package net.java.cargotracker.interfaces.handling.rest;
 
 import java.util.ArrayList;
 import java.util.List;

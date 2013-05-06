@@ -78,7 +78,7 @@ public class ExternalRoutingService implements RoutingService {
             if (routeSpecification.isSatisfiedBy(itinerary)) {
                 itineraries.add(itinerary);
             } else {
-                log.log(Level.WARNING,
+                log.log(Level.FINE,
                         "Received itinerary that did not satisfy the route specification");
             }
         }

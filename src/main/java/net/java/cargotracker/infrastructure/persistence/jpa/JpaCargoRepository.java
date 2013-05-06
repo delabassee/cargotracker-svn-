@@ -3,6 +3,9 @@ package net.java.cargotracker.infrastructure.persistence.jpa;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -11,10 +14,12 @@ import net.java.cargotracker.domain.model.cargo.CargoRepository;
 import net.java.cargotracker.domain.model.cargo.Leg;
 import net.java.cargotracker.domain.model.cargo.TrackingId;
 
-// TODO Change this to a singleton?
+@ApplicationScoped
 public class JpaCargoRepository implements CargoRepository, Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(
+            JpaCargoRepository.class.getName());
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -25,9 +30,7 @@ public class JpaCargoRepository implements CargoRepository, Serializable {
                     Cargo.class).setParameter("trackingId", trackingId)
                     .getSingleResult();
         } catch (NoResultException e) {
-            // TODO Use a logger with a level.
-            System.err.println("No cargo found for tracking ID: " + trackingId);
-            e.printStackTrace();
+            logger.log(Level.FINE, "No cargo found for tracking ID: {0}", trackingId);
             return null;
         }
     }

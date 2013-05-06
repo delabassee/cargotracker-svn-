@@ -94,7 +94,7 @@ public class CargoAdmin {
     @PostConstruct
     public void init() {
         locations = bookingServiceFacade.listShippingLocations();
-        unlocodes = new ArrayList<String>();
+        unlocodes = new ArrayList<>();
 
         for (Location location : locations) {
             unlocodes.add(location.getUnLocode());

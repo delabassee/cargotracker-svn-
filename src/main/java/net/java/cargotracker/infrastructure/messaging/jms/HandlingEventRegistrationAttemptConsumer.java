@@ -21,6 +21,7 @@ import net.java.cargotracker.interfaces.handling.HandlingEventRegistrationAttemp
 //      propertyName = "destinationLookup",
 //    propertyValue = "java:global/jms/HandlingEventRegistrationAttemptQueue")
 //})
+// TODO Use standard JMS properties
 @MessageDriven(mappedName = "java:global/jms/HandlingEventRegistrationAttemptQueue")
 public class HandlingEventRegistrationAttemptConsumer implements MessageListener {
 

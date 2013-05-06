@@ -1,6 +1,7 @@
 package net.java.cargotracker.infrastructure.persistence.jpa;
 
 import java.io.Serializable;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import net.java.cargotracker.domain.model.cargo.TrackingId;
@@ -8,7 +9,7 @@ import net.java.cargotracker.domain.model.handling.HandlingEvent;
 import net.java.cargotracker.domain.model.handling.HandlingEventRepository;
 import net.java.cargotracker.domain.model.handling.HandlingHistory;
 
-// TODO Change this to a singleton?
+@ApplicationScoped
 public class JpaHandlingEventRepository implements HandlingEventRepository,
         Serializable {
 

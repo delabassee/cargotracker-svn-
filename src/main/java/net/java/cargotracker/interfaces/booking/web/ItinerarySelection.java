@@ -24,7 +24,6 @@ import net.java.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
  */
 @Named
 @ViewScoped
-// TODO Fix view param multiple call issue.
 public class ItinerarySelection implements Serializable {
 
     private static final long serialVersionUID = 1L;
