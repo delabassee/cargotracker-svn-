@@ -4,13 +4,13 @@
     <h:head>
         <title><ui:insert name="title">Title</ui:insert></title>
         <style type="text/css" title="style" media="screen">
-            @import "/cargo-tracker/stylesheets/public.css";
+            @import "#{request.contextPath}/stylesheets/public.css";
         </style>
     </h:head>
     <h:body>
         <div id="outer">
             <div id="apptitle">
-                <img src="/cargo-tracker/images/cargo-tracker-banner.png" />
+                <img src="#{request.contextPath}/images/cargo-tracker-banner.png" />
             </div>
             <div id="body">
                 <ui:insert name="content">Content</ui:insert>

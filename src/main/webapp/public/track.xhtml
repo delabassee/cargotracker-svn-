@@ -37,7 +37,7 @@
                         <p>#{cargoTracker.cargo.nextExpectedActivity}</p>
                         <h:panelGroup rendered="#{cargoTracker.cargo.misdirected}">
                             <p class="notify">
-                                <img src="/cargo-tracker/images/error.png" alt="" />Cargo is
+                                <img src="#{request.contextPath}/images/error.png" alt="" />Cargo is
                                 misdirected
                             </p>
                         </h:panelGroup>
@@ -48,7 +48,7 @@
                                     <li>
                                         <p>
                                             <img style="vertical-align: top;"
-                                                 src='/cargo-tracker/images/#{leg.expected ? "tick" : "cross"}.png'
+                                                 src='#{request.contextPath}/images/#{leg.expected ? "tick" : "cross"}.png'
                                                  alt="" /> #{leg.description}
                                         </p>
                                     </li>

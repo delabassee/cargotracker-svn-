@@ -4,14 +4,14 @@
     <h:head>
         <title><ui:insert name="title">Title</ui:insert></title>
         <style type="text/css" title="style" media="screen">
-            @import "/cargo-tracker/stylesheets/admin.css";
+            @import "#{request.contextPath}/stylesheets/admin.css";
         </style>
         <ui:insert name="header"></ui:insert>
     </h:head>
     <h:body>
         <div id="outer">
             <img id="logotype"
-                 src="/cargo-tracker/images/cargo-tracker-banner-small.png" />
+                 src="#{request.contextPath}/images/cargo-tracker-banner-small.png" />
             <h1>Cargo Booking &amp; Routing</h1>
             <ul id="menu">
                 <li><a href="list.xhtml"> List all cargos</a></li>
