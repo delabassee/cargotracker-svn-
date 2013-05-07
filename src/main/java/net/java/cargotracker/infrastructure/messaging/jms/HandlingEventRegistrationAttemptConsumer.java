@@ -2,6 +2,7 @@ package net.java.cargotracker.infrastructure.messaging.jms;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.inject.Inject;
 import javax.jms.JMSException;
@@ -16,13 +17,12 @@ import net.java.cargotracker.interfaces.handling.HandlingEventRegistrationAttemp
  * Consumes handling event registration attempt messages and delegates to proper
  * registration.
  */
-//@MessageDriven(activationConfig = {
-//    @ActivationConfigProperty(
-//      propertyName = "destinationLookup",
-//    propertyValue = "java:global/jms/HandlingEventRegistrationAttemptQueue")
-//})
-// TODO Use standard JMS properties
-@MessageDriven(mappedName = "java:global/jms/HandlingEventRegistrationAttemptQueue")
+@MessageDriven(activationConfig = {
+    @ActivationConfigProperty(propertyName = "destinationType",
+    propertyValue = "javax.jms.Queue"),
+    @ActivationConfigProperty(propertyName = "destinationLookup",
+    propertyValue = "java:global/jms/HandlingEventRegistrationAttemptQueue")
+})
 public class HandlingEventRegistrationAttemptConsumer implements MessageListener {
 
     @Inject

@@ -12,7 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import net.java.pathfinder.internal.GraphDao;
 
-@Stateless// TODO Change this to stateless for better scalability.
+@Stateless
 @Path("/graph-traversal")
 public class GraphTraversalService {
 

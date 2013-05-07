@@ -2,6 +2,7 @@ package net.java.cargotracker.infrastructure.messaging.jms;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.inject.Inject;
 import javax.jms.Message;
@@ -17,13 +18,12 @@ import net.java.cargotracker.domain.model.cargo.TrackingId;
  * This is a programmatic hook into the JMS infrastructure to make cargo
  * inspection message-driven.
  */
-// TODO Use standard JMS properties
-//@MessageDriven(activationConfig = {
-//    @ActivationConfigProperty(
-//      propertyName = "destinationLookup",
-//    propertyValue = "java:global/jms/CargoHandledQueue")
-//})
-@MessageDriven(mappedName = "java:global/jms/CargoHandledQueue")
+@MessageDriven(activationConfig = {
+    @ActivationConfigProperty(propertyName = "destinationType", 
+        propertyValue = "javax.jms.Queue"),
+    @ActivationConfigProperty(propertyName = "destinationLookup", 
+        propertyValue = "java:global/jms/CargoHandledQueue")
+})
 public class CargoHandledConsumer implements MessageListener {
 
     @Inject

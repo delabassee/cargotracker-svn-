@@ -70,6 +70,8 @@ public class SampleDataGenerator {
     }
 
     private void loadSampleLocations() {
+//        System.out.println("Hello Mitesh");
+        
         entityManager.persist(SampleLocations.HONGKONG);
         entityManager.persist(SampleLocations.MELBOURNE);
         entityManager.persist(SampleLocations.STOCKHOLM);
