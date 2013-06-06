@@ -3,6 +3,7 @@ package net.java.cargotracker.application.util;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -31,6 +32,9 @@ import net.java.cargotracker.domain.model.voyage.SampleVoyages;
 @Startup
 public class SampleDataGenerator {
 
+    // TODO See if the logger can be injected.
+    private static final Logger logger = Logger.getLogger(
+            SampleDataGenerator.class.getName());
     @PersistenceContext
     private EntityManager entityManager;
     @Inject
@@ -41,6 +45,7 @@ public class SampleDataGenerator {
     @PostConstruct
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void loadSampleData() {
+        logger.info("Loading sample data.");
         unLoadAll(); //  Fail-safe in case of application restart that does not trigger a JPA schema drop.
         loadSampleLocations();
         loadSampleVoyages();
@@ -48,6 +53,7 @@ public class SampleDataGenerator {
     }
 
     private void unLoadAll() {
+        logger.info("Unloading all existing data.");
         // In order to remove handling events, must remove refrences in cargo.
         // Dropping cargo first won't work since handling events have references
         // to it.
@@ -70,8 +76,8 @@ public class SampleDataGenerator {
     }
 
     private void loadSampleLocations() {
-//        System.out.println("Hello Mitesh");
-        
+        logger.info("Loading sample locations.");
+
         entityManager.persist(SampleLocations.HONGKONG);
         entityManager.persist(SampleLocations.MELBOURNE);
         entityManager.persist(SampleLocations.STOCKHOLM);
@@ -88,6 +94,8 @@ public class SampleDataGenerator {
     }
 
     private void loadSampleVoyages() {
+        logger.info("Loading sample voyages.");
+
         entityManager.persist(SampleVoyages.HONGKONG_TO_NEW_YORK);
         entityManager.persist(SampleVoyages.NEW_YORK_TO_DALLAS);
         entityManager.persist(SampleVoyages.DALLAS_TO_HELSINKI);
@@ -96,6 +104,8 @@ public class SampleDataGenerator {
     }
 
     private void loadSampleCargos() {
+        logger.info("Loading sample cargo data.");
+        
         // Cargo ABC123
         TrackingId trackingId1 = new TrackingId("ABC123");
 
