@@ -134,13 +134,13 @@
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.3.3</version>
+                <version>1.4.2</version>
                 <configuration>
                     <!-- Container configuration -->
                     <container>
-                        <containerId>glassfish3x</containerId>
+                        <containerId>glassfish4x</containerId>
                         <zipUrlInstaller>
-                            <url>http://dlc.sun.com.edgesuite.net/glassfish/4.0/promoted/glassfish-4.0-b76.zip</url>
+                            <url>http://download.java.net/glassfish/4.0/promoted/latest-glassfish.zip</url>
                         </zipUrlInstaller>
                     </container>
                     <properties>
