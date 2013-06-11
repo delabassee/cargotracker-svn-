@@ -4,6 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html">
     <h:head>
         <title>Cargo Tracker</title>
+        <style type="text/css" title="style" media="screen">
+            @import "#{request.contextPath}/stylesheets/cargotracker.css";
+        </style>
     </h:head>
     <h:body style="padding: 20px">
         <p>
@@ -14,9 +17,9 @@
         </p>
         <p>There are two web interfaces available:</p>
         <ul>
-            <li>Public <a href="public/track.xhtml">cargo tracking</a>.</li>
+            <li>Public <a href="public/dashboard.xhtml">Landing Page</a>.</li>
             <li>
-                Administration of <a href="admin/list.xhtml">booking and routing</a>.
+                Administration<a href="admin/dashboard.xhtml">Landing Page</a>
             </li>
         </ul>
         <p>The Incident Logging application, that is used to register
@@ -26,8 +29,7 @@
             for more information about the application and it's goals.
         </p>
         <p>
-            <i>This project is an effort by <a href="https://blogs.oracle.com/reza/">Reza Rahman</a>,
-                a Java EE/GlassFish evangelist at Oracle Corporation.</i>
+            <i>This project is an effort of "DDD using JEE" practitioners within <a href="http://www.oracle.com">Oracle Corporation</a></i>
         </p>
     </h:body>
 </html>
