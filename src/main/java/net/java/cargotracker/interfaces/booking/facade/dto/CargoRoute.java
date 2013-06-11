@@ -18,14 +18,21 @@ public class CargoRoute implements Serializable {
     private Date arrivalDeadline;
     private boolean misrouted;
     private List<Leg> legs;
+    private boolean claimed;
+    private String lastKnownLocation;
+    private String transportStatus;
+    private String nextLocation;
 
     public CargoRoute(String trackingId, String origin, String finalDestination,
-            Date arrivalDeadline, boolean misrouted) {
-        this.trackingId = trackingId;
-        this.origin = origin;
-        this.finalDestination = finalDestination;
-        this.arrivalDeadline = arrivalDeadline;
-        this.misrouted = misrouted;
+            Date arrivalDeadline, boolean misrouted,boolean claimed,String lastKnownLocation,String transportStatus) {
+        this.trackingId         = trackingId;
+        this.origin             = origin;
+        this.finalDestination   = finalDestination;
+        this.arrivalDeadline    = arrivalDeadline;
+        this.misrouted          = misrouted;
+        this.claimed            = claimed;
+        this.lastKnownLocation  = lastKnownLocation;
+        this.transportStatus    = transportStatus;
         this.legs = new ArrayList<>();
     }
 
@@ -60,5 +67,21 @@ public class CargoRoute implements Serializable {
 
     public Date getArrivalDeadline() {
         return arrivalDeadline;
+    }
+    
+    public boolean isClaimed(){
+        return claimed;
+    }
+    
+    public String getLastKnownLocation(){
+        return this.lastKnownLocation;
+    }
+    
+    public String getTransportStatus(){
+        return this.transportStatus;
+    }
+    
+    public String getNextLocation(){
+        return this.nextLocation;
     }
 }
