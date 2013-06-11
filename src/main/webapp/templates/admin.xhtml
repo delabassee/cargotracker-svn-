@@ -4,23 +4,40 @@
     <h:head>
         <title><ui:insert name="title">Title</ui:insert></title>
         <style type="text/css" title="style" media="screen">
-            @import "#{request.contextPath}/stylesheets/admin.css";
+            @import "#{request.contextPath}/stylesheets/cargotracker.css";
         </style>
-        <ui:insert name="header"></ui:insert>
+         <style type="text/css" title="style" media="screen">
+            @import "#{request.contextPath}/stylesheets/calendar.css";
+        </style>
     </h:head>
-    <h:body>
+    <h:body class="body">
         <div id="outer">
-            <img id="logotype"
-                 src="#{request.contextPath}/images/cargo-tracker-banner-small.png" />
-            <h1>Cargo Booking &amp; Routing</h1>
-            <ul id="menu">
-                <li><a href="list.xhtml"> List all cargos</a></li>
-                <li><a href="registration.xhtml"> Book new
-                        cargo</a></li>
-            </ul>
-            <div id="body">
-                <ui:insert name="content">Content</ui:insert>
+            
+            <!-- Header using HTML 5 header/nav tags -->
+            <header id="header" class="cargo_header">
+            <img src="#{request.contextPath}/images/cargo-tracker-logo.png"/>
+            
+            <!-- Menu Navigation -->
+            <nav>
+                <ul>
+                    <li><a href="#{request.contextPath}/admin/dashboard.xhtml">Home</a></li>
+                    <li><a href="#{request.contextPath}/admin/registration.xhtml">Booking</a></li>
+                    <li><a href="#{request.contextPath}/admin/track.xhtml">Tracking</a></li>
+                    <li><a href="#{request.contextPath}/admin/about.xhtml">About</a></li>
+                </ul>
+            </nav>
+            
+            </header>
+            
+            <!-- Body Content -->
+            <div id="body" class="cargo_content">
+                <ui:insert name="content">Default Content</ui:insert>
             </div>
+            
+            <!-- Footer of the layout -->
+            <footer id="footer" class="cargo_footer">
+		<p>This project is an effort of "DDD using JEE" practitioners within <a href="http://www.oracle.com">Oracle Corporation</a></p>
+            </footer>
         </div>
     </h:body>
 </html>
