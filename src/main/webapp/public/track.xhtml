@@ -1,11 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:composition template="/templates/public.xhtml">
-        <ui:define name="title">Tracking Cargo</ui:define>
-        <ui:define name="content">
-            <div id="container">
-                <div id="search">
+
+         <div id="id_track_cargo" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+                    
                     <h:form id="trackingForm">
                         <table>
                             <tr>
@@ -22,7 +20,7 @@
                             </tr>
                         </table>
                     </h:form>
-                </div>
+                
                 <h:panelGroup rendered="#{empty cargoTracker.cargo}">
                     <p>
                         <em>Hint: try tracking 'ABC123' or 'JKL567'.</em>
@@ -57,13 +55,11 @@
                         </h:panelGroup>
                     </div>
                 </h:panelGroup>
-            </div>
+            
             <script type="text/javascript" charset="UTF-8">
                 try {
                     document.getElementById('trackingForm:trackigIdInput').focus()
                 } catch (e) {
                 }
             </script>
-        </ui:define>
-    </ui:composition>
-</html>
+             </div>
