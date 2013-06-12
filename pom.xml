@@ -14,8 +14,8 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+        <netbeans.hint.j2eeVersion>1.7</netbeans.hint.j2eeVersion>
+        <netbeans.hint.deploy.server>gfv4ee7</netbeans.hint.deploy.server>
     </properties>
 
     <repositories>
@@ -118,8 +118,8 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>javax</groupId>
-                                    <artifactId>javaee-endorsed-api</artifactId>
-                                    <version>6.0</version>
+                                    <artifactId>javaee-api</artifactId>
+                                    <version>7.0</version>
                                     <type>jar</type>
                                 </artifactItem>
                             </artifactItems>
@@ -136,7 +136,6 @@
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>1.4.2</version>
                 <configuration>
-                    <!-- Container configuration -->
                     <container>
                         <containerId>glassfish4x</containerId>
                         <zipUrlInstaller>
