@@ -24,6 +24,11 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    <data-source>
+        <name>java:global/jdbc/CargoTrackerDatabase</name>
+        <class-name>org.apache.derby.jdbc.EmbeddedDriver</class-name>
+        <url>jdbc:derby:/temp/cargo-tracker-database;create=true</url>
+    </data-source>
     <jms-destination>
         <name>java:global/jms/CargoHandledQueue</name>
         <interface-name>javax.jms.Queue</interface-name>
