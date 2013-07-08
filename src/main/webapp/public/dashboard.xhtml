@@ -2,21 +2,17 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
     <ui:composition template="/templates/public.xhtml">
-        <ui:define name="title">Cargo Dashboard</ui:define>
+        <ui:define name="title">Track Cargo</ui:define>
         <ui:define name="content">
-            
             <div id="id_w_track_cargoes" class="cs_track_cargoes">
-                    <ui:decorate template="/templates/widgetlayout.xhtml">
-                     <ui:define name="widgetTitle">Quick Search</ui:define>
-                     <ui:define name="widgetContent">
-                         <ui:include src="/public/track.xhtml"/>
-                     </ui:define>
-                    </ui:decorate> 
-                
+                <ui:decorate template="/templates/widgetlayout.xhtml">
+                    <ui:define name="widgetTitle">Track Your Cargo</ui:define>
+                    <ui:define name="widgetContent">
+                        <ui:include src="/public/track.xhtml"/>
+                    </ui:define>
+                </ui:decorate>
             </div>
-            
         </ui:define>
     </ui:composition>
 </html>
