@@ -1,64 +1,75 @@
-<div id="id_track_cargo" xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:h="http://java.sun.com/jsf/html"
-     xmlns:f="http://java.sun.com/jsf/core"
-     xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/templates/public.xhtml">
+        <ui:define name="title">Track Cargo</ui:define>
+        <ui:define name="content">
+            <div id="id_w_track_cargoes" class="cs_track_cargoes">
+                <ui:decorate template="/templates/widgetlayout.xhtml">
+                    <ui:define name="widgetTitle">Track Your Cargo</ui:define>
+                    <ui:define name="widgetContent">
+                        <h:form id="trackingForm">
+                            <table>
+                                <tr>
+                                    <td>Enter your tracking id:</td>
+                                    <td><h:inputText id="trackingIdInput"
+                                                     value="#{cargoTracker.trackingId}" /></td>
+                                    <td><h:commandButton value="Track!"
+                                                         action="#{cargoTracker.trackCargo()}" /></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><h:messages class="error" /></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </h:form>
 
-    <h:form id="trackingForm">
-        <table>
-            <tr>
-                <td>Enter your tracking id:</td>
-                <td><h:inputText id="trackingIdInput"
-                                 value="#{cargoTracker.trackingId}" /></td>
-                <td><h:commandButton value="Track!"
-                                     action="#{cargoTracker.trackCargo()}" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><h:messages class="error" /></td>
-                <td></td>
-            </tr>
-        </table>
-    </h:form>
-
-    <h:panelGroup rendered="#{empty cargoTracker.cargo}">
-        <p>
-            <em>Hint: try tracking 'ABC123' or 'JKL567'.</em>
-        </p>
-    </h:panelGroup>
-    <h:panelGroup rendered="#{not empty cargoTracker.cargo}">
-        <div id="result">
-            <h2>Cargo #{cargoTracker.cargo.trackingId} is now:
-                #{cargoTracker.cargo.statusText}</h2>
-            <p>Estimated time of arrival in
-                #{cargoTracker.cargo.destination}: #{cargoTracker.cargo.eta}</p>
-            <p>#{cargoTracker.cargo.nextExpectedActivity}</p>
-            <h:panelGroup rendered="#{cargoTracker.cargo.misdirected}">
-                <p class="notify">
-                    <img src="#{request.contextPath}/images/error.png" alt="" />Cargo is
-                    misdirected
-                </p>
-            </h:panelGroup>
-            <h:panelGroup rendered="#{not empty cargoTracker.cargo.events}">
-                <h3>Handling History</h3>
-                <ul style="list-style-type: none;">
-                    <ui:repeat value="#{cargoTracker.cargo.events}" var="leg">
-                        <li>
+                        <h:panelGroup rendered="#{empty cargoTracker.cargo}">
                             <p>
-                                <img style="vertical-align: top;"
-                                     src='#{request.contextPath}/images/#{leg.expected ? "tick" : "cross"}.png'
-                                     alt="" /> #{leg.description}
+                                <em>Hint: try tracking 'ABC123' or 'JKL567'.</em>
                             </p>
-                        </li>
-                    </ui:repeat>
-                </ul>
-            </h:panelGroup>
-        </div>
-    </h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{not empty cargoTracker.cargo}">
+                            <div id="result">
+                                <h2>Cargo #{cargoTracker.cargo.trackingId} is now:
+                                    #{cargoTracker.cargo.statusText}</h2>
+                                <p>Estimated time of arrival in
+                                    #{cargoTracker.cargo.destination}: #{cargoTracker.cargo.eta}</p>
+                                <p>#{cargoTracker.cargo.nextExpectedActivity}</p>
+                                <h:panelGroup rendered="#{cargoTracker.cargo.misdirected}">
+                                    <p class="notify">
+                                        <img src="#{request.contextPath}/images/error.png" alt="" />Cargo is
+                                        misdirected
+                                    </p>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{not empty cargoTracker.cargo.events}">
+                                    <h3>Handling History</h3>
+                                    <ul style="list-style-type: none;">
+                                        <ui:repeat value="#{cargoTracker.cargo.events}" var="leg">
+                                            <li>
+                                                <p>
+                                                    <img style="vertical-align: top;"
+                                                         src='#{request.contextPath}/images/#{leg.expected ? "tick" : "cross"}.png'
+                                                         alt="" /> #{leg.description}
+                                                </p>
+                                            </li>
+                                        </ui:repeat>
+                                    </ul>
+                                </h:panelGroup>
+                            </div>
+                        </h:panelGroup>
 
-    <script type="text/javascript" charset="UTF-8">
-        try {
-            document.getElementById('trackingForm:trackigIdInput').focus()
-        } catch (e) {
-        }
-    </script>
-</div>
+                        <script type="text/javascript" charset="UTF-8">
+                            try {
+                                document.getElementById('trackingForm:trackigIdInput').focus()
+                            } catch (e) {
+                            }
+                        </script>
+                    </ui:define>
+                </ui:decorate>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
