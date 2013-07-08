@@ -6,38 +6,33 @@
     <ui:composition template="/templates/admin.xhtml">
         <ui:define name="title">Cargo Dashboard</ui:define>
         <ui:define name="content">
-            
-             <div id="id_w_live_cargoes" class="dashboard_large_widget">
-                 <ui:decorate template="/templates/widgetlayout.xhtml">
-                     <ui:define name="widgetTitle">Cargos (In Progress)</ui:define>
-                     <ui:define name="widgetContent">
-                         <ui:include src="/admin/listInProgress.xhtml"/>
-                     </ui:define>
-                 </ui:decorate> 
+            <div id="id_w_live_cargoes" class="dashboard_large_widget">
+                <ui:decorate template="/templates/widgetlayout.xhtml">
+                    <ui:define name="widgetTitle">Cargos (In Progress)</ui:define>
+                    <ui:define name="widgetContent">
+                        <ui:include src="/admin/listInProgress.xhtml"/>
+                    </ui:define>
+                </ui:decorate>
             </div>
-            
-            
-            
+
             <div id="id_w_compl_cargoes" class="dashboard_medium_widget">
                 <ui:decorate template="/templates/widgetlayout.xhtml">
-                     <ui:define name="widgetTitle">Cargos (Completed)</ui:define>
-                     <ui:define name="widgetContent">
-                         <ui:include src="/admin/listCompleted.xhtml"/>
-                     </ui:define>
-                 </ui:decorate> 
+                    <ui:define name="widgetTitle">Cargos (Completed)</ui:define>
+                    <ui:define name="widgetContent">
+                        <ui:include src="/admin/listCompleted.xhtml"/>
+                    </ui:define>
+                </ui:decorate>
             </div>
-            
-            
-            
+
             <div id="id_w_notrouted_cargoes" class="dashboard_medium_widget">
                 <ui:decorate template="/templates/widgetlayout.xhtml">
-                     <ui:define name="widgetTitle">Cargos (Not routed)</ui:define>
-                     <ui:define name="widgetContent">
-                         <ui:include src="/admin/listNotRouted.xhtml"/>
-                     </ui:define>
-                 </ui:decorate> 
+                    <ui:define name="widgetTitle">Cargos (Not routed)</ui:define>
+                    <ui:define name="widgetContent">
+                        <ui:include src="/admin/listNotRouted.xhtml"/>
+                    </ui:define>
+                </ui:decorate>
             </div>
-            
+
         </ui:define>
     </ui:composition>
 </html>

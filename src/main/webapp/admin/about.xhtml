@@ -5,7 +5,17 @@
     <ui:composition template="/templates/admin.xhtml">
         <ui:define name="title">Cargo Administration</ui:define>
         <ui:define name="content">
-            This project demonstrates how you can develop applications with the Java EE platform using widely adopted architectural best practices like Domain-Driven Design (DDD). The code is intended to mirror a non-trivial application that developers in the real work would work on. It attempts to demonstrate first-hand how you can use Java EE to effectively meet practical enterprise concerns such as productivity, agility, testability, flexibility, maintainability, scalability and security. 
+            <p>The administrative interface includes several features for 
+                cargo administrators:</p>
+            <ul>
+                <li>View the current status of all registered cargo.</li>
+                <li>View details for cargo such as origin, destination,
+                deadline and itinerary.</li>
+                <li>Change cargo destination.</li>
+                <li>Book new cargo.</li>
+                <li>Assign route to cargo.</li>
+                <li>Track cargo via the public tracking interface.</li>
+            </ul> 
         </ui:define>
     </ui:composition>
 </html>
