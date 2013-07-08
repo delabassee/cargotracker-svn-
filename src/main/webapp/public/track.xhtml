@@ -1,6 +1,5 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/templates/public.xhtml">
         <ui:define name="title">Track Cargo</ui:define>
@@ -18,14 +17,9 @@
                                     <td><h:commandButton value="Track!"
                                                          action="#{cargoTracker.trackCargo()}" /></td>
                                 </tr>
-                                <tr>
-                                    <td></td>
-                                    <td><h:messages class="error" /></td>
-                                    <td></td>
-                                </tr>
                             </table>
                         </h:form>
-
+                        <h:messages class="error" />
                         <h:panelGroup rendered="#{empty cargoTracker.cargo}">
                             <p>
                                 <em>Hint: try tracking 'ABC123' or 'JKL567'.</em>

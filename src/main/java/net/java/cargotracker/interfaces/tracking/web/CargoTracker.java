@@ -2,6 +2,8 @@ package net.java.cargotracker.interfaces.tracking.web;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -59,8 +61,12 @@ public class CargoTracker implements Serializable {
                     .getDistinctEventsByCompletionTime();
             this.cargo = new CargoTrackingViewAdapter(cargo, handlingEvents);
         } else {
-            // TODO Generate a Faces error messsage.			
-            System.err.println("Cargo with tracking ID:" + trackingId + " not found.");
+            // TODO Generate a Faces error messsage.	
+            FacesContext context = FacesContext.getCurrentInstance();
+            FacesMessage message = new FacesMessage(
+                    "Cargo with tracking ID: " + trackingId + " not found.");
+            message.setSeverity(FacesMessage.SEVERITY_ERROR);
+            context.addMessage(null, message);
         }
     }
 }
