@@ -14,12 +14,11 @@
         </thead>
         <tbody>
             <ui:repeat value="#{listCargo.cargos}" var="cargo">
-                <ui:fragment rendered="#{not cargo.routed}">
+                <ui:fragment rendered="#{cargo.claimed}">
                     <tr>
                         <td><h:link value="#{cargo.trackingId}"
                                     outcome="show.xhtml?faces-redirect=true">
                                 <f:param name="trackingId" value="#{cargo.trackingId}" />
-
                             </h:link></td>
                         <td>#{cargo.origin}</td>
                         <td>#{cargo.finalDestination}</td>
@@ -28,5 +27,5 @@
             </ui:repeat>
         </tbody>
     </table>
-
+    
 </div>

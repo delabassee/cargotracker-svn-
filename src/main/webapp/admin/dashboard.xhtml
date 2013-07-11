@@ -1,31 +1,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:composition template="/templates/admin.xhtml">
         <ui:define name="title">Cargo Dashboard</ui:define>
         <ui:define name="content">
             <div id="id_w_live_cargoes" class="dashboard_large_widget">
-                <ui:decorate template="/templates/widgetlayout.xhtml">
-                    <ui:define name="widgetTitle">Cargos (In Progress)</ui:define>
+                <ui:decorate template="/templates/widget.xhtml">
+                    <ui:define name="widgetTitle">Cargos (Routed)</ui:define>
                     <ui:define name="widgetContent">
-                        <ui:include src="/admin/listInProgress.xhtml"/>
+                        <ui:include src="/admin/listRouted.xhtml"/>
                     </ui:define>
                 </ui:decorate>
             </div>
 
             <div id="id_w_compl_cargoes" class="dashboard_medium_widget">
-                <ui:decorate template="/templates/widgetlayout.xhtml">
-                    <ui:define name="widgetTitle">Cargos (Completed)</ui:define>
+                <ui:decorate template="/templates/widget.xhtml">
+                    <ui:define name="widgetTitle">Cargos (Claimed)</ui:define>
                     <ui:define name="widgetContent">
-                        <ui:include src="/admin/listCompleted.xhtml"/>
+                        <ui:include src="/admin/listClaimed.xhtml"/>
                     </ui:define>
                 </ui:decorate>
             </div>
 
             <div id="id_w_notrouted_cargoes" class="dashboard_medium_widget">
-                <ui:decorate template="/templates/widgetlayout.xhtml">
+                <ui:decorate template="/templates/widget.xhtml">
                     <ui:define name="widgetTitle">Cargos (Not routed)</ui:define>
                     <ui:define name="widgetContent">
                         <ui:include src="/admin/listNotRouted.xhtml"/>
