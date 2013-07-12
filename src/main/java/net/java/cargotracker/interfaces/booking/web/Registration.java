@@ -27,7 +27,7 @@ import net.java.cargotracker.interfaces.booking.facade.dto.Location;
 public class Registration implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static final String FORMAT = "MM/dd/yyyy";
+    private static final String FORMAT = "yyyy-MM-dd";
     List<Location> locations;
     private String arrivalDeadline = FORMAT;
     private String originUnlocode;
