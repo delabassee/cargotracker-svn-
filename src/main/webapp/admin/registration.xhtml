@@ -2,7 +2,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <ui:composition template="/templates/admin.xhtml">
         <ui:define name="title">Cargo Administration</ui:define>
         <ui:define name="header">
@@ -37,8 +37,7 @@
 
                         <div class="field">
                             <label for="Arrival Deadline">Arrival Deadline</label>
-                            <h:inputText p:type="date" value="#{registration.arrivalDeadline}"
-                                         size="10" maxlength="10" />
+                            <input type="date" jsf:value="#{registration.arrivalDeadline}" size="10" maxlength="10"/>
                         </div>
 
                         <div class="field">
