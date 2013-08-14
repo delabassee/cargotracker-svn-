@@ -3,7 +3,8 @@
      xmlns:f="http://xmlns.jcp.org/jsf/core"
      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <table width="100%">
+    
+    <table width="100%" id="listRoutedTab">
         <thead>
             <tr>
                 <td>Tracking ID</td>
@@ -17,11 +18,11 @@
         <tbody>
             <ui:repeat value="#{listCargo.cargos}" var="cargo">
                 <ui:fragment rendered="#{cargo.routed}">
-                    <tr>
-                        <td><h:link value="#{cargo.trackingId}"
-                                    outcome="show.xhtml?faces-redirect=true">
+                    <tr id="#{cargo.trackingId}">
+                        <td><h:link value="#{cargo.trackingId}"  
+                                    outcome="show.xhtml?faces-redirect=true" >
                                 <f:param name="trackingId" value="#{cargo.trackingId}" />
-
+                                    
                             </h:link></td>
                         <td>#{cargo.origin}</td>
                         <td>#{cargo.finalDestination}</td>
@@ -33,5 +34,8 @@
             </ui:repeat>
         </tbody>
     </table>
+    
+    <script type='text/javascript' src="js/listRouted.js"/>
+        
 
 </div>
