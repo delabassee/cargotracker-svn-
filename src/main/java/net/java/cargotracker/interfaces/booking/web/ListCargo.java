@@ -1,5 +1,6 @@
 package net.java.cargotracker.interfaces.booking.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -24,6 +25,9 @@ import net.java.cargotracker.interfaces.booking.facade.dto.CargoRoute;
 public class ListCargo {
 
     private List<CargoRoute> cargos;
+    private List<CargoRoute> routedCargos;
+    private List<CargoRoute> claimedCargos;
+    private List<CargoRoute> notRoutedCargos;
     @Inject
     private BookingServiceFacade bookingServiceFacade;
 
@@ -35,4 +39,36 @@ public class ListCargo {
     public void init() {
         cargos = bookingServiceFacade.listAllCargos();
     }
+    
+    public List<CargoRoute> getRoutedCargos(){
+        routedCargos = new ArrayList<CargoRoute>();
+        for(CargoRoute obj:cargos){
+            if(obj.isRouted()){
+                routedCargos.add(obj);
+            }
+        }
+        return routedCargos;
+    }
+    
+    public List<CargoRoute> getClaimedCargos(){
+        claimedCargos = new ArrayList<CargoRoute>();
+        for(CargoRoute obj:cargos){
+            if(obj.isClaimed()){
+                claimedCargos.add(obj);
+            }
+        }
+        return claimedCargos;
+    }
+    
+    public List<CargoRoute> getNotRoutedCargos(){
+        notRoutedCargos = new ArrayList<CargoRoute>();
+        for(CargoRoute obj:notRoutedCargos){
+            if(!obj.isRouted()){
+                notRoutedCargos.add(obj);
+            }
+        }
+        return notRoutedCargos;
+    }
+    
+    
 }
