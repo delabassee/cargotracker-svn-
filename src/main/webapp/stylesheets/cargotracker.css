@@ -22,8 +22,14 @@ a img {
 	text-decoration: none;
 }
 
-a:link, a:visited {
-	color: #CF5C3F;
+a:link {
+	color: #2B547E;
+	padding: 0 1px;
+	text-decoration: none;
+}
+
+nav a:visited {
+    color: #fff;
 	padding: 0 1px;
 	text-decoration: none;
 }
@@ -35,7 +41,7 @@ a:hover, a:active {
 }
 
 .cargo_header nav {
-	background: #6E6E6E;
+	background: #566D7E;
 	font-size: 15px;
 	height: 40px;
 	line-height: 30px;
@@ -160,7 +166,7 @@ table tbody {
 	float: left;
 	margin-top: 32%;
 	padding-left: 0;
-	background-color: #666;
+	background-color: #566D7E;
 	border-radius: 5px;
 	color: #FFF;
 
