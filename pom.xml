@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.j2eeVersion>1.7</netbeans.hint.j2eeVersion>
         <netbeans.hint.deploy.server>gfv4ee7</netbeans.hint.deploy.server>
+        <webapp.databaseTempDir>/temp</webapp.databaseTempDir>
     </properties>
 
     <repositories>
@@ -99,6 +100,7 @@
                 <version>2.1.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                     <!-- <warName>cargo-tracker</warName> -->
                 </configuration>
             </plugin>
