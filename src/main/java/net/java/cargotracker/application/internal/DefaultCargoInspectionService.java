@@ -27,7 +27,7 @@ public class DefaultCargoInspectionService implements CargoInspectionService {
     
     @Inject
     @CargoInspected
-    Event<Cargo> cargoInspected;
+    private Event<Cargo> cargoInspected;
     
     private static final Logger logger = Logger.getLogger(
             DefaultCargoInspectionService.class.getName());
