@@ -21,7 +21,7 @@ public class HandlingReport {
     private List<String> trackingIds = new ArrayList<>();
     @NotNull
     @Size(min = 4, max = 7)
-    private String type;
+    private String eventType;
     @NotNull
     @Size(min = 5, max = 5)
     private String unLocode;
@@ -44,12 +44,12 @@ public class HandlingReport {
         this.trackingIds = trackingIds;
     }
 
-    public String getType() {
-        return type;
+    public String getEventType() {
+        return eventType;
     }
 
-    public void setType(String value) {
-        this.type = value;
+    public void setEventType(String value) {
+        this.eventType = value;
     }
 
     public String getUnLocode() {

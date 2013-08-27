@@ -35,23 +35,8 @@ public class HandlingReportService {
     @Inject
     private ApplicationEvents applicationEvents;
 
-    @GET
-    @Path("/example")
-    @Produces(MediaType.APPLICATION_JSON)
-    public HandlingReport example() {
-        HandlingReport report = new HandlingReport();
-
-        report.setType("TYPE");
-        report.setUnLocode("ULOCD");
-        report.setVoyageNumber("VGNM");
-        report.setCompletionTime("yyyy-MM-dd HH:mm");
-        report.setTrackingIds(Arrays.asList(new String[]{"track1", "track2"}));
-
-        return report;
-    }
-
     @POST
-    @Path("/report")
+    @Path("/reports")
     @Consumes(MediaType.APPLICATION_JSON)
     // TODO Better exception handling.
     public void submitReport(@NotNull @Valid HandlingReport handlingReport) {
@@ -66,7 +51,7 @@ public class HandlingReportService {
             }
 
             HandlingEvent.Type type = HandlingEvent.Type.valueOf(
-                    handlingReport.getType());
+                    handlingReport.getEventType());
             UnLocode unLocode = new UnLocode(handlingReport.getUnLocode());
 
             for (String trackingIdValue : handlingReport.getTrackingIds()) {
