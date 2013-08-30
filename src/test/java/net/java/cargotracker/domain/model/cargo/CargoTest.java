@@ -1,12 +1,5 @@
 package net.java.cargotracker.domain.model.cargo;
 
-import net.java.cargotracker.domain.model.cargo.RouteSpecification;
-import net.java.cargotracker.domain.model.cargo.Cargo;
-import net.java.cargotracker.domain.model.cargo.TransportStatus;
-import net.java.cargotracker.domain.model.cargo.TrackingId;
-import net.java.cargotracker.domain.model.cargo.RoutingStatus;
-import net.java.cargotracker.domain.model.cargo.Itinerary;
-import net.java.cargotracker.domain.model.cargo.Leg;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
