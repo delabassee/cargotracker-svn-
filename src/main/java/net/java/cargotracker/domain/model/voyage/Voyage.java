@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.NotNull;
+
 import net.java.cargotracker.domain.model.location.Location;
+
 import org.apache.commons.lang3.Validate;
 
 @Entity
@@ -20,14 +24,17 @@ public class Voyage implements Serializable {
 	@GeneratedValue
 	private Long id;
 	@Embedded
+	@NotNull
 	private VoyageNumber voyageNumber;
 	@Embedded
+	@NotNull
 	private Schedule schedule;
 	// Null object pattern
 	public static final Voyage NONE = new Voyage(new VoyageNumber(""),
 			Schedule.EMPTY);
 
 	public Voyage() {
+		// Nothing to initialize
 	}
 
 	public Voyage(VoyageNumber voyageNumber, Schedule schedule) {

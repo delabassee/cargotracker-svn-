@@ -63,9 +63,11 @@ public class Delivery implements Serializable {
 	@JoinColumn(name = "last_event_id")
 	private HandlingEvent lastEvent;
 	private static final Date ETA_UNKOWN = null;
+	// Null object pattern
 	private static final HandlingActivity NO_ACTIVITY = new HandlingActivity();
 
 	public Delivery() {
+		// Nothing to initialize
 	}
 
 	public Delivery(HandlingEvent lastEvent, Itinerary itinerary,
