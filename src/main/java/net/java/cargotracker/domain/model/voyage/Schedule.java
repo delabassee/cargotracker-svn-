@@ -17,7 +17,9 @@ import org.eclipse.persistence.annotations.PrivateOwned;
 @Embeddable
 public class Schedule implements Serializable {
 
-    public static final Schedule EMPTY = new Schedule();
+	private static final long serialVersionUID = 1L;
+	// Null object pattern.
+	public static final Schedule EMPTY = new Schedule();
     // TODO Look into why cascade delete doesn't work.
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "voyage_id") // TODO Index as cm_index
@@ -25,6 +27,7 @@ public class Schedule implements Serializable {
     private List<CarrierMovement> carrierMovements = Collections.EMPTY_LIST;
 
     public Schedule() {
+    	// Nothing to initialize.
     }
 
     Schedule(List<CarrierMovement> carrierMovements) {
