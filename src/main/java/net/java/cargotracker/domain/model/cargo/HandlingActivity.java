@@ -107,10 +107,6 @@ public class HandlingActivity implements Serializable {
             return false;
         }
 
-        if (voyage != null) {
-            return false;
-        }
-
-        return true;
+        return voyage == null;
     }
 }
