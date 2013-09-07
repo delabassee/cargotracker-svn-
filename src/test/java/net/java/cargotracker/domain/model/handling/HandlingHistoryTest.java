@@ -12,6 +12,7 @@ import net.java.cargotracker.domain.model.voyage.Voyage;
 import net.java.cargotracker.domain.model.voyage.VoyageNumber;
 import org.junit.Test;
 
+//TODO This set of tests is very trivial, consider removing them.
 public class HandlingHistoryTest {
 
     Cargo cargo = new Cargo(new TrackingId("ABC"), new RouteSpecification(

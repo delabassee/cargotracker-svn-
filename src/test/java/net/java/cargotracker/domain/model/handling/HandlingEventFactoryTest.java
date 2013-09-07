@@ -29,7 +29,6 @@ public class HandlingEventFactoryTest {
 //        voyageRepository = new VoyageRepositoryInMem();
 //        locationRepository = new LocationRepositoryInMem();
 //        factory = new HandlingEventFactory(cargoRepository, voyageRepository, locationRepository);
-
         trackingId = new TrackingId("ABC");
         RouteSpecification routeSpecification = new RouteSpecification(
                 SampleLocations.TOKYO, SampleLocations.HELSINKI, new Date());
@@ -98,7 +97,6 @@ public class HandlingEventFactoryTest {
 //        expect(cargoRepository.find(trackingId)).andReturn(cargo);
 
 //        replay(cargoRepository);
-
         try {
             VoyageNumber invalid = new VoyageNumber("XXX");
             factory.createHandlingEvent(new Date(), new Date(100), trackingId,
