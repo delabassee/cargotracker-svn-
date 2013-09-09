@@ -31,7 +31,6 @@ import net.java.cargotracker.domain.model.voyage.Voyage;
 import net.java.cargotracker.domain.model.voyage.VoyageNumber;
 import net.java.cargotracker.domain.model.voyage.VoyageRepository;
 import net.java.cargotracker.domain.service.RoutingService;
-import net.java.cargotracker.infrastructure.messaging.stub.SynchronousApplicationEventsStub;
 
 public class CargoLifecycleScenarioTest {
 
@@ -112,8 +111,8 @@ public class CargoLifecycleScenarioTest {
          but this test simply uses an arbitrary selection to mimic that process.
 
          The cargo is then assigned to the selected route, described by an itinerary. */
-        List<Itinerary> itineraries =
-                bookingService.requestPossibleRoutesForCargo(trackingId);
+        List<Itinerary> itineraries
+                = bookingService.requestPossibleRoutesForCargo(trackingId);
         Itinerary itinerary = selectPreferedItinerary(itineraries);
         cargo.assignToRoute(itinerary);
 
@@ -203,9 +202,7 @@ public class CargoLifecycleScenarioTest {
         org.junit.Assert.assertNull(cargo.getDelivery().getNextExpectedActivity());
 
         // -- Cargo needs to be rerouted --
-
         // TODO cleaner reroute from "earliest location from where the new route originates"
-
         // Specify a new route, this time from Tokyo (where it was incorrectly unloaded) to SampleLocations.STOCKHOLM
         RouteSpecification fromTokyo = new RouteSpecification(
                 SampleLocations.TOKYO, SampleLocations.STOCKHOLM, arrivalDeadline);
@@ -217,8 +214,8 @@ public class CargoLifecycleScenarioTest {
         org.junit.Assert.assertNull(cargo.getDelivery().getNextExpectedActivity());
 
         // Repeat procedure of selecting one out of a number of possible routes satisfying the route spec
-        List<Itinerary> newItineraries =
-                bookingService.requestPossibleRoutesForCargo(cargo.getTrackingId());
+        List<Itinerary> newItineraries
+                = bookingService.requestPossibleRoutesForCargo(cargo.getTrackingId());
         Itinerary newItinerary = selectPreferedItinerary(newItineraries);
         cargo.assignToRoute(newItinerary);
 
@@ -228,11 +225,7 @@ public class CargoLifecycleScenarioTest {
         // TODO we can't handle the face that after a reroute, the cargo isn't misdirected anymore
         //org.junit.Assert.assertFalse(cargo.isMisdirected());
         //org.junit.Assert.assertEquals(new HandlingActivity(HandlingEvent.Type.LOAD, SampleLocations.TOKYO), cargo.getNextExpectedActivity());
-
-
         // -- Cargo has been rerouted, shipping continues --
-
-
         // Load in Tokyo
         handlingEventService.registerHandlingEvent(
                 DateUtil.toDate("2009-03-08"), trackingId,
@@ -341,15 +334,15 @@ public class CargoLifecycleScenarioTest {
                             DateUtil.toDate("2009-03-03"),
                             DateUtil.toDate("2009-03-09")),
                             new Leg(SampleVoyages.v200,
-                            SampleLocations.NEWYORK,
-                            SampleLocations.CHICAGO,
-                            DateUtil.toDate("2009-03-10"),
-                            DateUtil.toDate("2009-03-14")),
+                                    SampleLocations.NEWYORK,
+                                    SampleLocations.CHICAGO,
+                                    DateUtil.toDate("2009-03-10"),
+                                    DateUtil.toDate("2009-03-14")),
                             new Leg(SampleVoyages.v200,
-                            SampleLocations.CHICAGO,
-                            SampleLocations.STOCKHOLM,
-                            DateUtil.toDate("2009-03-07"),
-                            DateUtil.toDate("2009-03-11")))));
+                                    SampleLocations.CHICAGO,
+                                    SampleLocations.STOCKHOLM,
+                                    DateUtil.toDate("2009-03-07"),
+                                    DateUtil.toDate("2009-03-11")))));
                 } else {
                     // Tokyo - Hamburg - SampleLocations.STOCKHOLM, rerouting misdirected cargo from Tokyo 
                     return Arrays.asList(new Itinerary(Arrays.asList(new Leg(
@@ -357,31 +350,26 @@ public class CargoLifecycleScenarioTest {
                             SampleLocations.HAMBURG,
                             DateUtil.toDate("2009-03-08"),
                             DateUtil.toDate("2009-03-12")), new Leg(
-                            SampleVoyages.v400, SampleLocations.HAMBURG,
-                            SampleLocations.STOCKHOLM,
-                            DateUtil.toDate("2009-03-14"),
-                            DateUtil.toDate("2009-03-15")))));
+                                    SampleVoyages.v400, SampleLocations.HAMBURG,
+                                    SampleLocations.STOCKHOLM,
+                                    DateUtil.toDate("2009-03-14"),
+                                    DateUtil.toDate("2009-03-15")))));
                 }
             }
         };
 
-
-        applicationEvents = new SynchronousApplicationEventsStub();
-
+//        applicationEvents = new SynchronousApplicationEventsStub();
         // In-memory implementations of the repositories
 //        handlingEventRepository = new HandlingEventRepositoryInMem();
 //        cargoRepository = new CargoRepositoryInMem();
 //        locationRepository = new LocationRepositoryInMem();
 //        voyageRepository = new VoyageRepositoryInMem();
-
         // Actual factories and application services, wired with stubbed or in-memory infrastructure
 //        handlingEventFactory = new HandlingEventFactory(cargoRepository, voyageRepository, locationRepository);
-
 //        cargoInspectionService = new CargoInspectionServiceImpl(applicationEvents, cargoRepository, handlingEventRepository);
 //        handlingEventService = new DefaultHandlingEventService(handlingEventRepository, applicationEvents, handlingEventFactory);
 //        bookingService = new BookingServiceImpl(cargoRepository, locationRepository, routingService);
-
         // Circular dependency when doing synchrounous calls
-        ((SynchronousApplicationEventsStub) applicationEvents).setCargoInspectionService(cargoInspectionService);
+//        ((SynchronousApplicationEventsStub) applicationEvents).setCargoInspectionService(cargoInspectionService);
     }
 }
