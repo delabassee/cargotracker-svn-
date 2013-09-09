@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             <ui:repeat value="#{listCargo.cargos}" var="cargo">
-                <ui:fragment rendered="#{cargo.routed}">
+                <ui:fragment rendered="#{cargo.routed and !cargo.claimed}">
                     <tr id="#{cargo.trackingId}">
                         <td><h:link value="#{cargo.trackingId}"  
                                     outcome="show.xhtml?faces-redirect=true" >
