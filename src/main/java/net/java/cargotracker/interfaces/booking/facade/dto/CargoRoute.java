@@ -12,27 +12,27 @@ import java.util.List;
 public class CargoRoute implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String trackingId;
-    private String origin;
-    private String finalDestination;
-    private Date arrivalDeadline;
-    private boolean misrouted;
-    private List<Leg> legs;
-    private boolean claimed;
-    private String lastKnownLocation;
-    private String transportStatus;
+    private final String trackingId;
+    private final String origin;
+    private final String finalDestination;
+    private final Date arrivalDeadline;
+    private final boolean misrouted;
+    private final List<Leg> legs;
+    private final boolean claimed;
+    private final String lastKnownLocation;
+    private final String transportStatus;
     private String nextLocation;
 
     public CargoRoute(String trackingId, String origin, String finalDestination,
-            Date arrivalDeadline, boolean misrouted,boolean claimed,String lastKnownLocation,String transportStatus) {
-        this.trackingId         = trackingId;
-        this.origin             = origin;
-        this.finalDestination   = finalDestination;
-        this.arrivalDeadline    = arrivalDeadline;
-        this.misrouted          = misrouted;
-        this.claimed            = claimed;
-        this.lastKnownLocation  = lastKnownLocation;
-        this.transportStatus    = transportStatus;
+            Date arrivalDeadline, boolean misrouted, boolean claimed, String lastKnownLocation, String transportStatus) {
+        this.trackingId = trackingId;
+        this.origin = origin;
+        this.finalDestination = finalDestination;
+        this.arrivalDeadline = arrivalDeadline;
+        this.misrouted = misrouted;
+        this.claimed = claimed;
+        this.lastKnownLocation = lastKnownLocation;
+        this.transportStatus = transportStatus;
         this.legs = new ArrayList<>();
     }
 
@@ -68,20 +68,20 @@ public class CargoRoute implements Serializable {
     public Date getArrivalDeadline() {
         return arrivalDeadline;
     }
-    
-    public boolean isClaimed(){
+
+    public boolean isClaimed() {
         return claimed;
     }
-    
-    public String getLastKnownLocation(){
+
+    public String getLastKnownLocation() {
         return this.lastKnownLocation;
     }
-    
-    public String getTransportStatus(){
+
+    public String getTransportStatus() {
         return this.transportStatus;
     }
-    
-    public String getNextLocation(){
+
+    public String getNextLocation() {
         return this.nextLocation;
     }
 }

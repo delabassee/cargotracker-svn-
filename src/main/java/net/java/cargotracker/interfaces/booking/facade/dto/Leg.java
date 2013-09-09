@@ -8,11 +8,11 @@ import java.util.Date;
  */
 public class Leg implements Serializable {
 
-    private String voyageNumber;
-    private String from;
-    private String to;
-    private Date loadTime;
-    private Date unloadTime;
+    private final String voyageNumber;
+    private final String from;
+    private final String to;
+    private final Date loadTime;
+    private final Date unloadTime;
 
     public Leg(String voyageNumber, String from, String to, Date loadTime,
             Date unloadTime) {

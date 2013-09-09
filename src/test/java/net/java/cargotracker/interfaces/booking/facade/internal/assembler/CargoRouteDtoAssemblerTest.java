@@ -1,8 +1,11 @@
 package net.java.cargotracker.interfaces.booking.facade.internal.assembler;
 
-import net.java.cargotracker.interfaces.booking.facade.internal.assembler.CargoRouteDtoAssembler;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Arrays;
 import java.util.Date;
+
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.Itinerary;
 import net.java.cargotracker.domain.model.cargo.Leg;
@@ -13,50 +16,56 @@ import net.java.cargotracker.domain.model.location.SampleLocations;
 import net.java.cargotracker.domain.model.voyage.SampleVoyages;
 import net.java.cargotracker.interfaces.booking.facade.dto.CargoRoute;
 
+import org.junit.Test;
+
+// TODO This set of tests is very trivial, consider removing them.
 public class CargoRouteDtoAssemblerTest {
 
-    public void testToDTO() throws Exception {
-        CargoRouteDtoAssembler assembler = new CargoRouteDtoAssembler();
+	@Test
+	public void testToDto() {
+		CargoRouteDtoAssembler assembler = new CargoRouteDtoAssembler();
 
-        Location origin = SampleLocations.STOCKHOLM;
-        Location destination = SampleLocations.MELBOURNE;
-        Cargo cargo = new Cargo(new TrackingId("XYZ"),
-                new RouteSpecification(origin, destination, new Date()));
+		Location origin = SampleLocations.STOCKHOLM;
+		Location destination = SampleLocations.MELBOURNE;
+		Cargo cargo = new Cargo(new TrackingId("XYZ"), new RouteSpecification(
+				origin, destination, new Date()));
 
-        Itinerary itinerary = new Itinerary(Arrays.asList(new Leg(
-                SampleVoyages.CM001, origin, SampleLocations.SHANGHAI,
-                new Date(), new Date()), new Leg(SampleVoyages.CM001,
-                SampleLocations.ROTTERDAM, destination, new Date(), new Date())));
+		Itinerary itinerary = new Itinerary(
+				Arrays.asList(new Leg(SampleVoyages.CM001, origin,
+						SampleLocations.SHANGHAI, new Date(), new Date()),
+						new Leg(SampleVoyages.CM001, SampleLocations.ROTTERDAM,
+								destination, new Date(), new Date())));
 
-        cargo.assignToRoute(itinerary);
+		cargo.assignToRoute(itinerary);
 
-        CargoRoute dto = assembler.toDto(cargo);
+		CargoRoute dto = assembler.toDto(cargo);
 
-        org.junit.Assert.assertEquals(2, dto.getLegs().size());
+		assertEquals(2, dto.getLegs().size());
 
-        net.java.cargotracker.interfaces.booking.facade.dto.Leg legDto =
-                dto.getLegs().get(0);
-        org.junit.Assert.assertEquals("SampleVoyages.CM001", legDto.getVoyageNumber());
-        org.junit.Assert.assertEquals("SESTO", legDto.getFrom());
-        org.junit.Assert.assertEquals("CNSHA", legDto.getTo());
+		net.java.cargotracker.interfaces.booking.facade.dto.Leg legDto = dto
+				.getLegs().get(0);
+		assertEquals("CM001", legDto.getVoyageNumber());
+		assertEquals("SESTO", legDto.getFrom());
+		assertEquals("CNSHA", legDto.getTo());
 
-        legDto = dto.getLegs().get(1);
-        org.junit.Assert.assertEquals("SampleVoyages.CM001", legDto.getVoyageNumber());
-        org.junit.Assert.assertEquals("NLRTM", legDto.getFrom());
-        org.junit.Assert.assertEquals("AUMEL", legDto.getTo());
-    }
+		legDto = dto.getLegs().get(1);
+		assertEquals("CM001", legDto.getVoyageNumber());
+		assertEquals("NLRTM", legDto.getFrom());
+		assertEquals("AUMEL", legDto.getTo());
+	}
 
-    public void testToDTO_NoItinerary() throws Exception {
-        CargoRouteDtoAssembler assembler = new CargoRouteDtoAssembler();
+	@Test
+	public void testToDtoNoItinerary() throws Exception {
+		CargoRouteDtoAssembler assembler = new CargoRouteDtoAssembler();
 
-        Cargo cargo = new Cargo(new TrackingId("XYZ"),
-                new RouteSpecification(SampleLocations.STOCKHOLM,
-                SampleLocations.MELBOURNE, new Date()));
-        CargoRoute dto = assembler.toDto(cargo);
+		Cargo cargo = new Cargo(new TrackingId("XYZ"), new RouteSpecification(
+				SampleLocations.STOCKHOLM, SampleLocations.MELBOURNE,
+				new Date()));
+		CargoRoute dto = assembler.toDto(cargo);
 
-        org.junit.Assert.assertEquals("XYZ", dto.getTrackingId());
-        org.junit.Assert.assertEquals("SESTO", dto.getOrigin());
-        org.junit.Assert.assertEquals("AUMEL", dto.getFinalDestination());
-        org.junit.Assert.assertTrue(dto.getLegs().isEmpty());
-    }
+		assertEquals("XYZ", dto.getTrackingId());
+		assertEquals("Stockholm", dto.getOrigin());
+		assertEquals("Melbourne", dto.getFinalDestination());
+		assertTrue(dto.getLegs().isEmpty());
+	}
 }

@@ -1,6 +1,5 @@
 package net.java.cargotracker.infrastructure.routing;
 
-import net.java.cargotracker.infrastructure.routing.ExternalRoutingService;
 import java.util.Date;
 import java.util.List;
 import net.java.cargotracker.domain.model.cargo.Cargo;
