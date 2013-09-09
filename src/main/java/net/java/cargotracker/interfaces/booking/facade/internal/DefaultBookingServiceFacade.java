@@ -40,7 +40,7 @@ public class DefaultBookingServiceFacade implements BookingServiceFacade,
     public List<net.java.cargotracker.interfaces.booking.facade.dto.Location> listShippingLocations() {
         List<Location> allLocations = locationRepository.findAll();
         LocationDtoAssembler assembler = new LocationDtoAssembler();
-        return assembler.toDTOList(allLocations);
+        return assembler.toDtoList(allLocations);
     }
 
     @Override
