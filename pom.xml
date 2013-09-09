@@ -19,13 +19,6 @@
         <webapp.databaseTempDir>/temp</webapp.databaseTempDir>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>Java EE 7</id>
-            <url>https://maven.java.net/content/groups/promoted/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
