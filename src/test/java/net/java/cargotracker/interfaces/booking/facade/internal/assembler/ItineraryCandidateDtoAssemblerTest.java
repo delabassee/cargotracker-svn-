@@ -1,17 +1,15 @@
 package net.java.cargotracker.interfaces.booking.facade.internal.assembler;
 
-import net.java.cargotracker.interfaces.booking.facade.internal.assembler.ItineraryCandidateDtoAssembler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
 import net.java.cargotracker.domain.model.cargo.Itinerary;
 import net.java.cargotracker.domain.model.cargo.Leg;
 import net.java.cargotracker.domain.model.location.Location;
 import net.java.cargotracker.domain.model.location.SampleLocations;
 import net.java.cargotracker.domain.model.voyage.SampleVoyages;
-import net.java.cargotracker.domain.model.voyage.VoyageRepository;
-import net.java.cargotracker.infrastructure.persistence.inmemory.VoyageRepositoryInMem;
 import net.java.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
 
 public class ItineraryCandidateDtoAssemblerTest {
@@ -59,7 +57,7 @@ public class ItineraryCandidateDtoAssemblerTest {
 //        expect(locationRepository.find(new UnLocode("BBBBB"))).andReturn(SampleLocations.TOKYO).times(2);
 //        expect(locationRepository.find(new UnLocode("CCCCC"))).andReturn(SampleLocations.CHICAGO);
 
-        VoyageRepository voyageRepository = new VoyageRepositoryInMem();
+        // VoyageRepository voyageRepository = new VoyageRepositoryInMem();
 
 //        replay(locationRepository);
 

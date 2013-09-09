@@ -3,6 +3,7 @@ package net.java.cargotracker.scenario;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
 import net.java.cargotracker.application.ApplicationEvents;
 import net.java.cargotracker.application.BookingService;
 import net.java.cargotracker.application.CargoInspectionService;
@@ -31,10 +32,6 @@ import net.java.cargotracker.domain.model.voyage.VoyageNumber;
 import net.java.cargotracker.domain.model.voyage.VoyageRepository;
 import net.java.cargotracker.domain.service.RoutingService;
 import net.java.cargotracker.infrastructure.messaging.stub.SynchronousApplicationEventsStub;
-import net.java.cargotracker.infrastructure.persistence.inmemory.CargoRepositoryInMem;
-import net.java.cargotracker.infrastructure.persistence.inmemory.HandlingEventRepositoryInMem;
-import net.java.cargotracker.infrastructure.persistence.inmemory.LocationRepositoryInMem;
-import net.java.cargotracker.infrastructure.persistence.inmemory.VoyageRepositoryInMem;
 
 public class CargoLifecycleScenarioTest {
 
@@ -372,10 +369,10 @@ public class CargoLifecycleScenarioTest {
         applicationEvents = new SynchronousApplicationEventsStub();
 
         // In-memory implementations of the repositories
-        handlingEventRepository = new HandlingEventRepositoryInMem();
-        cargoRepository = new CargoRepositoryInMem();
-        locationRepository = new LocationRepositoryInMem();
-        voyageRepository = new VoyageRepositoryInMem();
+//        handlingEventRepository = new HandlingEventRepositoryInMem();
+//        cargoRepository = new CargoRepositoryInMem();
+//        locationRepository = new LocationRepositoryInMem();
+//        voyageRepository = new VoyageRepositoryInMem();
 
         // Actual factories and application services, wired with stubbed or in-memory infrastructure
 //        handlingEventFactory = new HandlingEventFactory(cargoRepository, voyageRepository, locationRepository);
