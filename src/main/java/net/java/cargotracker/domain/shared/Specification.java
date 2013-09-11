@@ -1,7 +1,7 @@
 package net.java.cargotracker.domain.shared;
 
 /**
- * Specificaiton interface.
+ * Specification interface.
  * <p/>
  * Use {@link net.java.cargotracker.domain.shared.AbstractSpecification} as base
  * for creating specifications, and only the method

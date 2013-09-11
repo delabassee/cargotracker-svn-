@@ -1,13 +1,13 @@
 package net.java.cargotracker.domain.shared;
 
 /**
- * AND specification, used to create a new specifcation that is the AND of two
+ * AND specification, used to create a new specification that is the AND of two
  * other specifications.
  */
 public class AndSpecification<T> extends AbstractSpecification<T> {
 
-    private Specification<T> spec1;
-    private Specification<T> spec2;
+    private final Specification<T> spec1;
+    private final Specification<T> spec2;
 
     /**
      * Create a new AND specification based on two other spec.

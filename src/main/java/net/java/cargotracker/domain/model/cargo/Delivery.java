@@ -268,7 +268,6 @@ public class Delivery implements Serializable {
         }
 
         switch (lastEvent.getType()) {
-
             case LOAD:
                 for (Leg leg : itinerary.getLegs()) {
                     if (leg.getLoadLocation().sameIdentityAs(
@@ -281,13 +280,14 @@ public class Delivery implements Serializable {
                 return NO_ACTIVITY;
 
             case UNLOAD:
-                for (Iterator<Leg> it = itinerary.getLegs().iterator(); it
+                for (Iterator<Leg> iterator = itinerary.getLegs().iterator(); iterator
                         .hasNext();) {
-                    Leg leg = it.next();
+                    Leg leg = iterator.next();
+
                     if (leg.getUnloadLocation().sameIdentityAs(
                             lastEvent.getLocation())) {
-                        if (it.hasNext()) {
-                            Leg nextLeg = it.next();
+                        if (iterator.hasNext()) {
+                            Leg nextLeg = iterator.next();
                             return new HandlingActivity(HandlingEvent.Type.LOAD,
                                     nextLeg.getLoadLocation(), nextLeg.getVoyage());
                         } else {
@@ -301,6 +301,7 @@ public class Delivery implements Serializable {
 
             case RECEIVE:
                 Leg firstLeg = itinerary.getLegs().iterator().next();
+
                 return new HandlingActivity(HandlingEvent.Type.LOAD,
                         firstLeg.getLoadLocation(), firstLeg.getVoyage());
 

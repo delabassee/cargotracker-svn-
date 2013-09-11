@@ -1,5 +1,6 @@
 package net.java.cargotracker.domain.shared;
 
+// TODO Make this a CDI singleton?
 public class DomainObjectUtils {
 
     /**

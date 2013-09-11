@@ -226,10 +226,10 @@ public class Cargo implements Serializable {
         Cargo other = (Cargo) object;
         return sameIdentityAs(other);
     }
-    
+
     private boolean sameIdentityAs(Cargo other) {
         return other != null && trackingId.sameValueAs(other.trackingId);
-    }    
+    }
 
     /**
      * @return Hash code of tracking id.
