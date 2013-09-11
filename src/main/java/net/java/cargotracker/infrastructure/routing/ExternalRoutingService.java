@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.client.Client;
@@ -34,10 +35,10 @@ import org.glassfish.jersey.moxy.json.MoxyJsonFeature;
 @Stateless
 public class ExternalRoutingService implements RoutingService {
 
-    private static final String GRAPH_TRAVERSAL_URL =
-            "http://localhost:8080/cargo-tracker/rest/graph-traversal/shortest-path";
+    @Resource(name = "graphTraversalUrl")
+    private String graphTraversalUrl;
     // TODO Can I use injection?
-    private Client jaxrsClient = ClientBuilder.newClient();
+    private final Client jaxrsClient = ClientBuilder.newClient();
     private WebTarget graphTraversalResource;
     @Inject
     private LocationRepository locationRepository;
@@ -49,7 +50,7 @@ public class ExternalRoutingService implements RoutingService {
 
     @PostConstruct
     public void init() {
-        graphTraversalResource = jaxrsClient.target(GRAPH_TRAVERSAL_URL);
+        graphTraversalResource = jaxrsClient.target(graphTraversalUrl);
         graphTraversalResource.register(new MoxyJsonFeature()).register(
                 new JsonMoxyConfigurationContextResolver());
     }
@@ -67,7 +68,7 @@ public class ExternalRoutingService implements RoutingService {
                 .queryParam("destination", destination)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(new GenericType<List<TransitPath>>() {
-        });
+                });
 
         // The returned result is then translated back into our domain model.
         List<Itinerary> itineraries = new ArrayList<>();
