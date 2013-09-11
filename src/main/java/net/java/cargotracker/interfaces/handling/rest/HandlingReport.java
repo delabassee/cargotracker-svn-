@@ -17,8 +17,8 @@ public class HandlingReport {
     @Size(min = 16, max = 16)
     private String completionTime;
     @NotNull
-    @Size(min = 1)
-    private List<String> trackingIds = new ArrayList<>();
+    @Size(min = 4)
+    private String trackingId;
     @NotNull
     @Size(min = 4, max = 7)
     private String eventType;
@@ -36,12 +36,12 @@ public class HandlingReport {
         this.completionTime = value;
     }
 
-    public List<String> getTrackingIds() {
-        return trackingIds;
+    public String getTrackingId() {
+        return trackingId;
     }
 
-    public void setTrackingIds(List<String> trackingIds) {
-        this.trackingIds = trackingIds;
+    public void setTrackingId(String trackingId) {
+        this.trackingId = trackingId;
     }
 
     public String getEventType() {
