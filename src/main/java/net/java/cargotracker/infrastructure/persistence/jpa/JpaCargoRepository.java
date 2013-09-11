@@ -48,6 +48,7 @@ public class JpaCargoRepository implements CargoRepository, Serializable {
     @Override
     public TrackingId nextTrackingId() {
         String random = UUID.randomUUID().toString().toUpperCase();
+
         return new TrackingId(random.substring(0, random.indexOf("-")));
     }
 

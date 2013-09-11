@@ -1,10 +1,26 @@
 package net.java.cargotracker.domain.model.voyage;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import static net.java.cargotracker.application.util.DateUtil.toDate;
 import net.java.cargotracker.domain.model.location.Location;
-import static net.java.cargotracker.domain.model.location.SampleLocations.*;
+import static net.java.cargotracker.domain.model.location.SampleLocations.CHICAGO;
+import static net.java.cargotracker.domain.model.location.SampleLocations.DALLAS;
+import static net.java.cargotracker.domain.model.location.SampleLocations.HAMBURG;
+import static net.java.cargotracker.domain.model.location.SampleLocations.HANGZOU;
+import static net.java.cargotracker.domain.model.location.SampleLocations.HELSINKI;
+import static net.java.cargotracker.domain.model.location.SampleLocations.HONGKONG;
+import static net.java.cargotracker.domain.model.location.SampleLocations.MELBOURNE;
+import static net.java.cargotracker.domain.model.location.SampleLocations.NEWYORK;
+import static net.java.cargotracker.domain.model.location.SampleLocations.ROTTERDAM;
+import static net.java.cargotracker.domain.model.location.SampleLocations.SHANGHAI;
+import static net.java.cargotracker.domain.model.location.SampleLocations.STOCKHOLM;
+import static net.java.cargotracker.domain.model.location.SampleLocations.TOKYO;
 
 /**
  * Sample carrier movements, for test purposes.
@@ -21,7 +37,7 @@ public class SampleVoyages {
     private static Voyage createVoyage(String id, Location from, Location to) {
         return new Voyage(new VoyageNumber(id), new Schedule(
                 Arrays.asList(new CarrierMovement(from, to, new Date(),
-                new Date()))));
+                                new Date()))));
     }
     public final static Voyage v100 = new Voyage.Builder(new VoyageNumber(
             "V100"), HONGKONG)
@@ -55,13 +71,13 @@ public class SampleVoyages {
     public static final Voyage HONGKONG_TO_NEW_YORK = new Voyage.Builder(
             new VoyageNumber("0100S"), HONGKONG)
             .addMovement(HANGZOU, toDate("2008-10-01", "12:00"),
-            toDate("2008-10-03", "14:30"))
+                    toDate("2008-10-03", "14:30"))
             .addMovement(TOKYO, toDate("2008-10-03", "21:00"),
-            toDate("2008-10-06", "06:15"))
+                    toDate("2008-10-06", "06:15"))
             .addMovement(MELBOURNE, toDate("2008-10-06", "11:00"),
-            toDate("2008-10-12", "11:30"))
+                    toDate("2008-10-12", "11:30"))
             .addMovement(NEWYORK, toDate("2008-10-14", "12:00"),
-            toDate("2008-10-23", "23:10")).build();
+                    toDate("2008-10-23", "23:10")).build();
     /**
      * Voyage number 0200T (by train)
      *
@@ -70,9 +86,9 @@ public class SampleVoyages {
     public static final Voyage NEW_YORK_TO_DALLAS = new Voyage.Builder(
             new VoyageNumber("0200T"), NEWYORK)
             .addMovement(CHICAGO, toDate("2008-10-24", "07:00"),
-            toDate("2008-10-24", "17:45"))
+                    toDate("2008-10-24", "17:45"))
             .addMovement(DALLAS, toDate("2008-10-24", "21:25"),
-            toDate("2008-10-25", "19:30")).build();
+                    toDate("2008-10-25", "19:30")).build();
     /**
      * Voyage number 0300A (by airplane)
      *
@@ -81,11 +97,11 @@ public class SampleVoyages {
     public static final Voyage DALLAS_TO_HELSINKI = new Voyage.Builder(
             new VoyageNumber("0300A"), DALLAS)
             .addMovement(HAMBURG, toDate("2008-10-29", "03:30"),
-            toDate("2008-10-31", "14:00"))
+                    toDate("2008-10-31", "14:00"))
             .addMovement(STOCKHOLM, toDate("2008-11-01", "15:20"),
-            toDate("2008-11-01", "18:40"))
+                    toDate("2008-11-01", "18:40"))
             .addMovement(HELSINKI, toDate("2008-11-02", "09:00"),
-            toDate("2008-11-02", "11:15")).build();
+                    toDate("2008-11-02", "11:15")).build();
     /**
      * Voyage number 0301S (by ship)
      *
@@ -93,7 +109,7 @@ public class SampleVoyages {
      */
     public static final Voyage DALLAS_TO_HELSINKI_ALT = new Voyage.Builder(
             new VoyageNumber("0301S"), DALLAS).addMovement(HELSINKI,
-            toDate("2008-10-29", "03:30"), toDate("2008-11-05", "15:45"))
+                    toDate("2008-10-29", "03:30"), toDate("2008-11-05", "15:45"))
             .build();
     /**
      * Voyage number 0400S (by ship)
@@ -104,11 +120,11 @@ public class SampleVoyages {
     public static final Voyage HELSINKI_TO_HONGKONG = new Voyage.Builder(
             new VoyageNumber("0400S"), HELSINKI)
             .addMovement(ROTTERDAM, toDate("2008-11-04", "05:50"),
-            toDate("2008-11-06", "14:10"))
+                    toDate("2008-11-06", "14:10"))
             .addMovement(SHANGHAI, toDate("2008-11-10", "21:45"),
-            toDate("2008-11-22", "16:40"))
+                    toDate("2008-11-22", "16:40"))
             .addMovement(HONGKONG, toDate("2008-11-24", "07:00"),
-            toDate("2008-11-28", "13:37")).build();
+                    toDate("2008-11-28", "13:37")).build();
     public static final Map<VoyageNumber, Voyage> ALL = new HashMap();
 
     static {

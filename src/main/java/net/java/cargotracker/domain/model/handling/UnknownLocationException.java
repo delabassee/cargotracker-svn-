@@ -3,18 +3,18 @@ package net.java.cargotracker.domain.model.handling;
 import net.java.cargotracker.domain.model.location.UnLocode;
 
 public class UnknownLocationException extends
-		CannotCreateHandlingEventException {
+        CannotCreateHandlingEventException {
 
-	private static final long serialVersionUID = 1L;
-	private UnLocode unlocode;
+    private static final long serialVersionUID = 1L;
+    private final UnLocode unlocode;
 
-	public UnknownLocationException(UnLocode unlocode) {
-		this.unlocode = unlocode;
-	}
+    public UnknownLocationException(UnLocode unlocode) {
+        this.unlocode = unlocode;
+    }
 
-	@Override
-	public String getMessage() {
-		return "No location with UN locode " + unlocode.getIdString()
-				+ " exists in the system";
-	}
+    @Override
+    public String getMessage() {
+        return "No location with UN locode " + unlocode.getIdString()
+                + " exists in the system";
+    }
 }
