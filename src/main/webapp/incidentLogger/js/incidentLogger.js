@@ -29,6 +29,14 @@ function update(){
          result = xhr.responseText;
          if(result){
             alert(result);
+            var form = document.forms[0];
+            for(var i=0,ii=form.length;i<ii;++i){
+            var input = form[i];
+                if(input.name){
+                    input.value = "";
+                }
+            }
+            
          }
     }
 }
