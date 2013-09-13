@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -37,7 +38,7 @@ public class HandlingReportService {
     @Path("/reports")
     @Consumes(MediaType.APPLICATION_JSON)
     // TODO Better exception handling.
-    public String submitReport(@NotNull HandlingReport handlingReport) {
+    public String submitReport(@NotNull @Valid HandlingReport handlingReport) {
         try {
             Date completionTime = new SimpleDateFormat(ISO_8601_FORMAT).parse(
                     handlingReport.getCompletionTime());

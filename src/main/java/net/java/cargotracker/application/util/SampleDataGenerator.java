@@ -228,7 +228,7 @@ public class SampleDataGenerator {
         TrackingId trackingId3 = new TrackingId("DEF789");
 
         RouteSpecification routeSpecification3 = new RouteSpecification(
-                SampleLocations.HONGKONG, SampleLocations.MELBOURNE, DateUtil.toDate("2013-09-12"));
+                SampleLocations.HONGKONG, SampleLocations.MELBOURNE, DateUtil.toDate("2013-12-28"));
 
         Cargo def789 = new Cargo(trackingId3, routeSpecification3);
         entityManager.persist(def789);

@@ -19,9 +19,9 @@ import net.java.cargotracker.interfaces.handling.HandlingEventRegistrationAttemp
  */
 @MessageDriven(activationConfig = {
     @ActivationConfigProperty(propertyName = "destinationType",
-    propertyValue = "javax.jms.Queue"),
+            propertyValue = "javax.jms.Queue"),
     @ActivationConfigProperty(propertyName = "destinationLookup",
-    propertyValue = "java:global/jms/HandlingEventRegistrationAttemptQueue")
+            propertyValue = "java:global/jms/HandlingEventRegistrationAttemptQueue")
 })
 public class HandlingEventRegistrationAttemptConsumer implements MessageListener {
 
@@ -34,8 +34,8 @@ public class HandlingEventRegistrationAttemptConsumer implements MessageListener
     public void onMessage(Message message) {
         try {
             ObjectMessage objectMessage = (ObjectMessage) message;
-            HandlingEventRegistrationAttempt attempt =
-                    (HandlingEventRegistrationAttempt) objectMessage.getObject();
+            HandlingEventRegistrationAttempt attempt
+                    = (HandlingEventRegistrationAttempt) objectMessage.getObject();
             handlingEventService.registerHandlingEvent(
                     attempt.getCompletionTime(),
                     attempt.getTrackingId(),
