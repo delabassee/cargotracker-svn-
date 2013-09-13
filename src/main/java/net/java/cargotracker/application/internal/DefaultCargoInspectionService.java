@@ -38,6 +38,7 @@ public class DefaultCargoInspectionService implements CargoInspectionService {
         Validate.notNull(trackingId, "Tracking ID is required");
 
         Cargo cargo = cargoRepository.find(trackingId);
+        
 
         if (cargo == null) {
             logger.log(Level.WARNING, "Can't inspect non-existing cargo {0}", trackingId);
@@ -58,8 +59,12 @@ public class DefaultCargoInspectionService implements CargoInspectionService {
             applicationEvents.cargoHasArrived(cargo);
         }
 
+        
         cargoRepository.store(cargo);
         
-        cargoInspected.fire(cargo); //Fire the event after the Repository has been invoked.
+        cargoInspected.fire(cargo); //Fire the event
+        
+        
+        
     }
 }
