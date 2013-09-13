@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.event.Observes;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -25,7 +26,7 @@ import javax.json.*;
  * @author vijaynair
  */
 
-@Named
+@Singleton
 @ServerEndpoint("/tracking")
 public class RealTimeCargoTracker {
     
@@ -62,7 +63,7 @@ public class RealTimeCargoTracker {
             jsonWriter.writeObject(model);
         }
         
-        System.out.println("*****The JSON string is****"+stWriter.toString());
+        
         try{
             for(Session sess:sessions){
                 sess.getBasicRemote().sendText(stWriter.toString());
