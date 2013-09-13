@@ -17,9 +17,10 @@
             }
             
             populateListRouted  = function(event){
-                alert('Event Data is'+event.data);
-                var jsonObject  = event.data;
+                
+                var jsonObject  = JSON.parse(event.data);
                 var table       = document.getElementById("listRoutedTab");
+                
                 for (var count = 1, row; row = table.rows[count]; count++) {
                     if(row.id === jsonObject.trackingId){
                         row.cells[1].innerHTML = jsonObject.origin;
