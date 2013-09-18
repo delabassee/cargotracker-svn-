@@ -8,8 +8,10 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.event.Observes;
-import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonWriter;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
@@ -17,8 +19,6 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import net.java.cargotracker.application.CargoInspected;
 import net.java.cargotracker.domain.model.cargo.Cargo;
-
-import javax.json.*;
 
 
 /**
