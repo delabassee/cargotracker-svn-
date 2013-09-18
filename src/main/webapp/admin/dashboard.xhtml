@@ -1,11 +1,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <ui:composition template="/templates/admin.xhtml">
+    <ui:composition template="/WEB-INF/templates/admin.xhtml">
         <ui:define name="title">Cargo Dashboard</ui:define>
         <ui:define name="content">
             <div id="id_w_live_cargoes" class="dashboard_large_widget">
-                <ui:decorate template="/templates/widget.xhtml">
+                <ui:decorate template="/WEB-INF/templates/widget.xhtml">
                     <ui:define name="widgetTitle">Cargos (Routed)</ui:define>
                     <ui:define name="widgetContent">
                         <ui:include src="/admin/listRouted.xhtml"/>
@@ -14,7 +14,7 @@
             </div>
 
             <div id="id_w_compl_cargoes" class="dashboard_medium_widget">
-                <ui:decorate template="/templates/widget.xhtml">
+                <ui:decorate template="/WEB-INF/templates/widget.xhtml">
                     <ui:define name="widgetTitle">Cargos (Claimed)</ui:define>
                     <ui:define name="widgetContent">
                         <ui:include src="/admin/listClaimed.xhtml"/>
@@ -23,7 +23,7 @@
             </div>
 
             <div id="id_w_notrouted_cargoes" class="dashboard_medium_widget">
-                <ui:decorate template="/templates/widget.xhtml">
+                <ui:decorate template="/WEB-INF/templates/widget.xhtml">
                     <ui:define name="widgetTitle">Cargos (Not routed)</ui:define>
                     <ui:define name="widgetContent">
                         <ui:include src="/admin/listNotRouted.xhtml"/>
