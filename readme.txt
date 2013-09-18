@@ -105,7 +105,7 @@ Known Issues
 * If you restart the application a few times, you will run into a GlassFish 4 
   bug (https://java.net/jira/browse/GLASSFISH-20616) causing a spurious deployment 
   failure. While the problem can be annoying, it's harmless. Just re-run the 
-  application.
+  application (make sure to completely shut down GlassFish first).
 * You will see some spurious JSF warnings on some pages due to a GlassFish 
   4/Mojarra bug (https://java.net/jira/browse/GLASSFISH-20244). The error is 
   harmless and can be ignored.
