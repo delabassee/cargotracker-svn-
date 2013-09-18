@@ -1,7 +1,5 @@
 package net.java.cargotracker.infrastructure.messaging.jms;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.inject.Inject;
@@ -27,8 +25,8 @@ public class HandlingEventRegistrationAttemptConsumer implements MessageListener
 
     @Inject
     private HandlingEventService handlingEventService;
-    private static final Logger logger = Logger.getLogger(
-            HandlingEventRegistrationAttemptConsumer.class.getName());
+//    private static final Logger logger = Logger.getLogger(
+//            HandlingEventRegistrationAttemptConsumer.class.getName());
 
     @Override
     public void onMessage(Message message) {
@@ -43,8 +41,10 @@ public class HandlingEventRegistrationAttemptConsumer implements MessageListener
                     attempt.getUnLocode(),
                     attempt.getType());
         } catch (JMSException | CannotCreateHandlingEventException e) {
+            // Poison messages will be placed on dead-letter queue.
+            throw new RuntimeException("Error occurred processing message", e);
 //        } catch (JMSException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+            // logger.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 }
