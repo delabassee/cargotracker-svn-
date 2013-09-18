@@ -96,6 +96,9 @@ Don't worry about making mistakes. The application is intended to be fairly
 error tolerant. If you do come across issues, you should report them. Please
 see the Getting Involved section on how to do so.
 
+NOTE: All data entered is wiped upon application restart, so you can start from 
+a blank slate easily if needed.
+
 You can also use the soapUI scripts included in the source code to explore the REST 
 interfaces as well as the numerous unit tests covering the code base 
 generally.
