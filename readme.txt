@@ -103,10 +103,12 @@ generally.
 Known Issues
 ============
 * If you restart the application a few times, you will run into a GlassFish 4 
-  bug causing a spurious deployment failure. While the problem can be annoying, 
-  it's harmless. Just re-run the application.
+  bug (https://java.net/jira/browse/GLASSFISH-20616) causing a spurious deployment 
+  failure. While the problem can be annoying, it's harmless. Just re-run the 
+  application.
 * You will see some spurious JSF warnings on some pages due to a GlassFish 
-  4/Mojarra bug. The error is harmless and can be ignored.
+  4/Mojarra bug (https://java.net/jira/browse/GLASSFISH-20244). The error is 
+  harmless and can be ignored.
 * Sometimes when GlassFish is not shutdown correctly, the Derby database that 
   the application uses get's corrupted, resulting is strange JDBC errors. If 
   this occurs, you will need to stop the application and clean the database. You 
