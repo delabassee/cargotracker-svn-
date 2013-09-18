@@ -1,44 +1,45 @@
 var xhr;
 
-function createRequest(){
+function createRequest() {
     xhr = new XMLHttpRequest();
 }
 
-function logIncident(){
-    
+function logIncident() {
+
     createRequest();
     var form = document.forms[0];
-   
+
     //Construct the JSON data
     var data = {};
-    for(var i=0,ii=form.length;i<ii;++i){
-       var input = form[i];
-       if(input.name){
-           if (input.value && input.value.trim().length) {
-             data[input.name] = input.value;
-           }
-       }
+    for (var i = 0, ii = form.length; i < ii; ++i) {
+        var input = form[i];
+        if (input.name) {
+            if (input.value && input.value.trim().length) {
+                data[input.name] = input.value;
+            }
+        }
     }
-    
-     xhr.open("POST", "http://localhost:8080/cargo-tracker/rest/handling/reports", true);
-     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-     xhr.send(JSON.stringify(data));
-     xhr.onreadystatechange = update;
+
+    xhr.open("POST", "http://localhost:8080/cargo-tracker/rest/handling/reports", true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+    xhr.send(JSON.stringify(data));
+    xhr.onreadystatechange = update;
 }
 
-function update(){
+function update() {
     if (xhr.readyState == 4) {
-         result = xhr.responseText;
-         if(result){
-            alert(result);
+        if (xhr.status == 204) {
+            alert("Event registered");
             var form = document.forms[0];
-            for(var i=0,ii=form.length;i<ii;++i){
-            var input = form[i];
-                if(input.name){
+            for (var i = 0, ii = form.length; i < ii; ++i) {
+                var input = form[i];
+                if (input.name) {
                     input.value = "";
                 }
             }
-            
-         }
+
+        } else {
+            alert("Registration failed");
+        }
     }
 }

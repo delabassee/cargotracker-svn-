@@ -38,7 +38,7 @@ public class HandlingReportService {
     @Path("/reports")
     @Consumes(MediaType.APPLICATION_JSON)
     // TODO Better exception handling.
-    public String submitReport(@NotNull @Valid HandlingReport handlingReport) {
+    public void submitReport(@NotNull @Valid HandlingReport handlingReport) {
         try {
             Date completionTime = new SimpleDateFormat(ISO_8601_FORMAT).parse(
                     handlingReport.getCompletionTime());
@@ -61,7 +61,6 @@ public class HandlingReportService {
                     completionTime, trackingId, voyageNumber, type, unLocode);
 
             applicationEvents.receivedHandlingEventRegistrationAttempt(attempt);
-            return "Successfuly Handled";
         } catch (ParseException ex) {
             throw new RuntimeException("Error parsing completion time", ex);
         }
