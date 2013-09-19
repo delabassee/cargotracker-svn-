@@ -28,7 +28,7 @@ function logIncident() {
 
 function update() {
     if (xhr.readyState == 4) {
-        if (xhr.status == 204) {
+        if ((xhr.status == 204) || (xhr.status == 1223)) {
             alert("Event registered");
             var form = document.forms[0];
             for (var i = 0, ii = form.length; i < ii; ++i) {
