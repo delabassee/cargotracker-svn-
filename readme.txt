@@ -83,7 +83,8 @@ goes though these events:
 
 While filling out the event registration form, it's best to have the itinerary 
 handy. You can access the itinerary for registered cargo via the admin interface.
-As you register handling events, the administrative dashboard will be automatically updated in real time without a page refresh in addition to cargo 
+As you register handling events, the administrative dashboard will be 
+automatically updated in real time without a page refresh in addition to cargo 
 state. The cargo handling is done via JMS for scalability and the event 
 notification to the system happens via the CDI event bus and WebSocket, so you 
 will see a visible delay of a few seconds after registering the event for the
@@ -98,16 +99,19 @@ see the Getting Involved section on how to do so.
 NOTE: All data entered is wiped upon application restart, so you can start from 
 a blank slate easily if needed.
 
-You can also use the soapUI scripts included in the source code to explore the REST interfaces as well as the numerous unit tests covering the code base 
+You can also use the soapUI scripts included in the source code to explore the 
+REST interfaces as well as the numerous unit tests covering the code base 
 generally.
 
 Exploring the Code
 ==================
 As mentioned earlier, the real point of the application is demonstrating how to 
 create well architected, effective Java EE applications. To that end, once you 
-have gotten some familiarity with the application functionality the next thing to do is to dig right into the code.
+have gotten some familiarity with the application functionality the next thing 
+to do is to dig right into the code.
 
-DDD is a key aspect of the architecture, so it's important to get at least a working understanding of DDD. As the name implies, Domain-Driven Design is an 
+DDD is a key aspect of the architecture, so it's important to get at least a 
+working understanding of DDD. As the name implies, Domain-Driven Design is an 
 approach to software design and development that focuses on the core domain and 
 domain logic.
 
