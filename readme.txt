@@ -38,9 +38,9 @@ To set up in NetBeans, follow these steps:
 * Open the source code directory in NetBeans - it's just a Maven project, 
   NetBeans will do the rest for you. As noted in the site instructions on
   NetBeans, you may get a few spurious errors due to reported NetBeans bugs.
-  Just ignore them and proceed with building the application.
-* After the project is built (which will take a while the very first time), 
-  simply run it via GlassFish 4.
+  Just ignore them and proceed with clean/building the application.
+* After the project is built (which will take a while the very first time as 
+  Maven downloads dependencies), simply run it via GlassFish 4.
   
 It's best to use Chrome for the application since it has the best support for 
 HTML 5 forms, but any HTML 5 capable browser is fine. There are some known 
@@ -83,8 +83,7 @@ goes though these events:
 
 While filling out the event registration form, it's best to have the itinerary 
 handy. You can access the itinerary for registered cargo via the admin interface.
-As you register handling events, the administrative dashboard will be automatically 
-updated in real time without a page refresh in addition to cargo 
+As you register handling events, the administrative dashboard will be automatically updated in real time without a page refresh in addition to cargo 
 state. The cargo handling is done via JMS for scalability and the event 
 notification to the system happens via the CDI event bus and WebSocket, so you 
 will see a visible delay of a few seconds after registering the event for the
@@ -99,16 +98,41 @@ see the Getting Involved section on how to do so.
 NOTE: All data entered is wiped upon application restart, so you can start from 
 a blank slate easily if needed.
 
-You can also use the soapUI scripts included in the source code to explore the REST 
-interfaces as well as the numerous unit tests covering the code base 
+You can also use the soapUI scripts included in the source code to explore the REST interfaces as well as the numerous unit tests covering the code base 
 generally.
+
+Exploring the Code
+==================
+As mentioned earlier, the real point of the application is demonstrating how to 
+create well architected, effective Java EE applications. To that end, once you 
+have gotten some familiarity with the application functionality the next thing to do is to dig right into the code.
+
+DDD is a key aspect of the architecture, so it's important to get at least a working understanding of DDD. As the name implies, Domain-Driven Design is an 
+approach to software design and development that focuses on the core domain and 
+domain logic.
+
+We have a brief overview of DDD specifically as it relates to Java EE on the 
+project site: https://java.net/projects/cargotracker/pages/Home. There's also a 
+resources page that you should take a look at: 
+https://java.net/projects/cargotracker/pages/Resources. The project site has 
+pages dedicated to explaining the core constructs of DDD and how they are 
+implemented in the application using Java EE: 
+https://java.net/projects/cargotracker/pages/Characterization as well as the DDD
+layers in the application: https://java.net/projects/cargotracker/pages/Layers.
+
+For the most part, it's fine if you are new to Java EE. As long as you have a
+basic understanding of server-side applications, the resources referenced above
+and the code should be good enough to get started. For learning Java EE further,
+we have recommended a few links in the resources section of the project site. Of 
+course, the ideal user of the project is someone who has a basic working 
+understanding both Java EE and DDD.
 
 Known Issues
 ============
 * If you restart the application a few times, you will run into a GlassFish 4 
-  bug (https://java.net/jira/browse/GLASSFISH-20616) causing a spurious deployment 
-  failure. While the problem can be annoying, it's harmless. Just re-run the 
-  application (make sure to completely shut down GlassFish first).
+  bug (https://java.net/jira/browse/GLASSFISH-20616) causing a spurious 
+  deployment failure. While the problem can be annoying, it's harmless. Just re-
+  run the application (make sure to completely shut down GlassFish first).
 * You will see some spurious JSF warnings on some pages due to a GlassFish 
   4/Mojarra bug (https://java.net/jira/browse/GLASSFISH-20244). The error is 
   harmless and can be ignored.
