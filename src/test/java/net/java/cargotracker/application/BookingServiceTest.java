@@ -1,8 +1,9 @@
 package net.java.cargotracker.application;
 
+import javax.inject.Inject;
+
 import net.java.cargotracker.application.internal.DefaultBookingService;
 import net.java.cargotracker.application.util.DateUtil;
-import net.java.cargotracker.application.util.SampleDataGenerator;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.CargoRepository;
 import net.java.cargotracker.domain.model.cargo.Delivery;
@@ -45,6 +46,7 @@ import net.java.cargotracker.infrastructure.persistence.jpa.JpaVoyageRepository;
 import net.java.cargotracker.infrastructure.routing.ExternalRoutingService;
 import net.java.pathfinder.api.TransitEdge;
 import net.java.pathfinder.api.TransitPath;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -62,12 +64,16 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class BookingServiceTest {
 
-    BookingService bookingService;
-    CargoRepository cargoRepository;
-    LocationRepository locationRepository;
-    RoutingService routingService;
+    @Inject
+    private BookingService bookingService;
+    @Inject
+    private CargoRepository cargoRepository;
+    @Inject
+    private LocationRepository locationRepository;
+    @Inject
+    private RoutingService routingService;
 
-    // @Deployment
+    @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "cargo-tracker-test.war")
                 // Application layer component directly under test.
@@ -118,12 +124,12 @@ public class BookingServiceTest {
                 .addClass(TransitPath.class)
                 .addClass(TransitEdge.class)
                 // Sample data.
-                .addClass(SampleDataGenerator.class)
+                .addClass(BookingServiceTestDataGenerator.class)
                 .addClass(SampleLocations.class)
                 .addClass(SampleVoyages.class)
                 .addClass(DateUtil.class)
                 .addClass(DateUtil.class)
-                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource("test-web.xml", "web.xml")
                 .addAsWebInfResource("test-ejb-jar.xml", "ejb-jar.xml")
                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
@@ -133,17 +139,20 @@ public class BookingServiceTest {
 
     @Test
     public void testRegisterNew() {
+//        try {
+//            GlassFish glassfish = GlassFishRuntime.bootstrap().newGlassFish();
+//            glassfish.start();
+//            File war = new File("c:\\temp\\cargo-tracker-test.war");
+//            Deployer deployer = glassfish.getDeployer();
+//            deployer.deploy(war);
+//        } catch (GlassFishException ex) {
+//            Logger.getLogger(BookingServiceTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
         TrackingId expectedTrackingId = new TrackingId("TRK1");
         UnLocode fromUnlocode = new UnLocode("USCHI");
         UnLocode toUnlocode = new UnLocode("SESTO");
-
-//        expect(cargoRepository.nextTrackingId()).andReturn(expectedTrackingId);
-//        expect(locationRepository.find(fromUnlocode)).andReturn(CHICAGO);
-//        expect(locationRepository.find(toUnlocode)).andReturn(SampleLocations.STOCKHOLM);
-//
-//        cargoRepository.store(isA(Cargo.class));
-//        replay(cargoRepository, locationRepository);
-        //TrackingId trackingId = bookingService.bookNewCargo(fromUnlocode, toUnlocode, new Date());
+//        TrackingId trackingId = bookingService.bookNewCargo(fromUnlocode, toUnlocode, new Date());
         // org.junit.Assert.assertEquals(expectedTrackingId, trackingId);
     }
 
