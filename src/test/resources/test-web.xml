@@ -6,6 +6,6 @@
     <data-source>
         <name>java:global/jdbc/CargoTrackerDatabase</name>
         <class-name>org.apache.derby.jdbc.EmbeddedDriver</class-name>
-        <url>jdbc:derby:/temp/test/cargo-tracker-database;create=true</url>
+        <url>jdbc:derby:/tmp/test/cargo-tracker-database;create=true</url>
     </data-source>
 </web-app>
