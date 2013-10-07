@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.inject.Inject;
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
@@ -38,8 +39,8 @@ public class CargoHandledConsumer implements MessageListener {
             String trackingIdString = textMessage.getText();
 
             cargoInspectionService.inspectCargo(new TrackingId(trackingIdString));
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
+        } catch (JMSException e) {
+            logger.log(Level.SEVERE, "Error procesing JMS message", e);
         }
     }
 }

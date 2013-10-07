@@ -1,5 +1,6 @@
 package net.java.cargotracker.application;
 
+import javax.validation.constraints.NotNull;
 import net.java.cargotracker.domain.model.cargo.TrackingId;
 
 public interface CargoInspectionService {
@@ -9,5 +10,6 @@ public interface CargoInspectionService {
      * example if a cargo has been misdirected, or unloaded at the final
      * destination.
      */
-    void inspectCargo(TrackingId trackingId);
+    public void inspectCargo(
+            @NotNull(message = "Tracking ID is required") TrackingId trackingId);
 }
