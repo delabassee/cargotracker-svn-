@@ -1,6 +1,12 @@
 package net.java.cargotracker.application;
 
+import static org.junit.Assert.*;
+
+import java.util.Date;
+
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import net.java.cargotracker.application.internal.DefaultBookingService;
 import net.java.cargotracker.application.util.DateUtil;
@@ -46,6 +52,7 @@ import net.java.cargotracker.infrastructure.persistence.jpa.JpaVoyageRepository;
 import net.java.cargotracker.infrastructure.routing.ExternalRoutingService;
 import net.java.pathfinder.api.TransitEdge;
 import net.java.pathfinder.api.TransitPath;
+import org.apache.commons.lang3.time.DateUtils;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -72,6 +79,8 @@ public class BookingServiceTest {
     private LocationRepository locationRepository;
     @Inject
     private RoutingService routingService;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -149,14 +158,34 @@ public class BookingServiceTest {
 //            Logger.getLogger(BookingServiceTest.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 
-        TrackingId expectedTrackingId = new TrackingId("TRK1");
         UnLocode fromUnlocode = new UnLocode("USCHI");
         UnLocode toUnlocode = new UnLocode("SESTO");
-//        TrackingId trackingId = bookingService.bookNewCargo(fromUnlocode, toUnlocode, new Date());
-        // org.junit.Assert.assertEquals(expectedTrackingId, trackingId);
-    }
+        Date deadline = new Date();
 
-    protected void tearDown() throws Exception {
-//        verify(cargoRepository, locationRepository);
+        TrackingId trackingId = bookingService.bookNewCargo(
+                fromUnlocode, toUnlocode, deadline);
+
+        Cargo cargo = entityManager.createNamedQuery("Cargo.findByTrackingId",
+                Cargo.class).setParameter("trackingId", trackingId)
+                .getSingleResult();
+
+        assertEquals(SampleLocations.CHICAGO, cargo.getOrigin());
+        assertEquals(SampleLocations.STOCKHOLM,
+                cargo.getRouteSpecification().getDestination());
+        assertTrue(DateUtils.isSameDay(deadline,
+                cargo.getRouteSpecification().getArrivalDeadline()));
+        assertEquals(TransportStatus.NOT_RECEIVED,
+                cargo.getDelivery().getTransportStatus());
+        assertEquals(Location.UNKNOWN, cargo.getDelivery().getLastKnownLocation());
+        assertEquals(Voyage.NONE, cargo.getDelivery().getCurrentVoyage());
+        assertFalse(cargo.getDelivery().isMisdirected());
+        assertEquals(Delivery.ETA_UNKOWN,
+                cargo.getDelivery().getEstimatedTimeOfArrival());
+        assertEquals(Delivery.NO_ACTIVITY,
+                cargo.getDelivery().getNextExpectedActivity());
+        assertFalse(cargo.getDelivery().isUnloadedAtDestination());
+        assertEquals(RoutingStatus.NOT_ROUTED,
+                cargo.getDelivery().getRoutingStatus());        
+        assertEquals(Itinerary.EMPTY_ITINERARY, cargo.getItinerary());
     }
 }

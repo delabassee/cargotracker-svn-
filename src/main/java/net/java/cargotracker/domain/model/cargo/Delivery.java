@@ -32,6 +32,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class Delivery implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    // Null object pattern.
+    public static final Date ETA_UNKOWN = null;
+    // Null object pattern
+    public static final HandlingActivity NO_ACTIVITY = new HandlingActivity();
     @Enumerated(EnumType.STRING)
     @Column(name = "transport_status")
     @NotNull
@@ -62,9 +66,6 @@ public class Delivery implements Serializable {
     @ManyToOne
     @JoinColumn(name = "last_event_id")
     private HandlingEvent lastEvent;
-    private static final Date ETA_UNKOWN = null;
-    // Null object pattern
-    private static final HandlingActivity NO_ACTIVITY = new HandlingActivity();
 
     public Delivery() {
         // Nothing to initialize

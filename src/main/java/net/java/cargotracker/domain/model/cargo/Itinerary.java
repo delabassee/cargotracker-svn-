@@ -22,9 +22,9 @@ import org.eclipse.persistence.annotations.PrivateOwned;
 public class Itinerary implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // Null object pattern.
-    static final Itinerary EMPTY_ITINERARY = new Itinerary();
     private static final Date END_OF_DAYS = new Date(Long.MAX_VALUE);
+    // Null object pattern.
+    public static final Itinerary EMPTY_ITINERARY = new Itinerary();
     // TODO Look into why cascade delete doesn't work.
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cargo_id")

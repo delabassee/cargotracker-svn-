@@ -147,6 +147,10 @@ public class Cargo implements Serializable {
     public Location getOrigin() {
         return origin;
     }
+    
+    public RouteSpecification getRouteSpecification() {
+        return routeSpecification;
+    }    
 
     /**
      * @return The delivery. Never null.
@@ -161,10 +165,6 @@ public class Cargo implements Serializable {
     public Itinerary getItinerary() {
         return DomainObjectUtils.nullSafe(this.itinerary,
                 Itinerary.EMPTY_ITINERARY);
-    }
-
-    public RouteSpecification getRouteSpecification() {
-        return routeSpecification;
     }
 
     /**

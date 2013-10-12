@@ -5,5 +5,10 @@
                 http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <engine> 
         <property name="deploymentExportPath">target/</property> 
-    </engine> 
+    </engine>
+    <container qualifier="glassfish" default="true">
+        <configuration>
+            <property name="outputToConsole">true</property>
+        </configuration>
+    </container>     
 </arquillian>
