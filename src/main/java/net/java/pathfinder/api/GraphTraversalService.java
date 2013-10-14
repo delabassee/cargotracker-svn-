@@ -18,21 +18,18 @@ public class GraphTraversalService {
 
     @Inject
     private GraphDao dao;
-    private Random random = new Random();
+    private final Random random = new Random();
     private static final long ONE_MIN_MS = 1000 * 60;
     private static final long ONE_DAY_MS = ONE_MIN_MS * 60 * 24;
 
     @GET
     @Path("/shortest-path")
     @Produces(MediaType.APPLICATION_JSON)
-    // TODO Add internationalized messages for constraints.    
+    // TODO Add internationalized messages for constraints.
     public List<TransitPath> findShortestPath(
-            @NotNull @Size(min = 5, max = 5) @QueryParam("origin")
-            String originUnLocode,
-            @NotNull @Size(min = 5, max = 5) @QueryParam("destination")
-            String destinationUnLocode,
-            @QueryParam("deadline")
-            String deadline) {
+            @NotNull @Size(min = 5, max = 5) @QueryParam("origin") String originUnLocode,
+            @NotNull @Size(min = 5, max = 5) @QueryParam("destination") String destinationUnLocode,
+            @QueryParam("deadline") String deadline) {
         Date date = nextDate(new Date());
 
         List<String> allVertices = dao.listLocations();

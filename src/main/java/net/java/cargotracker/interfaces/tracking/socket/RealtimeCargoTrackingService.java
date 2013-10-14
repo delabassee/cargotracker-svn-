@@ -13,7 +13,7 @@ import javax.websocket.OnClose;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import net.java.cargotracker.application.CargoInspected;
+import net.java.cargotracker.infrastructure.events.cdi.CargoInspected;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 
 /**

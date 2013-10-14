@@ -44,7 +44,7 @@ public class DefaultBookingService implements BookingService {
         Cargo cargo = new Cargo(trackingId, routeSpecification);
 
         cargoRepository.store(cargo);
-        logger.log(Level.INFO, "Booked new cargo with tracking id {0}", 
+        logger.log(Level.INFO, "Booked new cargo with tracking id {0}",
                 cargo.getTrackingId().getIdString());
 
         return cargo.getTrackingId();

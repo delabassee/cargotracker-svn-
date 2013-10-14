@@ -1,12 +1,12 @@
 package net.java.cargotracker.application.internal;
 
+import net.java.cargotracker.infrastructure.events.cdi.CargoInspected;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import net.java.cargotracker.application.ApplicationEvents;
-import net.java.cargotracker.application.CargoInspected;
 import net.java.cargotracker.application.CargoInspectionService;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.CargoRepository;

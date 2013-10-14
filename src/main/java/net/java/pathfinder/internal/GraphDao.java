@@ -10,7 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class GraphDao implements Serializable {
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public List<String> listLocations() {
         return new ArrayList<>(Arrays.asList("CNHKG", "AUMEL", "SESTO",
