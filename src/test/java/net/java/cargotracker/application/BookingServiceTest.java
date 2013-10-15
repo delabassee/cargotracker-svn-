@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -82,15 +83,12 @@ public class BookingServiceTest {
 
 	@Inject
 	private BookingService bookingService;
-	// @Inject
-	// private CargoRepository cargoRepository;
-	// @Inject
-	// private LocationRepository locationRepository;
-	// @Inject
-	// private RoutingService routingService;
 	@PersistenceContext
 	private EntityManager entityManager;
+
 	private static TrackingId trackingId;
+	private static List<Itinerary> candidates;
+	private static Date deadline;
 
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -180,7 +178,7 @@ public class BookingServiceTest {
 		UnLocode fromUnlocode = new UnLocode("USCHI");
 		UnLocode toUnlocode = new UnLocode("SESTO");
 
-		Date deadline = new Date();
+		deadline = new Date();
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.setTime(deadline);
 		calendar.add(Calendar.MONTH, 6); // Six months ahead.
@@ -217,9 +215,40 @@ public class BookingServiceTest {
 	@Test
 	@InSequence(2)
 	public void testRouteCandidates() {
-		List<Itinerary> candidates = bookingService
-				.requestPossibleRoutesForCargo(trackingId);
+		candidates = bookingService.requestPossibleRoutesForCargo(trackingId);
 
 		assertFalse(candidates.isEmpty());
+	}
+
+	@Test
+	@InSequence(3)
+	public void testAssignRoute() {
+		Itinerary assigned = candidates.get(new Random().nextInt(candidates
+				.size()));
+
+		bookingService.assignCargoToRoute(assigned, trackingId);
+
+		Cargo cargo = entityManager
+				.createNamedQuery("Cargo.findByTrackingId", Cargo.class)
+				.setParameter("trackingId", trackingId).getSingleResult();
+
+		assertEquals(assigned, cargo.getItinerary());
+		assertEquals(TransportStatus.NOT_RECEIVED, cargo.getDelivery()
+				.getTransportStatus());
+		assertEquals(Location.UNKNOWN, cargo.getDelivery()
+				.getLastKnownLocation());
+		assertEquals(Voyage.NONE, cargo.getDelivery().getCurrentVoyage());
+		assertFalse(cargo.getDelivery().isMisdirected());
+		assertTrue(cargo.getDelivery().getEstimatedTimeOfArrival()
+				.before(deadline));
+		assertEquals(HandlingEvent.Type.RECEIVE, cargo.getDelivery()
+				.getNextExpectedActivity().getType());
+		assertEquals(SampleLocations.CHICAGO, cargo.getDelivery()
+				.getNextExpectedActivity().getLocation());
+		assertEquals(null, cargo.getDelivery().getNextExpectedActivity()
+				.getVoyage());
+		assertFalse(cargo.getDelivery().isUnloadedAtDestination());
+		assertEquals(RoutingStatus.ROUTED, cargo.getDelivery()
+				.getRoutingStatus());
 	}
 }

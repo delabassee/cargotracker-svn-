@@ -65,10 +65,6 @@ public class DefaultBookingService implements BookingService {
     public void assignCargoToRoute(Itinerary itinerary, TrackingId trackingId) {
         Cargo cargo = cargoRepository.find(trackingId);
 
-        if (cargo == null) {
-            throw new IllegalArgumentException("Can't assign itinerary to non-existing cargo " + trackingId);
-        }
-
         cargo.assignToRoute(itinerary);
         cargoRepository.store(cargo);
 

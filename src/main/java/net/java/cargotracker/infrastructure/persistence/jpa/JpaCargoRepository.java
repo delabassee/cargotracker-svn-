@@ -3,11 +3,8 @@ package net.java.cargotracker.infrastructure.persistence.jpa;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.CargoRepository;
@@ -18,21 +15,14 @@ import net.java.cargotracker.domain.model.cargo.TrackingId;
 public class JpaCargoRepository implements CargoRepository, Serializable {
 
     private static final long serialVersionUID = 1L;
-    private static final Logger logger = Logger.getLogger(
-            JpaCargoRepository.class.getName());
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public Cargo find(TrackingId trackingId) {
-        try {
-            return entityManager.createNamedQuery("Cargo.findByTrackingId",
-                    Cargo.class).setParameter("trackingId", trackingId)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            logger.log(Level.FINE, "No cargo found for tracking ID: {0}", trackingId);
-            return null;
-        }
+        return entityManager.createNamedQuery("Cargo.findByTrackingId",
+                Cargo.class).setParameter("trackingId", trackingId)
+                .getSingleResult();
     }
 
     @Override
