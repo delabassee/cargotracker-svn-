@@ -89,6 +89,7 @@ public class BookingServiceTest {
 	private static TrackingId trackingId;
 	private static List<Itinerary> candidates;
 	private static Date deadline;
+	private static Itinerary assigned;
 
 	@Deployment
 	public static WebArchive createDeployment() {
@@ -223,7 +224,7 @@ public class BookingServiceTest {
 	@Test
 	@InSequence(3)
 	public void testAssignRoute() {
-		Itinerary assigned = candidates.get(new Random().nextInt(candidates
+		assigned = candidates.get(new Random().nextInt(candidates
 				.size()));
 
 		bookingService.assignCargoToRoute(assigned, trackingId);
@@ -249,6 +250,36 @@ public class BookingServiceTest {
 				.getVoyage());
 		assertFalse(cargo.getDelivery().isUnloadedAtDestination());
 		assertEquals(RoutingStatus.ROUTED, cargo.getDelivery()
+				.getRoutingStatus());
+	}
+
+	@Test
+	@InSequence(4)
+	public void testChangeDestination() {
+		bookingService.changeDestination(trackingId, new UnLocode("FIHEL"));
+
+		Cargo cargo = entityManager
+				.createNamedQuery("Cargo.findByTrackingId", Cargo.class)
+				.setParameter("trackingId", trackingId).getSingleResult();
+
+		assertEquals(SampleLocations.CHICAGO, cargo.getOrigin());
+		assertEquals(SampleLocations.HELSINKI, cargo.getRouteSpecification()
+				.getDestination());
+		assertTrue(DateUtils.isSameDay(deadline, cargo.getRouteSpecification()
+				.getArrivalDeadline()));
+		assertEquals(assigned, cargo.getItinerary());		
+		assertEquals(TransportStatus.NOT_RECEIVED, cargo.getDelivery()
+				.getTransportStatus());
+		assertEquals(Location.UNKNOWN, cargo.getDelivery()
+				.getLastKnownLocation());
+		assertEquals(Voyage.NONE, cargo.getDelivery().getCurrentVoyage());
+		assertFalse(cargo.getDelivery().isMisdirected());
+		assertEquals(Delivery.ETA_UNKOWN, cargo.getDelivery()
+				.getEstimatedTimeOfArrival());
+		assertEquals(Delivery.NO_ACTIVITY, cargo.getDelivery()
+				.getNextExpectedActivity());
+		assertFalse(cargo.getDelivery().isUnloadedAtDestination());
+		assertEquals(RoutingStatus.MISROUTED, cargo.getDelivery()
 				.getRoutingStatus());
 	}
 }

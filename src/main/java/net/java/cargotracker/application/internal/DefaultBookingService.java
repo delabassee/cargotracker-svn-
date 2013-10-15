@@ -82,6 +82,7 @@ public class DefaultBookingService implements BookingService {
         cargo.specifyNewRoute(routeSpecification);
 
         cargoRepository.store(cargo);
+
         logger.log(Level.INFO, "Changed destination for cargo {0} to {1}",
                 new Object[]{trackingId, routeSpecification.getDestination()});
     }
