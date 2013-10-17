@@ -1,16 +1,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <ui:composition template="/WEB-INF/templates/public.xhtml">
-        <ui:define name="title">Cargo Tracking</ui:define>
+    <ui:composition template="/WEB-INF/templates/common/public.xhtml">
+        <ui:define name="title">Cargo Administration</ui:define>
         <ui:define name="content">
-            <p>The public tracking interface allows anyone with a valid registered
-            tracking ID to track their cargo.</p>
-            <p>Once a valid tracking ID is 
-            entered, you will see the current status of cargo, the estimated
-            arrival time at the final destination, whether the cargo is
-            misdirected, the next expected activity as well as the detailed 
-            handling history.</p>
-            <p>If you see a discrepancy, please notify us immediately.</p>
+            <div class="row">
+            <div class="large-12 columns">    
+            <div id="container" class="panel">
+                <h3>The public interface consists of the following features</h3>
+                
+                <h5 class="subheader">Track cargo via the public tracking interface.</h5>
+             
+            </div>
+            </div>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

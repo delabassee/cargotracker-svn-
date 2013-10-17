@@ -1,13 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <ui:composition template="/WEB-INF/templates/public.xhtml">
+    <ui:composition template="/WEB-INF/templates/common/public.xhtml">
         <ui:define name="title">Track Cargo</ui:define>
         <ui:define name="content">
-            <div id="id_w_track_cargoes" class="cs_track_cargoes">
-                <ui:decorate template="/WEB-INF/templates/widget.xhtml">
-                    <ui:define name="widgetTitle">Track Your Cargo</ui:define>
-                    <ui:define name="widgetContent">
+            <div class="row">
+            <div class="large-12 columns">
+            <div id="container" class="panel">
                         <h:form id="trackingForm">
                             <table>
                                 <tr>
@@ -61,9 +60,11 @@
                             } catch (e) {
                             }
                         </script>
-                    </ui:define>
-                </ui:decorate>
+                        
+                        </div>
             </div>
+            </div>
+            
         </ui:define>
     </ui:composition>
 </html>
