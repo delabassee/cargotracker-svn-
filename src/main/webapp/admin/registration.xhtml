@@ -13,73 +13,80 @@
             </style>
         </ui:define>
         <ui:define name="content">
-            <div id="id_form_registration">
-                <div class="row">
-                <div class="large-12 columns">
-                <div id="container" class="panel">
-                    <span class="label">Book New Cargo</span>
-                    <h:form id="registrationForm">
-                        <br/>
-                        <div class="row">
-                        <div class="small-8">
-                          <div class="row">
-                              <div class="small-3 columns">
-                                <label for="Origin" class="right inline">Origin</label>
-                              </div>
-                              <div class="small-5 columns left">  
+            
+            <h:form id="registrationForm">
+            <div class="row">
+            <div class="small-12 columns">
+            <div id="container" class="panel">
+                    <div class="row">
+                        <div class="small-3">
+                            <div class="row">
+                                <div class="small-3 columns left">    
+                                <label for="Origin" class="label">Book New Cargo</label>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                
+                    <div class="row">
+                        <div class="small-12">
+                            <div class="row">
+                                <div class="small-4 columns">    
+                                <label for="Origin" class="right">Origin</label>
+                                </div>
+                                <div class="small-5 left columns">
                                 <h:selectOneMenu value="#{registration.originUnlocode}">
+                                    <f:selectItems value="#{registration.locations}" var="location"
+                                                   itemLabel="#{location.name}" itemValue="#{location.unLocode}" />
+                                    </h:selectOneMenu>
+                                </div>    
+                                </div>   
+                            </div>
+                      </div>
+                
+                <div class="row">
+                    <div class="small-12">
+                        <div class="row">
+                            <div class="small-4 columns">    
+                            <label for="Origin" class="right">Destination</label>
+                            </div>
+                            <div class="small-5 left columns">
+                            <h:selectOneMenu value="#{registration.originUnlocode}">
                                 <f:selectItems value="#{registration.locations}" var="location"
                                                itemLabel="#{location.name}" itemValue="#{location.unLocode}" />
                                 </h:selectOneMenu>
-                              </div>    
-                          </div>
+                            </div>    
+                            </div>   
                         </div>
-                        </div>    
-
-                        <div class="row">
-                        <div class="small-8">
+                  </div>
+                
+                <div class="row">
+                        <div class="small-12">
                           <div class="row">
-                              <div class="small-3 columns">
-                                <label for="Destination" class="right inline">Destination</label>
-                              </div>
-                              <div class="small-5 columns left">
-                                <h:selectOneMenu
-                                value="#{registration.destinationUnlocode}">
-                                <f:selectItems value="#{registration.locations}" var="location"
-                                               itemLabel="#{location.name}" itemValue="#{location.unLocode}" />
-                                </h:selectOneMenu>
-                              </div>    
-                        </div>
-                        </div>
-                        </div>    
-
-                        <div class="row">
-                        <div class="small-8">
-                          <div class="row">
-                              <div class="small-3 columns">
+                              <div class="small-4 columns">
                                 <label for="Arrival Deadline" class="right inline">Arrival Deadline</label>
                               </div>
-                              <div class="small-5 columns left">
+                              <div class="small-5 left columns">
                                 <input type="date" jsf:value="#{registration.arrivalDeadline}" size="10" maxlength="10"/>
                               </div> 
                           </div>
                         </div>
-                        </div>
-                        
-                        <div class="row">
-                        <div class="small-3">
+                  </div>
+                
+                <div class="row">
+                        <div class="small-12">
                             <div class="row">
-                                <div class="small-3 columns right">
+                                <div class="small-7 columns right">
                                 <h:commandButton value="Book" class="round alert tiny button" action="#{registration.register}" />
                                 </div>
                             </div>
                         </div>
-                        </div>    
-                    </h:form>
-                   </div>
-                </div>
+                        </div>
+                
+            </div>   
             </div>
             </div>
+            </h:form>  
         </ui:define>
     </ui:composition>
 </html>
