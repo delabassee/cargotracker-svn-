@@ -10,9 +10,9 @@
                 <th width="100">Tracking ID</th>
                 <th width="200">Origin</th>
                 <th width="200">Destination</th>
-                <th width="200">Last Known Location</th>
-                <th width="200">Transport Status</th>
-                <th width="200">Deadline</th>
+                <th width="200" class="hide-for-small">Last Known Location</th>
+                <th width="200" class="hide-for-small">Transport Status</th>
+                <th width="200" class="hide-for-small">Deadline</th>
             </tr>
         </thead>
         <tbody>
@@ -26,14 +26,15 @@
                             </h:link></td>
                         <td>#{cargo.origin}</td>
                         <td>#{cargo.finalDestination}</td>
-                        <td>#{cargo.lastKnownLocation}</td>
-                        <td>#{cargo.transportStatus}</td>
-                        <td>#{cargo.arrivalDeadline}</td>
+                        <td class="hide-for-small">#{cargo.lastKnownLocation}</td>
+                        <td class="hide-for-small">#{cargo.transportStatus}</td>
+                        <td class="hide-for-small">#{cargo.arrivalDeadline}</td>
                     </tr>
                 </ui:fragment>
             </ui:repeat>
         </tbody>
     </table>
+
     
     <script type='text/javascript' src="js/listRouted.js"/>
         
