@@ -53,9 +53,11 @@
                         <span class="success label">Itinerary</span>
                         <thead>
                             <tr>
-                                <td>Voyage number</td>
-                                <td colspan="2">Load</td>
-                                <td colspan="2">Unload</td>
+                                <th>Voyage number</th>
+                                <th>Load Location</th>
+                                <th class="show-for-medium-up"> Time</th>
+                                <th>Unload Location</th>
+                                <th class="show-for-medium-up"> Time</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,9 +65,9 @@
                                 <tr>
                                     <td>#{leg.voyageNumber}</td>
                                     <td>#{leg.from}</td>
-                                    <td>(#{leg.loadTime})</td>
+                                    <td class="show-for-medium-up">(#{leg.loadTime})</td>
                                     <td>#{leg.to}</td>
-                                    <td>(#{leg.unloadTime})</td>
+                                    <td class="show-for-medium-up">(#{leg.unloadTime})</td>
                                 </tr>
                             </ui:repeat>
                         </tbody>
