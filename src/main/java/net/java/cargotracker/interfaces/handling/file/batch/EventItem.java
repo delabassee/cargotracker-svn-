@@ -17,7 +17,7 @@ public class EventItem {
     }
     
     public EventItem(String line){
-        String[] result = line.split("\t");
+        String[] result = line.split(",");
         this.completionTimeValue    =   result[0];
         this.trackingIdValue        =   result[1];
         this.voyageNumberValue      =   result[2];
@@ -54,7 +54,7 @@ public class EventItem {
     }
     
     public String getUnLocodeValue(){
-        return this.completionTimeValue;
+        return this.unLocodeValue;
     }
     
     public void setEventTypeValue(String eventTypeValue){
@@ -69,7 +69,7 @@ public class EventItem {
         return "Event Details : Completion Time -> "    + this.completionTimeValue + ";" +
                                 "  Tracking ID -> "     + this.trackingIdValue + 
                                 "  Voyage ->"           + this.voyageNumberValue +
-                                "  Location ->"         + this.eventTypeValue +
+                                "  Location ->"         + this.unLocodeValue +
                                 "  Event Type ->"       + this.eventTypeValue;
     }
     
