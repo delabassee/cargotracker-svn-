@@ -26,7 +26,7 @@ public class UploadDirectoryScanner {
     private JobOperator jobOperator;
     private long execID;
 
-    @Schedule(minute = "*/10", hour = "*") // Runs every thirty minutes
+    @Schedule(minute = "*/3", hour = "*") // Runs every thirty minutes
     public void processFiles() {
         logger.log(Level.INFO, "Scanning upload directory...");
     
