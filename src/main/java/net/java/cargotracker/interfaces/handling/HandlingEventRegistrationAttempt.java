@@ -15,12 +15,12 @@ import net.java.cargotracker.domain.model.voyage.VoyageNumber;
  */
 public class HandlingEventRegistrationAttempt implements Serializable {
 
-    private Date registrationTime;
-    private Date completionTime;
-    private TrackingId trackingId;
-    private VoyageNumber voyageNumber;
-    private HandlingEvent.Type type;
-    private UnLocode unLocode;
+    private final Date registrationTime;
+    private final Date completionTime;
+    private final TrackingId trackingId;
+    private final VoyageNumber voyageNumber;
+    private final HandlingEvent.Type type;
+    private final UnLocode unLocode;
 
     public HandlingEventRegistrationAttempt(Date registrationDate,
             Date completionDate, TrackingId trackingId,

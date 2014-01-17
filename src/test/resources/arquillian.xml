@@ -8,7 +8,7 @@
     </engine>
     <container qualifier="glassfish" default="true">
         <configuration>
-            <property name="outputToConsole">true</property>
+            <!-- <property name="outputToConsole">true</property> -->
         </configuration>
     </container>     
 </arquillian>
