@@ -1,6 +1,8 @@
 package net.java.cargotracker.interfaces.tracking.socket;
 
 import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -8,7 +10,7 @@ import java.util.logging.Logger;
 import javax.ejb.Singleton;
 import javax.enterprise.event.Observes;
 import javax.json.Json;
-import javax.json.JsonObject;
+import javax.json.stream.JsonGenerator;
 import javax.websocket.OnClose;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -41,20 +43,28 @@ public class RealtimeCargoTrackingService {
     }
 
     public void onCargoInspected(@Observes @CargoInspected Cargo cargo) {
-        JsonObject model = Json.createObjectBuilder()
-                .add("trackingId", cargo.getTrackingId().getIdString())
-                .add("origin", cargo.getOrigin().getName())
-                .add("destination", cargo.getRouteSpecification().getDestination().getName())
-                .add("lastKnownLocation", cargo.getDelivery().getLastKnownLocation().getName())
-                .add("transportStatus", cargo.getDelivery().getTransportStatus().toString())
-                .build();
+        Writer writer = new StringWriter();
 
-        try {
-            for (Session session : sessions) {
-                session.getBasicRemote().sendText(model.toString());
-            }
-        } catch (IOException ex) {
-            logger.log(Level.WARNING, "Unable to publish WebSocket message", ex);
+        try (JsonGenerator generator = Json.createGenerator(writer)) {
+            generator
+                    .writeStartObject()
+                    .write("trackingId", cargo.getTrackingId().getIdString())
+                    .write("origin", cargo.getOrigin().getName())
+                    .write("destination", cargo.getRouteSpecification().getDestination().getName())
+                    .write("lastKnownLocation", cargo.getDelivery().getLastKnownLocation().getName())
+                    .write("transportStatus", cargo.getDelivery().getTransportStatus().toString())
+                    .writeEnd();
         }
+
+        String jsonValue = writer.toString();
+
+        for (Session session : sessions) {
+            try {
+                session.getBasicRemote().sendText(jsonValue);
+            } catch (IOException ex) {
+                logger.log(Level.WARNING, "Unable to publish WebSocket message", ex);
+            }
+        }
+
     }
 }
