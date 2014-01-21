@@ -9,7 +9,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import net.java.pathfinder.internal.GraphDao;
 
 @Stateless
@@ -24,7 +23,7 @@ public class GraphTraversalService {
 
     @GET
     @Path("/shortest-path")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({"application/json", "application/xml; qs=.75"})
     // TODO Add internationalized messages for constraints.
     public List<TransitPath> findShortestPath(
             @NotNull @Size(min = 5, max = 5) @QueryParam("origin") String originUnLocode,
