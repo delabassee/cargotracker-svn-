@@ -28,7 +28,6 @@ import net.java.cargotracker.domain.model.handling.HandlingEventRepository;
 public class CargoTracker implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // TODO Validate not null or empty.
     private String trackingId;
     private CargoTrackingViewAdapter cargo;
     @Inject

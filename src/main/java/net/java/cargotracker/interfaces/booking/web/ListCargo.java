@@ -39,36 +39,35 @@ public class ListCargo {
     public void init() {
         cargos = bookingServiceFacade.listAllCargos();
     }
-    
-    public List<CargoRoute> getRoutedCargos(){
-        routedCargos = new ArrayList<CargoRoute>();
-        for(CargoRoute obj:cargos){
-            if(obj.isRouted()){
+
+    public List<CargoRoute> getRoutedCargos() {
+        routedCargos = new ArrayList<>();
+        for (CargoRoute obj : cargos) {
+            if (obj.isRouted()) {
                 routedCargos.add(obj);
             }
         }
         return routedCargos;
     }
-    
-    public List<CargoRoute> getClaimedCargos(){
-        claimedCargos = new ArrayList<CargoRoute>();
-        for(CargoRoute obj:cargos){
-            if(obj.isClaimed()){
+
+    public List<CargoRoute> getClaimedCargos() {
+        claimedCargos = new ArrayList<>();
+        for (CargoRoute obj : cargos) {
+            if (obj.isClaimed()) {
                 claimedCargos.add(obj);
             }
         }
         return claimedCargos;
     }
-    
-    public List<CargoRoute> getNotRoutedCargos(){
-        notRoutedCargos = new ArrayList<CargoRoute>();
-        for(CargoRoute obj:notRoutedCargos){
-            if(!obj.isRouted()){
+
+    public List<CargoRoute> getNotRoutedCargos() {
+        notRoutedCargos = new ArrayList<>();
+        for (CargoRoute obj : notRoutedCargos) {
+            if (!obj.isRouted()) {
                 notRoutedCargos.add(obj);
             }
         }
         return notRoutedCargos;
     }
-    
-    
+
 }
