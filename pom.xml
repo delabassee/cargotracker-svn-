@@ -132,7 +132,7 @@
                     <container>
                         <containerId>glassfish4x</containerId>
                         <zipUrlInstaller>
-                            <url>http://dlc.sun.com.edgesuite.net/glassfish/4.0.1/nightly/latest-glassfish.zip</url>
+                            <url>http://dlc.sun.com.edgesuite.net/glassfish/4.0.1/promoted/latest-glassfish.zip</url>
                         </zipUrlInstaller>
                     </container>
                     <properties>
