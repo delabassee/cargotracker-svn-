@@ -6,7 +6,6 @@ function createRequest() {
 
 function logIncident() {
 
-
     createRequest();
     var form = document.forms[0];
 
@@ -20,8 +19,8 @@ function logIncident() {
             }
         }
     }
-  
-    
+
+
     xhr.open("POST", "http://localhost:8080/cargo-tracker/rest/handling/reports", true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     xhr.send(JSON.stringify(data));
