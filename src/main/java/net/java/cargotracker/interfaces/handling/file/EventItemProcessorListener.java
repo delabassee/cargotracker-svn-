@@ -1,4 +1,4 @@
-package net.java.cargotracker.interfaces.handling.file.batch;
+package net.java.cargotracker.interfaces.handling.file;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,10 +8,9 @@ import javax.inject.Named;
 
 @Dependent
 @Named("EventItemProcessorListener")
-public class EventItemProcessorListener implements ItemProcessListener{
+public class EventItemProcessorListener implements ItemProcessListener {
+
     private static final Logger logger = Logger.getLogger("EventItemProcessorListener");
-    
-    public EventItemProcessorListener() { }
 
     @Override
     public void beforeProcess(Object o) throws Exception {
@@ -20,7 +19,8 @@ public class EventItemProcessorListener implements ItemProcessListener{
     }
 
     @Override
-    public void afterProcess(Object o, Object o1) throws Exception { }
+    public void afterProcess(Object o, Object o1) throws Exception {
+    }
 
     @Override
     public void onProcessError(Object o, Exception excptn) throws Exception {

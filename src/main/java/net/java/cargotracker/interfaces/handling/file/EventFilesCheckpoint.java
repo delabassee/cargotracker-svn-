@@ -1,11 +1,12 @@
-package net.java.cargotracker.interfaces.handling.file.batch;
+package net.java.cargotracker.interfaces.handling.file;
 
 import java.io.Serializable;
 
-public class EventItemCheckpoint implements Serializable {
+public class EventFilesCheckpoint implements Serializable {
+
     private long lineNum;
 
-    public EventItemCheckpoint() {
+    public EventFilesCheckpoint() {
         lineNum = 0;
     }
 
@@ -15,5 +16,5 @@ public class EventItemCheckpoint implements Serializable {
 
     public void nextLine() {
         lineNum++;
-    }    
+    }
 }

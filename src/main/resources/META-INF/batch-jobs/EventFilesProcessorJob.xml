@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="EventFilesProcessorJob"
+     xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+     version="1.0">
+    <properties>
+        <property name="event_file_name" value="handling_events.csv"/>
+    </properties>
+    <listeners>
+        <listener ref="FileProcessorJobListener"/>
+    </listeners>
+    <step id="EventFilesProcessor">
+        <listeners>
+            <listener ref="EventItemProcessorListener"/>
+        </listeners>
+        <chunk item-count="10">
+            <reader ref="EventItemReader"/>
+            <processor ref="EventItemProcessor"/>
+            <writer ref="EventItemWriter"/>
+        </chunk>
+    </step>
+</job>
