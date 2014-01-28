@@ -1,10 +1,12 @@
 package net.java.cargotracker.interfaces.handling.file;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.RandomAccessFile;
 import java.io.Serializable;
-import javax.batch.api.chunk.ItemReader;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.batch.api.chunk.AbstractItemReader;
 import javax.batch.runtime.context.JobContext;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -12,47 +14,58 @@ import javax.inject.Named;
 
 @Dependent
 @Named("EventItemReader")
-public class EventItemReader implements ItemReader {
+public class EventItemReader extends AbstractItemReader {
 
+    private static final Logger logger = Logger.getLogger(
+            EventItemReader.class.getName());
     private EventFilesCheckpoint checkpoint;
-    private BufferedReader fileReader;
+    private RandomAccessFile currentFile;
     @Inject
     private JobContext jobContext;
 
     @Override
     public void open(Serializable checkpoint) throws Exception {
+        File uploadDirectory = new File(
+                jobContext.getProperties().getProperty("upload_directory"));
+
         if (checkpoint == null) {
             this.checkpoint = new EventFilesCheckpoint();
+            logger.log(Level.INFO, "Scanning upload directory: {0}", uploadDirectory);
+
+            if (!uploadDirectory.exists()) {
+                logger.log(Level.INFO, "Upload directory does not exist, creating it");
+                uploadDirectory.mkdirs();
+            } else {
+                this.checkpoint.setFiles(Arrays.asList(uploadDirectory.listFiles()));
+            }
         } else {
+            logger.log(Level.INFO, "Starting from previous checkpoint");
             this.checkpoint = (EventFilesCheckpoint) checkpoint;
         }
 
-        // TODO scan all files in the directory.
-        String fileName = jobContext.getProperties().getProperty("event_file_name");
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream iStream = classLoader.getResourceAsStream(fileName);
-        fileReader = new BufferedReader(new InputStreamReader(iStream));
+        File nextFile = this.checkpoint.nextFile();
 
-        for (int i = 0; i < this.checkpoint.getLineNum(); i++) {
-            fileReader.readLine();
+        if (nextFile == null) {
+            logger.log(Level.INFO, "No files to process");
+            currentFile = null;
+        } else {
+            currentFile = new RandomAccessFile(nextFile, "r");
+            currentFile.seek(this.checkpoint.getFilePointer());
         }
-    }
-
-    @Override
-    public void close() throws Exception {
-        // TODO Should delete be put here?
-
-        fileReader.close();
     }
 
     @Override
     public Object readItem() throws Exception {
-        String entry = fileReader.readLine();
+        if (currentFile != null) {
+            String entry = currentFile.readLine();
 
-        if (entry != null) {
-            this.checkpoint.nextLine();
-            // TODO Better input validation here.
-            return new EventItem(entry);
+            if (entry != null) {
+                this.checkpoint.nextLine();
+                // TODO Better input validation here.
+                return new EventItem(entry);
+            } else {
+                return null;
+            }
         } else {
             return null;
         }

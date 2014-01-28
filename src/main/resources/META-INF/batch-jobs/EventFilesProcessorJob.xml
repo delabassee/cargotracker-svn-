@@ -2,20 +2,23 @@
 <job id="EventFilesProcessorJob"
      xmlns="http://xmlns.jcp.org/xml/ns/javaee"
      version="1.0">
+    <!-- Add skippable exception and skip listener -->
     <properties>
+        <property name="upload_directory" value="/tmp/uploads"/>
+        <property name="archived_directory" value="/tmp/archived"/>
+        <property name="failed_directory" value="/tmp/failed"/>
         <property name="event_file_name" value="handling_events.csv"/>
     </properties>
     <listeners>
         <listener ref="FileProcessorJobListener"/>
     </listeners>
-    <step id="EventFilesProcessor">
-        <listeners>
-            <listener ref="EventItemProcessorListener"/>
-        </listeners>
-        <chunk item-count="10">
-            <reader ref="EventItemReader"/>
-            <processor ref="EventItemProcessor"/>
+    <step id="ProcessEventFiles">
+        <chunk item-count="12">
+            <reader ref="EventItemReader" />
             <writer ref="EventItemWriter"/>
+            <skippable-exception-classes>
+                <include class="java.lang.Exception"/>
+            </skippable-exception-classes>
         </chunk>
     </step>
 </job>
