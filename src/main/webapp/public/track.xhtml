@@ -16,7 +16,9 @@
                                                      value="#{cargoTracker.trackingId}"
                                                      p:autofocus="true"
                                                      p:placeholder="XYZ789"
-                                                     p:required="true" /></td>
+                                                     p:required="true"
+                                                     p:pattern=".*\S+.*" 
+                                                     p:title="Please enter a valid tracking ID" /></td>
                                     <td><h:commandButton value="Track!"
                                                          action="#{cargoTracker.trackCargo()}" /></td>
                                 </tr>

@@ -28,18 +28,24 @@ import net.java.cargotracker.domain.model.handling.HandlingEventRepository;
 public class CargoTracker implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String trackingId;
-    private CargoTrackingViewAdapter cargo;
+
     @Inject
     private CargoRepository cargoRepository;
     @Inject
     private HandlingEventRepository handlingEventRepository;
+
+    private String trackingId;
+    private CargoTrackingViewAdapter cargo;
 
     public String getTrackingId() {
         return trackingId;
     }
 
     public void setTrackingId(String trackingId) {
+        if (trackingId != null) {
+            trackingId = trackingId.trim();
+        }
+
         this.trackingId = trackingId;
     }
 
@@ -60,12 +66,13 @@ public class CargoTracker implements Serializable {
                     .getDistinctEventsByCompletionTime();
             this.cargo = new CargoTrackingViewAdapter(cargo, handlingEvents);
         } else {
-            // TODO Generate a Faces error messsage.	
+            // TODO See if this can be injected.
             FacesContext context = FacesContext.getCurrentInstance();
             FacesMessage message = new FacesMessage(
                     "Cargo with tracking ID: " + trackingId + " not found.");
             message.setSeverity(FacesMessage.SEVERITY_ERROR);
             context.addMessage(null, message);
+            this.cargo = null;
         }
     }
 }
