@@ -14,18 +14,20 @@ import net.java.cargotracker.domain.model.handling.HandlingEvent;
 import net.java.cargotracker.domain.model.handling.HandlingEventRepository;
 
 /**
- * Controller for tracking cargo. This interface sits immediately on top of the
- * domain layer, unlike the booking interface which has a facade and supporting
- * DTOs in between.
+ * Backing bean for tracking cargo. This interface sits immediately on top of
+ * the domain layer, unlike the booking interface which has a facade and
+ * supporting DTOs in between.
  * <p/>
  * An adapter class, designed for the tracking use case, is used to wrap the
  * domain model to make it easier to work with in a web page rendering context.
  * We do not want to apply view rendering constraints to the design of our
  * domain model, and the adapter helps us shield the domain model classes.
+ * <p/>
+ * In some very simplistic cases, it may be fine to not use even an adapter.
  */
 @Named
 @ViewScoped
-public class CargoTracker implements Serializable {
+public class Track implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,6 +44,7 @@ public class CargoTracker implements Serializable {
     }
 
     public void setTrackingId(String trackingId) {
+        // TODO See if a more global trimming mechanism is needed.
         if (trackingId != null) {
             trackingId = trackingId.trim();
         }
@@ -57,7 +60,7 @@ public class CargoTracker implements Serializable {
         this.cargo = cargo;
     }
 
-    public void trackCargo() {
+    public void onTrackById() {
         Cargo cargo = cargoRepository.find(new TrackingId(trackingId));
 
         if (cargo != null) {

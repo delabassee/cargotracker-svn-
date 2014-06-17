@@ -1,7 +1,10 @@
 package net.java.cargotracker.interfaces.tracking.web;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.Delivery;
 import net.java.cargotracker.domain.model.cargo.HandlingActivity;
@@ -14,34 +17,39 @@ import net.java.cargotracker.domain.model.voyage.Voyage;
  */
 public class CargoTrackingViewAdapter {
 
-    private Cargo cargo;
-    private List<HandlingEventViewAdapter> events;
-    private String FORMAT = "yyyy-MM-dd hh:mm";
+    private static final SimpleDateFormat DATE_FORMAT
+            = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+
+    private final Cargo cargo;
+    private final List<HandlingEventViewAdapter> events;
 
     public CargoTrackingViewAdapter(Cargo cargo,
             List<HandlingEvent> handlingEvents) {
         this.cargo = cargo;
+        this.events = new ArrayList<>(handlingEvents.size());
 
-        this.events = new ArrayList<>(
-                handlingEvents.size());
         for (HandlingEvent handlingEvent : handlingEvents) {
             events.add(new HandlingEventViewAdapter(handlingEvent));
         }
     }
 
+    public String getTrackingId() {
+        return cargo.getTrackingId().getIdString();
+    }
+
+    public String getOrigin() {
+        return getDisplayText(cargo.getOrigin());
+    }
+
+    public String getDestination() {
+        return getDisplayText(cargo.getRouteSpecification().getDestination());
+    }
+
     /**
-     * @param location a location
      * @return A formatted string for displaying the location.
      */
     private String getDisplayText(Location location) {
         return location.getName();
-    }
-
-    /**
-     * @return An unmodifiable list of handling event view adapters.
-     */
-    public List<HandlingEventViewAdapter> getEvents() {
-        return Collections.unmodifiableList(events);
     }
 
     /**
@@ -63,20 +71,12 @@ public class CargoTrackingViewAdapter {
             case UNKNOWN:
                 return "Unknown";
             default:
-                return "[Unknown status]";
+                return "[Unknown status]"; // Should never happen.
         }
     }
 
-    public String getDestination() {
-        return getDisplayText(cargo.getRouteSpecification().getDestination());
-    }
-
-    public String getOrigin() {
-        return getDisplayText(cargo.getOrigin());
-    }
-
-    public String getTrackingId() {
-        return cargo.getTrackingId().getIdString();
+    public boolean isMisdirected() {
+        return cargo.getDelivery().isMisdirected();
     }
 
     public String getEta() {
@@ -85,7 +85,7 @@ public class CargoTrackingViewAdapter {
         if (eta == null) {
             return "?";
         } else {
-            return new SimpleDateFormat(FORMAT).format(eta);
+            return DATE_FORMAT.format(eta);
         }
     }
 
@@ -113,8 +113,11 @@ public class CargoTrackingViewAdapter {
         }
     }
 
-    public boolean isMisdirected() {
-        return cargo.getDelivery().isMisdirected();
+    /**
+     * @return An unmodifiable list of handling event view adapters.
+     */
+    public List<HandlingEventViewAdapter> getEvents() {
+        return Collections.unmodifiableList(events);
     }
 
     /**
@@ -122,7 +125,7 @@ public class CargoTrackingViewAdapter {
      */
     public class HandlingEventViewAdapter {
 
-        private HandlingEvent handlingEvent;
+        private final HandlingEvent handlingEvent;
 
         public HandlingEventViewAdapter(HandlingEvent handlingEvent) {
             this.handlingEvent = handlingEvent;
@@ -133,7 +136,7 @@ public class CargoTrackingViewAdapter {
         }
 
         public String getTime() {
-            return new SimpleDateFormat(FORMAT).format(handlingEvent
+            return DATE_FORMAT.format(handlingEvent
                     .getCompletionTime());
         }
 

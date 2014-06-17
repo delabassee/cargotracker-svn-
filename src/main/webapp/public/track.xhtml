@@ -13,40 +13,40 @@
                                 <tr>
                                     <td>Enter your tracking ID:</td>
                                     <td><h:inputText id="trackingIdInput"
-                                                     value="#{cargoTracker.trackingId}"
+                                                     value="#{track.trackingId}"
                                                      p:autofocus="true"
                                                      p:placeholder="XYZ789"
                                                      p:required="true"
-                                                     p:pattern=".*\S+.*" 
-                                                     p:title="Please enter a valid tracking ID" /></td>
+                                                     p:pattern=".*\S+.*"
+                                                     p:title="Valid tracking ID" /></td>
                                     <td><h:commandButton value="Track!"
-                                                         action="#{cargoTracker.trackCargo()}" /></td>
+                                                         action="#{track.onTrackById()}" /></td>
                                 </tr>
                             </table>
                         </h:form>
                         <h:messages class="error" />
-                        <h:panelGroup rendered="#{empty cargoTracker.cargo}">
+                        <h:panelGroup rendered="#{empty track.cargo}">
                             <p>
                                 <em>Hint: try tracking 'ABC123' or 'JKL567'.</em>
                             </p>
                         </h:panelGroup>
-                        <h:panelGroup rendered="#{not empty cargoTracker.cargo}">
+                        <h:panelGroup rendered="#{not empty track.cargo}">
                             <div id="result">
-                                <h2>Cargo #{cargoTracker.cargo.trackingId} is now:
-                                    #{cargoTracker.cargo.statusText}</h2>
+                                <h2>Cargo #{track.cargo.trackingId} is now:
+                                    #{track.cargo.statusText}</h2>
                                 <p>Estimated time of arrival in
-                                    #{cargoTracker.cargo.destination}: #{cargoTracker.cargo.eta}</p>
-                                <p>#{cargoTracker.cargo.nextExpectedActivity}</p>
-                                <h:panelGroup rendered="#{cargoTracker.cargo.misdirected}">
+                                    #{track.cargo.destination}: #{track.cargo.eta}</p>
+                                <p>#{track.cargo.nextExpectedActivity}</p>
+                                <h:panelGroup rendered="#{track.cargo.misdirected}">
                                     <p class="notify">
                                         <img src="#{request.contextPath}/images/error.png" alt="" />Cargo is
                                         misdirected
                                     </p>
                                 </h:panelGroup>
-                                <h:panelGroup rendered="#{not empty cargoTracker.cargo.events}">
+                                <h:panelGroup rendered="#{not empty track.cargo.events}">
                                     <h3>Handling History</h3>
                                     <ul style="list-style-type: none;">
-                                        <ui:repeat value="#{cargoTracker.cargo.events}" var="leg">
+                                        <ui:repeat value="#{track.cargo.events}" var="leg">
                                             <li>
                                                 <p>
                                                     <img style="vertical-align: top;"
