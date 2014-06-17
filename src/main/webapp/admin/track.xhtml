@@ -1,8 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <ui:composition template="/WEB-INF/templates/common/admin.xhtml">
-        <ui:define name="title">Cargo Status</ui:define>
+        <ui:define name="title">Track Cargo</ui:define>
         <ui:define name="content">
             <div class="row">
                 <div class="large-12 columns">
@@ -10,20 +11,20 @@
                         <h:form id="trackingForm">
                             <table>
                                 <tr>
-                                    <td>Enter your tracking id:</td>
+                                    <td>Enter your tracking ID:</td>
                                     <td><h:inputText id="trackingIdInput"
-                                                     value="#{track.trackingId}" /></td>
+                                                     value="#{track.trackingId}"
+                                                     p:autofocus="true"
+                                                     p:placeholder="XYZ789"
+                                                     p:required="true"
+                                                     p:pattern=".*\S+.*"
+                                                     p:title="Valid tracking ID" /></td>
                                     <td><h:commandButton value="Track!"
                                                          action="#{track.onTrackById()}" /></td>
                                 </tr>
                             </table>
                         </h:form>
                         <h:messages class="error" />
-                        <h:panelGroup rendered="#{empty track.cargo}">
-                            <p>
-                                <em>Hint: try tracking 'ABC123' or 'JKL567'.</em>
-                            </p>
-                        </h:panelGroup>
                         <h:panelGroup rendered="#{not empty track.cargo}">
                             <div id="result">
                                 <h2>Cargo #{track.cargo.trackingId} is now:
@@ -53,18 +54,9 @@
                                 </h:panelGroup>
                             </div>
                         </h:panelGroup>
-
-                        <script type="text/javascript" charset="UTF-8">
-                            try {
-                                document.getElementById('trackingForm:trackigIdInput').focus()
-                            } catch (e) {
-                            }
-                        </script>
-
                     </div>
                 </div>
             </div>
-
         </ui:define>
     </ui:composition>
 </html>
