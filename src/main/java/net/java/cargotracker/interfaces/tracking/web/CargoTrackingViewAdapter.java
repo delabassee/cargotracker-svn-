@@ -159,21 +159,21 @@ public class CargoTrackingViewAdapter {
                     return "Loaded onto voyage "
                             + handlingEvent.getVoyage().getVoyageNumber().getIdString()
                             + " in " + handlingEvent.getLocation().getName() + ", at "
-                            + handlingEvent.getCompletionTime() + ".";
+                            + DATE_FORMAT.format(handlingEvent.getCompletionTime()) + ".";
                 case UNLOAD:
                     return "Unloaded off voyage "
                             + handlingEvent.getVoyage().getVoyageNumber().getIdString()
                             + " in " + handlingEvent.getLocation().getName() + ", at "
-                            + handlingEvent.getCompletionTime() + ".";
+                            + DATE_FORMAT.format(handlingEvent.getCompletionTime()) + ".";
                 case RECEIVE:
                     return "Received in " + handlingEvent.getLocation().getName()
-                            + ", at " + handlingEvent.getCompletionTime() + ".";
+                            + ", at " + DATE_FORMAT.format(handlingEvent.getCompletionTime()) + ".";
                 case CLAIM:
                     return "Claimed in " + handlingEvent.getLocation().getName()
-                            + ", at " + handlingEvent.getCompletionTime() + ".";
+                            + ", at " + DATE_FORMAT.format(handlingEvent.getCompletionTime()) + ".";
                 case CUSTOMS:
                     return "Cleared customs in " + handlingEvent.getLocation().getName()
-                            + ", at " + handlingEvent.getCompletionTime() + ".";
+                            + ", at " + DATE_FORMAT.format(handlingEvent.getCompletionTime()) + ".";
                 default:
                     return "[Unknown]";
             }

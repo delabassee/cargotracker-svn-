@@ -65,7 +65,7 @@ public class HandlingEvent implements Serializable {
     private Location location;
     @Temporal(TemporalType.DATE)
     @NotNull
-    @Column(name = "completion")
+    @Column(name = "completionTime")
     private Date completionTime;
     @Temporal(TemporalType.DATE)
     @NotNull
