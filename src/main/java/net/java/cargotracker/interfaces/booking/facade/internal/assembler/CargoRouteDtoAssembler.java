@@ -25,8 +25,10 @@ public class CargoRouteDtoAssembler {
         for (Leg leg : cargo.getItinerary().getLegs()) {
             dto.addLeg(
                     leg.getVoyage().getVoyageNumber().getIdString(),
-                    leg.getLoadLocation().getName() + " (" + leg.getLoadLocation().getUnLocode().getIdString() + ")",
-                    leg.getUnloadLocation().getName() + " (" + leg.getUnloadLocation().getUnLocode().getIdString() + ")",
+                    leg.getLoadLocation().getUnLocode().getIdString(),
+                    leg.getLoadLocation().getName(),
+                    leg.getUnloadLocation().getUnLocode().getIdString(),
+                    leg.getUnloadLocation().getName(),
                     leg.getLoadTime(), leg.getUnloadTime());
         }
 

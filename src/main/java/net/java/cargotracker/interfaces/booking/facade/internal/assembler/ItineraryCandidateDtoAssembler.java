@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.java.cargotracker.domain.model.cargo.Itinerary;
 import net.java.cargotracker.domain.model.cargo.Leg;
 import net.java.cargotracker.domain.model.location.Location;
@@ -19,7 +17,7 @@ import net.java.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
 public class ItineraryCandidateDtoAssembler {
 
     private static final SimpleDateFormat DATE_FORMAT
-            = new SimpleDateFormat("MM/dd/yyyy hh:mm a zzzz");
+            = new SimpleDateFormat("MM/dd/yyyy hh:mm a z");
 
     public RouteCandidate toDTO(Itinerary itinerary) {
         List<net.java.cargotracker.interfaces.booking.facade.dto.Leg> legDTOs = new ArrayList<>(
@@ -33,11 +31,14 @@ public class ItineraryCandidateDtoAssembler {
     protected net.java.cargotracker.interfaces.booking.facade.dto.Leg toLegDTO(
             Leg leg) {
         VoyageNumber voyageNumber = leg.getVoyage().getVoyageNumber();
-        UnLocode from = leg.getLoadLocation().getUnLocode();
-        UnLocode to = leg.getUnloadLocation().getUnLocode();
         return new net.java.cargotracker.interfaces.booking.facade.dto.Leg(
-                voyageNumber.getIdString(), from.getIdString(),
-                to.getIdString(), leg.getLoadTime(), leg.getUnloadTime());
+                voyageNumber.getIdString(),
+                leg.getLoadLocation().getUnLocode().getIdString(),
+                leg.getLoadLocation().getName(),
+                leg.getUnloadLocation().getUnLocode().getIdString(),
+                leg.getUnloadLocation().getName(),
+                leg.getLoadTime(),
+                leg.getUnloadTime());
     }
 
     public Itinerary fromDTO(RouteCandidate routeCandidateDTO,
@@ -51,8 +52,8 @@ public class ItineraryCandidateDtoAssembler {
                     legDTO.getVoyageNumber());
             Voyage voyage = voyageRepository.find(voyageNumber);
             Location from = locationRepository.find(new UnLocode(legDTO
-                    .getFrom()));
-            Location to = locationRepository.find(new UnLocode(legDTO.getTo()));
+                    .getFromUnLocode()));
+            Location to = locationRepository.find(new UnLocode(legDTO.getToUnLocode()));
 
             try {
                 legs.add(new Leg(voyage, from, to,

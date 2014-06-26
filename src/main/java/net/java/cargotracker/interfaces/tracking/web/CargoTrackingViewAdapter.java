@@ -18,7 +18,7 @@ import net.java.cargotracker.domain.model.voyage.Voyage;
 public class CargoTrackingViewAdapter {
 
     private static final SimpleDateFormat DATE_FORMAT
-            = new SimpleDateFormat("MM/dd/yyyy hh:mm a zzzz");
+            = new SimpleDateFormat("MM/dd/yyyy hh:mm a z");
 
     private final Cargo cargo;
     private final List<HandlingEventViewAdapter> events;

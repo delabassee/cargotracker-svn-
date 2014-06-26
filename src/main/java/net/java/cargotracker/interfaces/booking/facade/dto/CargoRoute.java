@@ -14,7 +14,7 @@ public class CargoRoute implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final SimpleDateFormat DATE_FORMAT
-            = new SimpleDateFormat("MM/dd/yyyy hh:mm a zzzz");
+            = new SimpleDateFormat("MM/dd/yyyy hh:mm a z");
 
     private final String trackingId;
     private final String origin;
@@ -52,9 +52,15 @@ public class CargoRoute implements Serializable {
         return finalDestination;
     }
 
-    public void addLeg(String voyageNumber, String from, String to,
+    public void addLeg(
+            String voyageNumber,
+            String fromUnLocode, String fromName,
+            String toUnLocode, String toName,
             Date loadTime, Date unloadTime) {
-        legs.add(new Leg(voyageNumber, from, to, loadTime, unloadTime));
+        legs.add(new Leg(voyageNumber,
+                fromUnLocode, fromName,
+                toUnLocode, toName,
+                loadTime, unloadTime));
     }
 
     public List<Leg> getLegs() {

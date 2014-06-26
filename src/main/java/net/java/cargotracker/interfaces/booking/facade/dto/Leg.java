@@ -10,19 +10,29 @@ import java.util.Date;
 public class Leg implements Serializable {
 
     private static final SimpleDateFormat DATE_FORMAT
-            = new SimpleDateFormat("MM/dd/yyyy hh:mm a zzzz");
+            = new SimpleDateFormat("MM/dd/yyyy hh:mm a z");
 
     private final String voyageNumber;
-    private final String from;
-    private final String to;
+    private final String fromUnLocode;
+    private final String fromName;
+    private final String toUnLocode;
+    private final String toName;
     private final String loadTime;
     private final String unloadTime;
 
-    public Leg(String voyageNumber, String from, String to, Date loadTime,
+    public Leg(
+            String voyageNumber,
+            String fromUnLocode,
+            String fromName,
+            String toUnLocode,
+            String toName,
+            Date loadTime,
             Date unloadTime) {
         this.voyageNumber = voyageNumber;
-        this.from = from;
-        this.to = to;
+        this.fromUnLocode = fromUnLocode;
+        this.fromName = fromName;
+        this.toUnLocode = toUnLocode;
+        this.toName = toName;
         this.loadTime = DATE_FORMAT.format(loadTime);
         this.unloadTime = DATE_FORMAT.format(unloadTime);
     }
@@ -32,11 +42,19 @@ public class Leg implements Serializable {
     }
 
     public String getFrom() {
-        return from;
+        return fromName + " (" + fromUnLocode + ")";
+    }
+
+    public String getFromUnLocode() {
+        return fromUnLocode;
     }
 
     public String getTo() {
-        return to;
+        return toUnLocode + " (" + toName + ")";
+    }
+
+    public String getToUnLocode() {
+        return toUnLocode;
     }
 
     public String getLoadTime() {
@@ -49,6 +67,6 @@ public class Leg implements Serializable {
 
     @Override
     public String toString() {
-        return "Leg{" + "voyageNumber=" + voyageNumber + ", from=" + from + ", to=" + to + ", loadTime=" + loadTime + ", unloadTime=" + unloadTime + '}';
+        return "Leg{" + "voyageNumber=" + voyageNumber + ", from=" + fromUnLocode + ", to=" + toUnLocode + ", loadTime=" + loadTime + ", unloadTime=" + unloadTime + '}';
     }
 }
