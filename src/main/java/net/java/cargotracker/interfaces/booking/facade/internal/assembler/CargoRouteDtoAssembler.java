@@ -1,24 +1,26 @@
 package net.java.cargotracker.interfaces.booking.facade.internal.assembler;
 
+import java.text.SimpleDateFormat;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.Leg;
 import net.java.cargotracker.domain.model.cargo.RoutingStatus;
 import net.java.cargotracker.domain.model.cargo.TransportStatus;
 import net.java.cargotracker.interfaces.booking.facade.dto.CargoRoute;
 
-// TODO Convert to a singleton?
+// TODO Convert to a singleton and inject?
 public class CargoRouteDtoAssembler {
 
     public CargoRoute toDto(Cargo cargo) {
-
-        CargoRoute dto = new CargoRoute(cargo.getTrackingId().getIdString(),
-                cargo.getOrigin().getName(), cargo.getRouteSpecification().getDestination()
-                .getName(), cargo.getRouteSpecification().getArrivalDeadline(),
+        CargoRoute dto = new CargoRoute(
+                cargo.getTrackingId().getIdString(),
+                cargo.getOrigin().getName() + " (" + cargo.getOrigin().getUnLocode().getIdString() + ")",
+                cargo.getRouteSpecification().getDestination().getName() + " (" + cargo.getRouteSpecification().getDestination().getUnLocode().getIdString() + ")",
+                cargo.getRouteSpecification().getArrivalDeadline(),
                 cargo.getDelivery().getRoutingStatus()
                 .sameValueAs(RoutingStatus.MISROUTED),
                 cargo.getDelivery().getTransportStatus()
                 .sameValueAs(TransportStatus.CLAIMED),
-                cargo.getDelivery().getLastKnownLocation().getName(),
+                cargo.getDelivery().getLastKnownLocation().getName() + " (" + cargo.getDelivery().getLastKnownLocation().getUnLocode().getIdString() + ")",
                 cargo.getDelivery().getTransportStatus().name()
         );
         for (Leg leg : cargo.getItinerary().getLegs()) {

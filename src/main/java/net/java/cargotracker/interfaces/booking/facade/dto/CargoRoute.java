@@ -1,6 +1,7 @@
 package net.java.cargotracker.interfaces.booking.facade.dto;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -12,10 +13,13 @@ import java.util.List;
 public class CargoRoute implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private static final SimpleDateFormat DATE_FORMAT
+            = new SimpleDateFormat("MM/dd/yyyy hh:mm a zzzz");
+
     private final String trackingId;
     private final String origin;
     private final String finalDestination;
-    private final Date arrivalDeadline;
+    private final String arrivalDeadline;
     private final boolean misrouted;
     private final List<Leg> legs;
     private final boolean claimed;
@@ -28,7 +32,7 @@ public class CargoRoute implements Serializable {
         this.trackingId = trackingId;
         this.origin = origin;
         this.finalDestination = finalDestination;
-        this.arrivalDeadline = arrivalDeadline;
+        this.arrivalDeadline = DATE_FORMAT.format(arrivalDeadline);
         this.misrouted = misrouted;
         this.claimed = claimed;
         this.lastKnownLocation = lastKnownLocation;
@@ -65,7 +69,7 @@ public class CargoRoute implements Serializable {
         return !legs.isEmpty();
     }
 
-    public Date getArrivalDeadline() {
+    public String getArrivalDeadline() {
         return arrivalDeadline;
     }
 

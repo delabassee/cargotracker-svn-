@@ -64,7 +64,7 @@ public class DefaultBookingServiceFacade implements BookingServiceFacade,
             RouteCandidate routeCandidateDTO) {
         Itinerary itinerary = new ItineraryCandidateDtoAssembler()
                 .fromDTO(routeCandidateDTO, voyageRepository,
-                locationRepository);
+                        locationRepository);
         TrackingId trackingId = new TrackingId(trackingIdStr);
 
         bookingService.assignCargoToRoute(itinerary, trackingId);
@@ -78,13 +78,16 @@ public class DefaultBookingServiceFacade implements BookingServiceFacade,
 
     @Override
     public List<CargoRoute> listAllCargos() {
-        List<Cargo> cargoList = cargoRepository.findAll();
-        List<CargoRoute> dtoList = new ArrayList<>(cargoList.size());
+        List<Cargo> cargos = cargoRepository.findAll();
+        List<CargoRoute> routes = new ArrayList<>(cargos.size());
+
         CargoRouteDtoAssembler assembler = new CargoRouteDtoAssembler();
-        for (Cargo cargo : cargoList) {
-            dtoList.add(assembler.toDto(cargo));
+
+        for (Cargo cargo : cargos) {
+            routes.add(assembler.toDto(cargo));
         }
-        return dtoList;
+
+        return routes;
     }
 
     @Override
@@ -94,8 +97,8 @@ public class DefaultBookingServiceFacade implements BookingServiceFacade,
 
         List<RouteCandidate> routeCandidates = new ArrayList<>(
                 itineraries.size());
-        ItineraryCandidateDtoAssembler dtoAssembler =
-                new ItineraryCandidateDtoAssembler();
+        ItineraryCandidateDtoAssembler dtoAssembler
+                = new ItineraryCandidateDtoAssembler();
         for (Itinerary itinerary : itineraries) {
             routeCandidates.add(dtoAssembler.toDTO(itinerary));
         }

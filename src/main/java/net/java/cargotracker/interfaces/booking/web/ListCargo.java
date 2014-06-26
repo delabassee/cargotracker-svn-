@@ -42,31 +42,37 @@ public class ListCargo {
 
     public List<CargoRoute> getRoutedCargos() {
         routedCargos = new ArrayList<>();
-        for (CargoRoute obj : cargos) {
-            if (obj.isRouted()) {
-                routedCargos.add(obj);
+
+        for (CargoRoute route : cargos) {
+            if (route.isRouted()) {
+                routedCargos.add(route);
             }
         }
+
         return routedCargos;
     }
 
     public List<CargoRoute> getClaimedCargos() {
         claimedCargos = new ArrayList<>();
-        for (CargoRoute obj : cargos) {
-            if (obj.isClaimed()) {
-                claimedCargos.add(obj);
+
+        for (CargoRoute route : cargos) {
+            if (route.isClaimed()) {
+                claimedCargos.add(route);
             }
         }
+
         return claimedCargos;
     }
 
     public List<CargoRoute> getNotRoutedCargos() {
         notRoutedCargos = new ArrayList<>();
-        for (CargoRoute obj : notRoutedCargos) {
-            if (!obj.isRouted()) {
-                notRoutedCargos.add(obj);
+
+        for (CargoRoute route : notRoutedCargos) {
+            if (!route.isRouted()) {
+                notRoutedCargos.add(route);
             }
         }
+
         return notRoutedCargos;
     }
 
