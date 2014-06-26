@@ -1,6 +1,7 @@
 package net.java.cargotracker.interfaces.booking.facade.dto;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -8,19 +9,22 @@ import java.util.Date;
  */
 public class Leg implements Serializable {
 
+    private static final SimpleDateFormat DATE_FORMAT
+            = new SimpleDateFormat("MM/dd/yyyy hh:mm a zzzz");
+
     private final String voyageNumber;
     private final String from;
     private final String to;
-    private final Date loadTime;
-    private final Date unloadTime;
+    private final String loadTime;
+    private final String unloadTime;
 
     public Leg(String voyageNumber, String from, String to, Date loadTime,
             Date unloadTime) {
         this.voyageNumber = voyageNumber;
         this.from = from;
         this.to = to;
-        this.loadTime = loadTime;
-        this.unloadTime = unloadTime;
+        this.loadTime = DATE_FORMAT.format(loadTime);
+        this.unloadTime = DATE_FORMAT.format(unloadTime);
     }
 
     public String getVoyageNumber() {
@@ -35,11 +39,11 @@ public class Leg implements Serializable {
         return to;
     }
 
-    public Date getLoadTime() {
+    public String getLoadTime() {
         return loadTime;
     }
 
-    public Date getUnloadTime() {
+    public String getUnloadTime() {
         return unloadTime;
     }
 

@@ -1,6 +1,5 @@
 package net.java.cargotracker.interfaces.booking.facade.internal.assembler;
 
-import java.text.SimpleDateFormat;
 import net.java.cargotracker.domain.model.cargo.Cargo;
 import net.java.cargotracker.domain.model.cargo.Leg;
 import net.java.cargotracker.domain.model.cargo.RoutingStatus;
@@ -21,15 +20,16 @@ public class CargoRouteDtoAssembler {
                 cargo.getDelivery().getTransportStatus()
                 .sameValueAs(TransportStatus.CLAIMED),
                 cargo.getDelivery().getLastKnownLocation().getName() + " (" + cargo.getDelivery().getLastKnownLocation().getUnLocode().getIdString() + ")",
-                cargo.getDelivery().getTransportStatus().name()
-        );
+                cargo.getDelivery().getTransportStatus().name());
+
         for (Leg leg : cargo.getItinerary().getLegs()) {
-            dto.addLeg(leg.getVoyage().getVoyageNumber().getIdString(), leg
-                    .getLoadLocation().getUnLocode().getIdString(), leg.getUnloadLocation()
-                    .getUnLocode().getIdString(), leg.getLoadTime(), leg.getUnloadTime());
+            dto.addLeg(
+                    leg.getVoyage().getVoyageNumber().getIdString(),
+                    leg.getLoadLocation().getName() + " (" + leg.getLoadLocation().getUnLocode().getIdString() + ")",
+                    leg.getUnloadLocation().getName() + " (" + leg.getUnloadLocation().getUnLocode().getIdString() + ")",
+                    leg.getLoadTime(), leg.getUnloadTime());
         }
 
         return dto;
-
     }
 }

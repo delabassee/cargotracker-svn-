@@ -1,7 +1,11 @@
 package net.java.cargotracker.interfaces.booking.facade.internal.assembler;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.java.cargotracker.domain.model.cargo.Itinerary;
 import net.java.cargotracker.domain.model.cargo.Leg;
 import net.java.cargotracker.domain.model.location.Location;
@@ -14,42 +18,51 @@ import net.java.cargotracker.interfaces.booking.facade.dto.RouteCandidate;
 
 public class ItineraryCandidateDtoAssembler {
 
-	public RouteCandidate toDTO(Itinerary itinerary) {
-		List<net.java.cargotracker.interfaces.booking.facade.dto.Leg> legDTOs = new ArrayList<>(
-				itinerary.getLegs().size());
-		for (Leg leg : itinerary.getLegs()) {
-			legDTOs.add(toLegDTO(leg));
-		}
-		return new RouteCandidate(legDTOs);
-	}
+    private static final SimpleDateFormat DATE_FORMAT
+            = new SimpleDateFormat("MM/dd/yyyy hh:mm a zzzz");
 
-	protected net.java.cargotracker.interfaces.booking.facade.dto.Leg toLegDTO(
-			Leg leg) {
-		VoyageNumber voyageNumber = leg.getVoyage().getVoyageNumber();
-		UnLocode from = leg.getLoadLocation().getUnLocode();
-		UnLocode to = leg.getUnloadLocation().getUnLocode();
-		return new net.java.cargotracker.interfaces.booking.facade.dto.Leg(
-				voyageNumber.getIdString(), from.getIdString(),
-				to.getIdString(), leg.getLoadTime(), leg.getUnloadTime());
-	}
+    public RouteCandidate toDTO(Itinerary itinerary) {
+        List<net.java.cargotracker.interfaces.booking.facade.dto.Leg> legDTOs = new ArrayList<>(
+                itinerary.getLegs().size());
+        for (Leg leg : itinerary.getLegs()) {
+            legDTOs.add(toLegDTO(leg));
+        }
+        return new RouteCandidate(legDTOs);
+    }
 
-	public Itinerary fromDTO(RouteCandidate routeCandidateDTO,
-			VoyageRepository voyageRepository,
-			LocationRepository locationRepository) {
-		List<Leg> legs = new ArrayList<>(routeCandidateDTO.getLegs().size());
+    protected net.java.cargotracker.interfaces.booking.facade.dto.Leg toLegDTO(
+            Leg leg) {
+        VoyageNumber voyageNumber = leg.getVoyage().getVoyageNumber();
+        UnLocode from = leg.getLoadLocation().getUnLocode();
+        UnLocode to = leg.getUnloadLocation().getUnLocode();
+        return new net.java.cargotracker.interfaces.booking.facade.dto.Leg(
+                voyageNumber.getIdString(), from.getIdString(),
+                to.getIdString(), leg.getLoadTime(), leg.getUnloadTime());
+    }
 
-		for (net.java.cargotracker.interfaces.booking.facade.dto.Leg legDTO : routeCandidateDTO
-				.getLegs()) {
-			VoyageNumber voyageNumber = new VoyageNumber(
-					legDTO.getVoyageNumber());
-			Voyage voyage = voyageRepository.find(voyageNumber);
-			Location from = locationRepository.find(new UnLocode(legDTO
-					.getFrom()));
-			Location to = locationRepository.find(new UnLocode(legDTO.getTo()));
-			legs.add(new Leg(voyage, from, to, legDTO.getLoadTime(), legDTO
-					.getUnloadTime()));
-		}
+    public Itinerary fromDTO(RouteCandidate routeCandidateDTO,
+            VoyageRepository voyageRepository,
+            LocationRepository locationRepository) {
+        List<Leg> legs = new ArrayList<>(routeCandidateDTO.getLegs().size());
 
-		return new Itinerary(legs);
-	}
+        for (net.java.cargotracker.interfaces.booking.facade.dto.Leg legDTO
+                : routeCandidateDTO.getLegs()) {
+            VoyageNumber voyageNumber = new VoyageNumber(
+                    legDTO.getVoyageNumber());
+            Voyage voyage = voyageRepository.find(voyageNumber);
+            Location from = locationRepository.find(new UnLocode(legDTO
+                    .getFrom()));
+            Location to = locationRepository.find(new UnLocode(legDTO.getTo()));
+
+            try {
+                legs.add(new Leg(voyage, from, to,
+                        DATE_FORMAT.parse(legDTO.getLoadTime()),
+                        DATE_FORMAT.parse(legDTO.getUnloadTime())));
+            } catch (ParseException ex) {
+                throw new RuntimeException("Could not parse date", ex);
+            }
+        }
+
+        return new Itinerary(legs);
+    }
 }
