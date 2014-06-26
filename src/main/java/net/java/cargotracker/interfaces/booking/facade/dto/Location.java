@@ -21,6 +21,6 @@ public class Location implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return name + " (" + unLocode + ")";
     }
 }
