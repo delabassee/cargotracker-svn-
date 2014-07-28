@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -69,15 +71,25 @@ public class Registration implements Serializable {
     }
 
     public String register() {
-        String trackingId = "";
+        String trackingId = null;
 
         try {
-            trackingId = bookingServiceFacade.bookNewCargo(originUnlocode,
-                    destinationUnlocode,
-                    new SimpleDateFormat(FORMAT).parse(arrivalDeadline));
+            if (!originUnlocode.equals(destinationUnlocode)) {
+                trackingId = bookingServiceFacade.bookNewCargo(
+                        originUnlocode,
+                        destinationUnlocode,
+                        new SimpleDateFormat(FORMAT).parse(arrivalDeadline));
+            } else {
+                // TODO See if this can be injected.
+                FacesContext context = FacesContext.getCurrentInstance();
+                FacesMessage message = new FacesMessage(
+                        "Origin and destination cannot be the same.");
+                message.setSeverity(FacesMessage.SEVERITY_ERROR);
+                context.addMessage(null, message);
+                return null;
+            }
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException("Error parsing date", e);
         }
 
         return "show.xhtml?faces-redirect=true&trackingId=" + trackingId;
