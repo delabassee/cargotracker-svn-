@@ -30,7 +30,7 @@ the following:
 
 * Get the project source code: https://java.net/projects/cargotracker/downloads
 * As long as you have Maven set up, navigate to the project source root and 
-  type: mvn cargo:run
+  type: mvn package cargo:run
   
 To set up in NetBeans, follow these steps:
 

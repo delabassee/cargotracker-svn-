@@ -4,7 +4,7 @@
             <actionName>CUSTOM-Run Cargo</actionName>
             <displayName>Run Cargo</displayName>
             <goals>
-                <goal>cargo:run</goal>
+                <goal>package cargo:run</goal>
             </goals>
         </action>
         <action>
