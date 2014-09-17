@@ -1,6 +1,6 @@
 ================================================================================                            
                               Cargo Tracker
-             Applied Domain-Driven Design BluePrints for Java EE
+            Applied Domain-Driven Design Blue Prints for Java EE
 ================================================================================
 
 Overview
@@ -34,7 +34,8 @@ the following:
   
 To set up in NetBeans, follow these steps:
 
-* Set up JDK 7+, NetBeans 7.3+ and GlassFish 4+
+* Set up JDK 7+, NetBeans 7.3+ and GlassFish 4+ 
+  (preferably GlassFish 4.1+ and NetBeans 8.0.1+).
 * Open the source code directory in NetBeans - it's just a Maven project, 
   NetBeans will do the rest for you. As noted in the site instructions on
   NetBeans, you may get a few spurious errors due to reported NetBeans bugs.
@@ -133,6 +134,9 @@ understanding both Java EE and DDD.
 
 Known Issues
 ============
+There are no known issues while running on GlassFish 4.1. For previous versions
+you might run into the following issues:
+
 * If you restart the application a few times, you will run into a GlassFish 4 
   bug (https://java.net/jira/browse/GLASSFISH-20616) causing a spurious 
   deployment failure. While the problem can be annoying, it's harmless. Just re-
