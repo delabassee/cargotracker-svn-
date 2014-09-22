@@ -29,7 +29,7 @@ import net.java.cargotracker.domain.model.voyage.SampleVoyages;
  * Loads sample data for demo.
  */
 @Singleton
-@Startup
+// @Startup
 public class SampleDataGenerator {
 
     // TODO See if the logger can be injected.

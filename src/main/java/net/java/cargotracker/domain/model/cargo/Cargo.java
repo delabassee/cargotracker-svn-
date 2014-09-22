@@ -147,10 +147,10 @@ public class Cargo implements Serializable {
     public Location getOrigin() {
         return origin;
     }
-    
+
     public RouteSpecification getRouteSpecification() {
         return routeSpecification;
-    }    
+    }
 
     /**
      * @return The delivery. Never null.

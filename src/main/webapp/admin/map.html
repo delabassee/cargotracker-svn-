@@ -55,10 +55,10 @@
 
             var colorCodes = new Array();
             colorCodes["NOT_ROUTED"] = "gray";
-            colorCodes["MISROUTED"] = "red";            
+            colorCodes["MISROUTED"] = "red";
             colorCodes["NOT_RECEIVED"] = "white";
             colorCodes["IN_PORT"] = "green";
-            colorCodes["ONBOARD_CARRIER"] = "green";            
+            colorCodes["ONBOARD_CARRIER"] = "green";
             colorCodes["MISDIRECTED"] = "red";
             colorCodes["AT_DESTINATION"] = "black";
             colorCodes["CLAIMED"] = "black";
@@ -67,7 +67,7 @@
         <script type="text/javascript">
             var cargo = new Array();
             for (locationCode in locationName) {
-                cargo.push({latLng: [latitude[locationCode], longitude[locationCode]], name: locationName[locationCode], style: {fill: 'yellow'}});
+                cargo.push({latLng: [latitude[locationCode], longitude[locationCode]], name: locationName[locationCode], style: {fill: colorCodes["UNKNOWN"]}});
             }
         </script>
     </head>
