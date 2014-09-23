@@ -7,6 +7,7 @@
         <script src="/cargo-tracker/javascript/lib/jquery-jvectormap-world-mill-en.js"></script>
         <script type="text/javascript">
             var locationName = new Array();
+
             locationName["CNHKG"] = "Hong Kong";
             locationName["AUMEL"] = "Melbourne";
             locationName["SESTO"] = "Stockholm";
@@ -20,9 +21,11 @@
             locationName["CNHGH"] = "Hangzhou";
             locationName["USNYC"] = "New York";
             locationName["USDAL"] = "Dallas";
+
             // TODO See if there is a service to get the latitude/longitude
             // data from.
             var latitude = new Array();
+
             latitude["CNHKG"] = 22;
             latitude["AUMEL"] = -38;
             latitude["SESTO"] = 59;
@@ -50,7 +53,9 @@
             longitude["CNHGH"] = 120;
             longitude["USNYC"] = -74;
             longitude["USDAL"] = -97;
+
             var colorCodes = new Array();
+
             colorCodes["NOT_ROUTED"] = "gray";
             colorCodes["MISROUTED"] = "red";
             colorCodes["NOT_RECEIVED"] = "white";
@@ -59,9 +64,13 @@
             colorCodes["MISDIRECTED"] = "red";
             colorCodes["AT_DESTINATION"] = "black";
             colorCodes["CLAIMED"] = "black";
-            colorCodes["UNKNOWN"] = "red";</script>
+            colorCodes["UNKNOWN"] = "red";
+        </script>
+    </head>
+    <body>
+        <div id="world-map" style="width: 800px; height: 600px"></div>
         <script type="text/javascript">
-            function reloadMap() {
+            $(function () {
                 $.getJSON('/cargo-tracker/rest/cargo', function (data) {
                     var coordinates = new Array();
 
@@ -90,12 +99,8 @@
                         map: 'world_mill_en',
                         markers: coordinates});
                 });
-            }
+            });
         </script>
-    </head>
-    <body>
-        <div id="world-map" style="width: 800px; height: 600px"></div>
-        <script type="text/javascript">$(reloadMap());</script>
         <script type="text/javascript">
             $(function () {
                 var socket = new WebSocket("ws://localhost:8080/cargo-tracker/tracking");
