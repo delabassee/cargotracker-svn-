@@ -97,7 +97,17 @@
 
                     $('#world-map').vectorMap({
                         map: 'world_mill_en',
-                        markers: coordinates});
+                        markers: coordinates,
+                        onMarkerLabelShow: function (event, label, index) {
+                            label.html(
+                                    'Tracking ID: ' + data[index].trackingId + '<br/>' +
+                                    'Routing Status: ' + data[index].routingStatus + '<br/>' +
+                                    'Misdirected: ' + data[index].misdirected + '<br/>' +
+                                    'Transport Status: ' + data[index].transportStatus + '<br/>' +
+                                    'At Destination: ' + data[index].atDestination + '<br/>' +
+                                    'Origin: ' + data[index].origin + '<br/>' +
+                                    'Last known location: ' + data[index].lastKnownLocation);
+                        }});
                 });
             });
         </script>
