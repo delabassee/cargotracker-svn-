@@ -64,20 +64,44 @@
             colorCodes["CLAIMED"] = "black";
             colorCodes["UNKNOWN"] = "red";
         </script>
-        <script type="text/javascript">
-            var cargo = new Array();
-            for (locationCode in locationName) {
-                cargo.push({latLng: [latitude[locationCode], longitude[locationCode]], name: locationName[locationCode], style: {fill: colorCodes["UNKNOWN"]}});
-            }
-        </script>
     </head>
     <body>
         <div id="world-map" style="width: 800px; height: 600px"></div>
         <script>
             $(function () {
-                $('#world-map').vectorMap({
-                    map: 'world_mill_en',
-                    markers: cargo});
+                $.getJSON('/cargo-tracker/rest/cargo', function (data) {
+                    var coordinates = new Array();
+
+                    for (i in data) {
+                        cargo = data[i];
+
+                        var locationCode = (cargo.transportStatus == 'NOT_RECEIVED') ? cargo.origin : cargo.lastKnownLocation;
+
+                        var statusCode = 'NOT_RECEIVED';
+
+                        if ((cargo.routingStatus == 'NOT_ROUTED') || (cargo.routingStatus == 'MISROUTED')) {
+                            statusCode = cargo.routingStatus;
+                        } else if (cargo.misdirected == true) {
+                            statusCode = 'MISDIRECTED';
+                        } else if (cargo.atDestination == true) {
+                            statusCode = 'AT_DESTINATION';
+                        } else {
+                            statusCode = cargo.transportStatus;
+                        }
+
+                        coordinates.push(
+                                {latLng: [latitude[locationCode] + (Math.floor((Math.random() * 7) - 7)),
+                                        longitude[locationCode] + (Math.floor((Math.random() * 7) - 7))],
+                                    name: cargo.trackingId,
+                                    style: {fill: colorCodes[statusCode]}});
+                    }
+
+                    alert(JSON.stringify(coordinates));
+
+                    $('#world-map').vectorMap({
+                        map: 'world_mill_en',
+                        markers: coordinates});
+                });
             });
         </script>
     </body>

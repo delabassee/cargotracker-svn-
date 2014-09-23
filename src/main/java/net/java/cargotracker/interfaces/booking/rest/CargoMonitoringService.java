@@ -36,7 +36,7 @@ public class CargoMonitoringService {
                     .add("misdirected", cargo.getDelivery().isMisdirected())
                     .add("transportStatus", cargo.getDelivery()
                             .getTransportStatus().toString())
-                    .add("unloadedAtDestination", cargo.getDelivery()
+                    .add("atDestination", cargo.getDelivery()
                             .isUnloadedAtDestination())
                     .add("origin", cargo.getOrigin().getUnLocode().getIdString())
                     .add("lastKnownLocation",
