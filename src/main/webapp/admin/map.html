@@ -36,7 +36,7 @@
             transportStatusName["IN_PORT"] = " In port";
             transportStatusName["ONBOARD_CARRIER"] = "Onboard carrier";
             transportStatusName["CLAIMED"] = "Claimed";
-            transportStatusName["UNKNOWN"] = "Unknown";            
+            transportStatusName["UNKNOWN"] = "Unknown";
 
             // TODO See if there is a service to get the latitude/longitude
             // data from.
@@ -137,7 +137,11 @@
                                     'At Destination: ' + (data[index].atDestination ? "Yes" : "No") + '<br/>' +
                                     'Origin: ' + locationName[data[index].origin] + '<br/>' +
                                     'Last known location: ' + locationName[data[index].lastKnownLocation]);
-                        }});
+                        },
+                        onMarkerClick: function (event, index) {
+                            window.location = "show.xhtml?trackingId=" + data[index].trackingId;
+                        }
+                    });
                 });
             });
         </script>
