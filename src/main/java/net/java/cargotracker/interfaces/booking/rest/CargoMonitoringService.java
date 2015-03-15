@@ -20,8 +20,6 @@ public class CargoMonitoringService {
     public static final String ISO_8601_FORMAT = "yyyy-MM-dd HH:mm";
     @Inject
     private CargoRepository cargoRepository;
-    
-    public CargoMonitoringService() {} 
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
